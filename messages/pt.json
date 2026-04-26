@@ -1,0 +1,85 @@
+{
+  "nav": {
+    "home": "Início",
+    "services": "Serviços",
+    "quotes": "Cotações",
+    "contact": "Contato"
+  },
+  "hero": {
+    "badge": "Logística Global de Confiança",
+    "headline": "Conectando o Chile com o Mundo",
+    "subheadline": "Soluções completas de logística internacional, assessoria aduaneira e consultoria digital para empresas que pensam grande.",
+    "cta_primary": "Solicitar Cotação",
+    "cta_secondary": "Ver Serviços",
+    "stat_countries": "Países",
+    "stat_clients": "Clientes",
+    "stat_experience": "Anos de Experiência",
+    "stat_shipments": "Envios Bem-sucedidos"
+  },
+  "services": {
+    "badge": "Nossos Serviços",
+    "title": "Soluções Completas para o seu Negócio",
+    "subtitle": "Oferecemos uma gama completa de serviços logísticos e digitais adaptados às necessidades de empresas internacionais.",
+    "items": {
+      "import_export": {
+        "name": "Importação e Exportação",
+        "description": "Gerenciamos suas operações de comércio exterior com eficiência e total conformidade regulatória."
+      },
+      "customs": {
+        "name": "Assessoria Aduaneira",
+        "description": "Especialistas em classificação tarifária, regimes aduaneiros e otimização de custos na fronteira."
+      },
+      "logistics": {
+        "name": "Logística Internacional",
+        "description": "Coordenação de transporte multimodal: aéreo, marítimo e terrestre em todo o mundo."
+      },
+      "digital": {
+        "name": "Consultoria Digital",
+        "description": "Transformação digital de processos logísticos para maximizar eficiência e rastreabilidade."
+      },
+      "documents": {
+        "name": "Gestão de Documentos",
+        "description": "Preparação, revisão e tramitação de toda a documentação de comércio exterior."
+      },
+      "support": {
+        "name": "Suporte 24/7",
+        "description": "Assistência contínua para resolver incidentes e manter suas operações sem interrupções."
+      }
+    }
+  },
+  "form": {
+    "badge": "Cotação Gratuita",
+    "title": "Pronto para Começar?",
+    "subtitle": "Preencha o formulário e nossa equipe entrará em contato em até 24 horas.",
+    "name": "Nome completo",
+    "email": "Endereço de e-mail",
+    "phone": "Telefone",
+    "service_type": "Tipo de serviço",
+    "select_service": "Selecione um serviço...",
+    "description": "Descrição do requerimento",
+    "description_placeholder": "Descreva sua necessidade com o máximo de detalhes possível (mínimo 20 caracteres)...",
+    "submit": "Enviar Cotação",
+    "submitting": "Enviando...",
+    "success_title": "Solicitação Recebida!",
+    "success_message": "Recebemos sua solicitação de cotação. Nossa equipe entrará em contato em até 24 horas.",
+    "new_request": "Nova solicitação",
+    "error_message": "Ocorreu um erro ao enviar sua solicitação. Por favor, tente novamente.",
+    "validation": {
+      "name_required": "O nome é obrigatório",
+      "name_min": "O nome deve ter pelo menos 2 caracteres",
+      "email_required": "O e-mail é obrigatório",
+      "email_invalid": "Digite um e-mail válido",
+      "phone_required": "O telefone é obrigatório",
+      "phone_min": "O telefone deve ter pelo menos 7 caracteres",
+      "service_required": "Selecione um tipo de serviço",
+      "description_required": "A descrição é obrigatória",
+      "description_min": "A descrição deve ter pelo menos 20 caracteres"
+    }
+  },
+  "footer": {
+    "tagline": "Conectando o Chile com o mundo através de soluções logísticas de classe mundial.",
+    "contact_title": "Contato",
+    "rights": "Todos os direitos reservados.",
+    "built_with": "Construído com ❤️ para o comércio global"
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "quotes": "Quotes",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "Trusted Global Logistics",
+    "headline": "Connecting Chile with the World",
+    "subheadline": "Comprehensive international logistics, customs advisory, and digital consulting solutions for businesses that think big.",
+    "cta_primary": "Request a Quote",
+    "cta_secondary": "View Services",
+    "stat_countries": "Countries",
+    "stat_clients": "Clients",
+    "stat_experience": "Years of Experience",
+    "stat_shipments": "Successful Shipments"
+  },
+  "services": {
+    "badge": "Our Services",
+    "title": "Complete Solutions for Your Business",
+    "subtitle": "We offer a comprehensive range of logistics and digital services tailored to the needs of international companies.",
+    "items": {
+      "import_export": {
+        "name": "Import & Export",
+        "description": "We manage your foreign trade operations with efficiency and full regulatory compliance."
+      },
+      "customs": {
+        "name": "Customs Advisory",
+        "description": "Experts in tariff classification, customs regimes, and border cost optimization."
+      },
+      "logistics": {
+        "name": "International Logistics",
+        "description": "Multimodal transport coordination: air, sea, and land globally."
+      },
+      "digital": {
+        "name": "Digital Consulting",
+        "description": "Digital transformation of logistics processes to maximize efficiency and traceability."
+      },
+      "documents": {
+        "name": "Document Management",
+        "description": "Preparation, review, and processing of all foreign trade documentation."
+      },
+      "support": {
+        "name": "24/7 Support",
+        "description": "Continuous assistance to resolve incidents and keep your operations running without interruption."
+      }
+    }
+  },
+  "form": {
+    "badge": "Free Quote",
+    "title": "Ready to Get Started?",
+    "subtitle": "Fill out the form and our team will contact you within 24 hours.",
+    "name": "Full name",
+    "email": "Email address",
+    "phone": "Phone number",
+    "service_type": "Service type",
+    "select_service": "Select a service...",
+    "description": "Requirement description",
+    "description_placeholder": "Describe your need in as much detail as possible (minimum 20 characters)...",
+    "submit": "Send Quote",
+    "submitting": "Sending...",
+    "success_title": "Request Received!",
+    "success_message": "We have received your quote request. Our team will get in touch with you within 24 hours.",
+    "new_request": "New request",
+    "error_message": "An error occurred while sending your request. Please try again.",
+    "validation": {
+      "name_required": "Name is required",
+      "name_min": "Name must be at least 2 characters",
+      "email_required": "Email is required",
+      "email_invalid": "Enter a valid email",
+      "phone_required": "Phone is required",
+      "phone_min": "Phone must be at least 7 characters",
+      "service_required": "Please select a service type",
+      "description_required": "Description is required",
+      "description_min": "Description must be at least 20 characters"
+    }
+  },
+  "footer": {
+    "tagline": "Connecting Chile with the world through world-class logistics solutions.",
+    "contact_title": "Contact",
+    "rights": "All rights reserved.",
+    "built_with": "Built with ❤️ for global trade"
+  }
+}

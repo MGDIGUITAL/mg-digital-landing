@@ -1,0 +1,85 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "services": "Services",
+    "quotes": "Devis",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "Logistique Mondiale de Confiance",
+    "headline": "Connecter le Chili avec le Monde",
+    "subheadline": "Solutions complètes de logistique internationale, conseil douanier et consulting digital pour les entreprises qui voient grand.",
+    "cta_primary": "Demander un Devis",
+    "cta_secondary": "Voir les Services",
+    "stat_countries": "Pays",
+    "stat_clients": "Clients",
+    "stat_experience": "Années d'Expérience",
+    "stat_shipments": "Expéditions Réussies"
+  },
+  "services": {
+    "badge": "Nos Services",
+    "title": "Solutions Complètes pour votre Entreprise",
+    "subtitle": "Nous offrons une gamme complète de services logistiques et numériques adaptés aux besoins des entreprises internationales.",
+    "items": {
+      "import_export": {
+        "name": "Import et Export",
+        "description": "Nous gérons vos opérations de commerce extérieur avec efficacité et conformité réglementaire totale."
+      },
+      "customs": {
+        "name": "Conseil Douanier",
+        "description": "Experts en classification tarifaire, régimes douaniers et optimisation des coûts frontaliers."
+      },
+      "logistics": {
+        "name": "Logistique Internationale",
+        "description": "Coordination du transport multimodal : aérien, maritime et terrestre au niveau mondial."
+      },
+      "digital": {
+        "name": "Consulting Digital",
+        "description": "Transformation numérique des processus logistiques pour maximiser l'efficacité et la traçabilité."
+      },
+      "documents": {
+        "name": "Gestion des Documents",
+        "description": "Préparation, révision et traitement de toute la documentation de commerce extérieur."
+      },
+      "support": {
+        "name": "Support 24h/24",
+        "description": "Assistance continue pour résoudre les incidents et maintenir vos opérations sans interruption."
+      }
+    }
+  },
+  "form": {
+    "badge": "Devis Gratuit",
+    "title": "Prêt à Commencer?",
+    "subtitle": "Remplissez le formulaire et notre équipe vous contactera dans les 24 heures.",
+    "name": "Nom complet",
+    "email": "Adresse e-mail",
+    "phone": "Téléphone",
+    "service_type": "Type de service",
+    "select_service": "Sélectionnez un service...",
+    "description": "Description du besoin",
+    "description_placeholder": "Décrivez votre besoin avec le maximum de détails (minimum 20 caractères)...",
+    "submit": "Envoyer le Devis",
+    "submitting": "Envoi en cours...",
+    "success_title": "Demande Reçue!",
+    "success_message": "Nous avons bien reçu votre demande de devis. Notre équipe vous contactera dans les 24 heures.",
+    "new_request": "Nouvelle demande",
+    "error_message": "Une erreur s'est produite lors de l'envoi de votre demande. Veuillez réessayer.",
+    "validation": {
+      "name_required": "Le nom est requis",
+      "name_min": "Le nom doit comporter au moins 2 caractères",
+      "email_required": "L'e-mail est requis",
+      "email_invalid": "Entrez un e-mail valide",
+      "phone_required": "Le téléphone est requis",
+      "phone_min": "Le téléphone doit comporter au moins 7 caractères",
+      "service_required": "Veuillez sélectionner un type de service",
+      "description_required": "La description est requise",
+      "description_min": "La description doit comporter au moins 20 caractères"
+    }
+  },
+  "footer": {
+    "tagline": "Connecter le Chili avec le monde grâce à des solutions logistiques de classe mondiale.",
+    "contact_title": "Contact",
+    "rights": "Tous droits réservés.",
+    "built_with": "Construit avec ❤️ pour le commerce mondial"
+  }
+}

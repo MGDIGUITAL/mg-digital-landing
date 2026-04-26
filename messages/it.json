@@ -1,0 +1,85 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Servizi",
+    "quotes": "Preventivi",
+    "contact": "Contatto"
+  },
+  "hero": {
+    "badge": "Logistica Globale di Fiducia",
+    "headline": "Connettere il Cile con il Mondo",
+    "subheadline": "Soluzioni complete di logistica internazionale, consulenza doganale e consulenza digitale per aziende che pensano in grande.",
+    "cta_primary": "Richiedi un Preventivo",
+    "cta_secondary": "Vedi i Servizi",
+    "stat_countries": "Paesi",
+    "stat_clients": "Clienti",
+    "stat_experience": "Anni di Esperienza",
+    "stat_shipments": "Spedizioni Riuscite"
+  },
+  "services": {
+    "badge": "I Nostri Servizi",
+    "title": "Soluzioni Complete per la tua Impresa",
+    "subtitle": "Offriamo una gamma completa di servizi logistici e digitali adattati alle esigenze delle aziende internazionali.",
+    "items": {
+      "import_export": {
+        "name": "Import ed Export",
+        "description": "Gestiamo le tue operazioni di commercio estero con efficienza e piena conformità normativa."
+      },
+      "customs": {
+        "name": "Consulenza Doganale",
+        "description": "Esperti in classificazione tariffaria, regimi doganali e ottimizzazione dei costi alle frontiere."
+      },
+      "logistics": {
+        "name": "Logistica Internazionale",
+        "description": "Coordinazione del trasporto multimodale: aereo, marittimo e terrestre a livello globale."
+      },
+      "digital": {
+        "name": "Consulenza Digitale",
+        "description": "Trasformazione digitale dei processi logistici per massimizzare efficienza e tracciabilità."
+      },
+      "documents": {
+        "name": "Gestione Documenti",
+        "description": "Preparazione, revisione e gestione di tutta la documentazione per il commercio estero."
+      },
+      "support": {
+        "name": "Supporto 24/7",
+        "description": "Assistenza continua per risolvere incidenti e mantenere le tue operazioni senza interruzioni."
+      }
+    }
+  },
+  "form": {
+    "badge": "Preventivo Gratuito",
+    "title": "Pronto a Iniziare?",
+    "subtitle": "Compila il modulo e il nostro team ti contatterà entro 24 ore.",
+    "name": "Nome completo",
+    "email": "Indirizzo e-mail",
+    "phone": "Telefono",
+    "service_type": "Tipo di servizio",
+    "select_service": "Seleziona un servizio...",
+    "description": "Descrizione del requisito",
+    "description_placeholder": "Descrivi la tua esigenza con il massimo dettaglio (minimo 20 caratteri)...",
+    "submit": "Invia Preventivo",
+    "submitting": "Invio in corso...",
+    "success_title": "Richiesta Ricevuta!",
+    "success_message": "Abbiamo ricevuto la tua richiesta di preventivo. Il nostro team ti contatterà entro 24 ore.",
+    "new_request": "Nuova richiesta",
+    "error_message": "Si è verificato un errore durante l'invio della richiesta. Riprova.",
+    "validation": {
+      "name_required": "Il nome è obbligatorio",
+      "name_min": "Il nome deve avere almeno 2 caratteri",
+      "email_required": "L'e-mail è obbligatoria",
+      "email_invalid": "Inserisci un'e-mail valida",
+      "phone_required": "Il telefono è obbligatorio",
+      "phone_min": "Il telefono deve avere almeno 7 caratteri",
+      "service_required": "Seleziona un tipo di servizio",
+      "description_required": "La descrizione è obbligatoria",
+      "description_min": "La descrizione deve avere almeno 20 caratteri"
+    }
+  },
+  "footer": {
+    "tagline": "Connettere il Cile con il mondo attraverso soluzioni logistiche di classe mondiale.",
+    "contact_title": "Contatto",
+    "rights": "Tutti i diritti riservati.",
+    "built_with": "Costruito con ❤️ per il commercio globale"
+  }
+}

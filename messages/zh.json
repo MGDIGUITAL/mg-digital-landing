@@ -1,0 +1,85 @@
+{
+  "nav": {
+    "home": "首页",
+    "services": "服务",
+    "quotes": "报价",
+    "contact": "联系"
+  },
+  "hero": {
+    "badge": "值得信赖的全球物流",
+    "headline": "连接智利与世界",
+    "subheadline": "为放眼全球的企业提供全面的国际物流、海关咨询和数字咨询解决方案。",
+    "cta_primary": "申请报价",
+    "cta_secondary": "查看服务",
+    "stat_countries": "国家",
+    "stat_clients": "客户",
+    "stat_experience": "年经验",
+    "stat_shipments": "成功运输"
+  },
+  "services": {
+    "badge": "我们的服务",
+    "title": "为您的企业提供全面解决方案",
+    "subtitle": "我们提供一系列完整的物流和数字服务，满足国际企业的需求。",
+    "items": {
+      "import_export": {
+        "name": "进出口",
+        "description": "高效、全面合规地管理您的对外贸易业务。"
+      },
+      "customs": {
+        "name": "海关咨询",
+        "description": "关税分类、海关制度和边境成本优化方面的专家。"
+      },
+      "logistics": {
+        "name": "国际物流",
+        "description": "全球多式联运协调：航空、海运和陆运。"
+      },
+      "digital": {
+        "name": "数字咨询",
+        "description": "物流流程数字化转型，最大化效率和可追溯性。"
+      },
+      "documents": {
+        "name": "文件管理",
+        "description": "准备、审核和处理所有对外贸易文件。"
+      },
+      "support": {
+        "name": "24/7全天候支持",
+        "description": "持续协助解决事故，保持您的业务不间断运行。"
+      }
+    }
+  },
+  "form": {
+    "badge": "免费报价",
+    "title": "准备好开始了吗？",
+    "subtitle": "填写表格，我们的团队将在24小时内与您联系。",
+    "name": "全名",
+    "email": "电子邮件地址",
+    "phone": "电话",
+    "service_type": "服务类型",
+    "select_service": "选择服务...",
+    "description": "需求描述",
+    "description_placeholder": "请尽可能详细地描述您的需求（至少20个字符）...",
+    "submit": "发送报价申请",
+    "submitting": "发送中...",
+    "success_title": "申请已收到！",
+    "success_message": "我们已收到您的报价申请。我们的团队将在24小时内与您联系。",
+    "new_request": "新申请",
+    "error_message": "发送申请时出现错误，请重试。",
+    "validation": {
+      "name_required": "姓名为必填项",
+      "name_min": "姓名至少需要2个字符",
+      "email_required": "电子邮件为必填项",
+      "email_invalid": "请输入有效的电子邮件",
+      "phone_required": "电话为必填项",
+      "phone_min": "电话至少需要7个字符",
+      "service_required": "请选择服务类型",
+      "description_required": "描述为必填项",
+      "description_min": "描述至少需要20个字符"
+    }
+  },
+  "footer": {
+    "tagline": "通过世界一流的物流解决方案，连接智利与全球。",
+    "contact_title": "联系方式",
+    "rights": "保留所有权利。",
+    "built_with": "用 ❤️ 为全球贸易而生"
+  }
+}
