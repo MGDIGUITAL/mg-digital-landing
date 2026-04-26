@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useTranslations, useLocale } from 'next-intl'
 import { useRouter, usePathname } from 'next/navigation'
-import { Globe, Package, Menu, X, Camera } from 'lucide-react'
+import { Globe, Package, Menu, X, Instagram } from 'lucide-react'
 
 // Configuración de idiomas con banderas y nombres nativos
 const LOCALES = [
@@ -100,7 +100,7 @@ export default function Navbar({ compact = false }: NavbarProps) {
               aria-label="Instagram MG DIGITAL"
               className="text-slate-400 hover:text-pink-400 transition-colors duration-200"
             >
-              <Camera className="w-5 h-5" />
+              <Instagram className="w-5 h-5" />
             </a>
 
             {/* Selector de idioma */}
@@ -195,7 +195,7 @@ export default function Navbar({ compact = false }: NavbarProps) {
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-pink-400 transition-colors"
               >
-                <Camera className="w-5 h-5" />
+                <Instagram className="w-5 h-5" />
               </a>
               <a
                 href="#cotizaciones"
