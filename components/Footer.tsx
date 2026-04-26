@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 import { useRouter, usePathname } from 'next/navigation'
-import { Package, Mail, Phone, Instagram, Globe } from 'lucide-react'
+import { Package, Mail, Phone, Camera, Globe } from 'lucide-react'
 
 const LOCALES = [
   { code: 'es', flag: '🇨🇱', name: 'ES' },
@@ -70,7 +70,7 @@ export default function Footer({ currentLocale }: FooterProps) {
               aria-label="Instagram"
               className="inline-flex items-center gap-2 mt-4 text-slate-400 hover:text-pink-400 transition-colors text-sm"
             >
-              <Instagram className="w-4 h-4" />
+              <Camera className="w-4 h-4" />
               @mpeg.logistica
             </a>
           </div>
