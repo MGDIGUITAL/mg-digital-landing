@@ -42,7 +42,7 @@ export async function insertarCotizacion(input: InsertarCotizacionInput): Promis
     // Validación server-side (segunda línea de defensa tras la validación client-side)
     const parsed = cotizacionSchema.safeParse(input)
     if (!parsed.success) {
-      const firstError = parsed.error.errors[0]?.message ?? 'Datos inválidos'
+      const firstError = parsed.error.issues[0]?.message ?? 'Datos inválidos'
       return { success: false, error: firstError }
     }
 
