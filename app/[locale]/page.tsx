@@ -7,8 +7,13 @@ import QuoteForm from '@/components/QuoteForm'
 import Footer from '@/components/Footer'
 import { MessageSquare } from 'lucide-react'
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations('hero')
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: Promise<{ locale: string }> 
+}): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'hero' })
   return {
     title: `MG DIGITAL — ${t('headline')}`,
     description: t('subheadline'),
@@ -36,9 +41,13 @@ function SectionLabel({ number, name }: { number: string; name: string }) {
 
 /* ------------------------------------------------------------------ */
 
-export default async function HomePage() {
-  const t      = await getTranslations('form')
-  const locale = await getLocale()
+export default async function HomePage({ 
+  params 
+}: { 
+  params: Promise<{ locale: string }> 
+}) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'form' })
 
   return (
     <main style={{ background: 'var(--black)', color: '#fff' }}>

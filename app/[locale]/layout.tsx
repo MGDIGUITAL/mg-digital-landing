@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { NextIntlClientProvider } from 'next-intl'
-import { getMessages, getLocale } from 'next-intl/server'
+import { getMessages } from 'next-intl/server'
 import { Inter } from 'next/font/google'
 import '../globals.css'
 
@@ -10,7 +10,6 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
-// Meta tags base para SEO — next-intl agrega hreflang automáticamente
 export const metadata: Metadata = {
   title: 'MG DIGITAL — Logística Internacional | Asesoría Aduanera',
   description:
@@ -30,18 +29,20 @@ interface LocaleLayoutProps {
   params: Promise<{ locale: string }>
 }
 
-/**
- * Root layout del segmento [locale].
- * Provee el cliente de i18n a todo el árbol de componentes.
- */
-export default async function LocaleLayout({ children }: LocaleLayoutProps) {
-  const locale = await getLocale()
-  const messages = await getMessages()
+export default async function LocaleLayout({ 
+  children, 
+  params 
+}: LocaleLayoutProps) {
+  // En Next.js 15, params es una Promise
+  const { locale } = await params;
+  
+  // Obtenemos los mensajes para el proveedor de cliente
+  const messages = await getMessages();
 
   return (
     <html lang={locale} className={inter.variable}>
-      <body className="antialiased bg-slate-950 text-white">
-        <NextIntlClientProvider messages={messages}>
+      <body className={`${inter.className} antialiased bg-slate-950 text-white`}>
+        <NextIntlClientProvider messages={messages} locale={locale}>
           {children}
         </NextIntlClientProvider>
       </body>
