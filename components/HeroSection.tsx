@@ -105,24 +105,52 @@ export default function HeroSection() {
   return (
     <section
       id="inicio"
-      className="relative min-h-screen flex flex-col justify-center pt-20 pb-0 overflow-hidden grid-bg"
+      className="relative min-h-screen flex flex-col justify-center pb-0 overflow-hidden grid-bg"
+      style={{ paddingTop: '6rem' }}
     >
-      {/* Ambient glow */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/3 right-1/4 w-96 h-96 rounded-full opacity-20 blur-[120px]"
+      {/* ── Grain / noise texture ── */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.04]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: 'repeat',
+          backgroundSize: '180px 180px',
+        }}
+      />
+
+      {/* ── Scanline texture ── */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,242,255,0.015) 0px, rgba(0,242,255,0.015) 1px, transparent 1px, transparent 3px)',
+          backgroundSize: '100% 3px',
+        }}
+      />
+
+      {/* ── Ambient glow blobs ── */}
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] rounded-full opacity-[0.12] blur-[140px]"
              style={{ background: 'var(--cyan)' }} />
-        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 rounded-full opacity-10 blur-[100px]"
-             style={{ background: '#0066cc' }} />
+        <div className="absolute bottom-1/4 left-1/6 w-96 h-96 rounded-full opacity-[0.08] blur-[120px]"
+             style={{ background: '#0055cc' }} />
+        <div className="absolute top-1/4 left-1/3 w-72 h-72 rounded-full opacity-[0.05] blur-[100px]"
+             style={{ background: '#00f2ff' }} />
       </div>
+
+      {/* ── Vignette edges ── */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{ background: 'radial-gradient(ellipse at center, transparent 55%, rgba(0,5,13,0.7) 100%)' }}
+      />
 
       {/* ══ MAIN HERO GRID ══ */}
       <div className="container relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-24 items-center min-h-[calc(100vh-5rem)] py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-24 items-center min-h-[calc(100vh-6rem)] py-20">
 
           {/* LEFT — Content */}
-          <div className="flex flex-col gap-8">
-            {/* Label */}
-            <div className="fade-up-1 flex items-center gap-3">
+          <div className="flex flex-col gap-10">
+            {/* Label — extra mt-6 to clear navbar subtitle */}
+            <div className="fade-up-1 flex items-center gap-3 mt-6">
               <div className="flex gap-1.5">
                 <span className="led" />
                 <span className="led" style={{ animationDelay: '0.8s' }} />

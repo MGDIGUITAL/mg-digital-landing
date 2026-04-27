@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 /* ================================================================
-   MG.DIGUITAL — Industrial Futurist Design System v3.0
+   MG.DIGUITAL — Industrial Futurist Design System v3.1
    Palette: #00050d (deep), #00f2ff (cyan), #94a3b8 (slate)
    ================================================================ */
 
@@ -31,7 +31,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 6rem; /* exact navbar height */
   -webkit-font-smoothing: antialiased;
 }
 
@@ -297,26 +297,44 @@ body {
   animation: countUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-/* ── Subtle grid background ── */
-.grid-bg {
-  background-image:
-    linear-gradient(rgba(0,242,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,242,255,0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-}
-
 /* ── Fade in from below ── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); filter: blur(4px); }
   to   { opacity: 1; transform: translateY(0);    filter: blur(0);   }
 }
 
-.fade-up         { animation: fadeUp 0.6s ease forwards; }
-.fade-up-1       { animation: fadeUp 0.6s 0.1s ease both; }
-.fade-up-2       { animation: fadeUp 0.6s 0.2s ease both; }
-.fade-up-3       { animation: fadeUp 0.6s 0.3s ease both; }
-.fade-up-4       { animation: fadeUp 0.6s 0.4s ease both; }
-.fade-up-5       { animation: fadeUp 0.6s 0.5s ease both; }
+.fade-up   { animation: fadeUp 0.6s ease forwards; }
+.fade-up-1 { animation: fadeUp 0.6s 0.1s ease both; }
+.fade-up-2 { animation: fadeUp 0.6s 0.2s ease both; }
+.fade-up-3 { animation: fadeUp 0.6s 0.3s ease both; }
+.fade-up-4 { animation: fadeUp 0.6s 0.4s ease both; }
+.fade-up-5 { animation: fadeUp 0.6s 0.5s ease both; }
+
+/* ── Rich grid background ── */
+.grid-bg {
+  background-color: var(--bg-deep);
+  background-image:
+    /* Fine dot grid */
+    radial-gradient(rgba(0,242,255,0.18) 1px, transparent 1px),
+    /* Larger grid lines */
+    linear-gradient(rgba(0,242,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,242,255,0.03) 1px, transparent 1px);
+  background-size:
+    30px 30px,
+    90px 90px,
+    90px 90px;
+}
+
+/* ── Diagonal stripe texture (for alternate sections) ── */
+.stripe-bg {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(0,242,255,0.015) 0px,
+    rgba(0,242,255,0.015) 1px,
+    transparent 1px,
+    transparent 12px
+  );
+}
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar            { width: 5px; }
