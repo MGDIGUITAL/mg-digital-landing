@@ -2,16 +2,11 @@
 
 import { useTranslations } from 'next-intl'
 import { useRouter, usePathname } from 'next/navigation'
-import { Package, Mail, Phone, Instagram, Globe } from 'lucide-react'
+import { Mail, Phone, Instagram, ArrowUpRight } from 'lucide-react'
 
 const LOCALES = [
   { code: 'es', flag: '🇨🇱', name: 'ES' },
   { code: 'en', flag: '🇺🇸', name: 'EN' },
-  { code: 'ru', flag: '🇷🇺', name: 'RU' },
-  { code: 'pt', flag: '🇧🇷', name: 'PT' },
-  { code: 'fr', flag: '🇫🇷', name: 'FR' },
-  { code: 'it', flag: '🇮🇹', name: 'IT' },
-  { code: 'zh', flag: '🇨🇳', name: 'ZH' },
 ] as const
 
 interface FooterProps {
@@ -20,10 +15,8 @@ interface FooterProps {
 
 export default function Footer({ currentLocale }: FooterProps) {
   const t  = useTranslations('footer')
-  const tn = useTranslations('nav')
   const router   = useRouter()
   const pathname = usePathname()
-
   const currentYear = new Date().getFullYear()
 
   function handleLocaleChange(newLocale: string) {
@@ -32,112 +25,100 @@ export default function Footer({ currentLocale }: FooterProps) {
     router.push(segments.join('/'))
   }
 
-  const navLinks = [
-    { href: '#inicio',       label: tn('home') },
-    { href: '#servicios',    label: tn('services') },
-    { href: '#soluciones',   label: 'Soluciones' },
-    { href: '#contacto',     label: 'Proyectos' },
-  ]
-
   return (
-    <footer id="contacto" className="relative bg-white border-t border-slate-100">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-20 lg:py-32">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-20 mb-20">
+    <footer className="relative bg-[#020617] border-t border-white/5 overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
+      
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-24 lg:py-32">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-20">
           
-          {/* Columna 1: Logo y tagline */}
-          <div className="md:col-span-1">
-            <div className="flex items-center gap-3 mb-8">
-              <span className="text-2xl font-black uppercase tracking-tighter">
-                <span style={{ color: 'var(--blue-deep)' }}>MG</span>
-                <span style={{ color: 'var(--blue-primary)' }}>.DIGUITAL</span>
-              </span>
+          {/* Brand Col */}
+          <div className="md:col-span-2">
+            <div className="flex items-center gap-4 mb-8">
+               <div className="w-12 h-12 flex items-center justify-center border-2 border-blue-500/50 shadow-[0_0_15px_rgba(0,163,255,0.2)]">
+                  <span className="text-xl font-black text-white italic">MG</span>
+               </div>
+               <div className="flex flex-col">
+                  <span className="text-2xl font-black uppercase tracking-tighter text-white">
+                    MG<span className="text-blue-500">.DIGUITAL</span>
+                  </span>
+                  <span className="text-[9px] font-mono tracking-[0.2em] text-white/30 uppercase">
+                    SOFTWARE | ERP | CRM | WEB
+                  </span>
+               </div>
             </div>
-            <p className="text-slate-500 text-sm leading-relaxed mb-6 font-medium">
-              {t('tagline')}
+            <p className="text-white/40 text-sm leading-relaxed max-w-sm mb-10 font-medium">
+              Transformamos la complejidad industrial en eficiencia digital mediante sistemas de gestión de alto rendimiento.
             </p>
-            <div className="flex items-center gap-4">
-                <a
-                  href="https://www.instagram.com/mpeg.logistica/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full border border-slate-100 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-200 transition-all"
-                >
-                  <Instagram className="w-4 h-4" />
+            <div className="flex items-center gap-6">
+                <a href="#" className="w-12 h-12 rounded-xl glass-card flex items-center justify-center text-white/30 hover:text-blue-400 hover:border-blue-500 transition-all">
+                  <Instagram className="w-5 h-5" />
+                </a>
+                <a href="#" className="w-12 h-12 rounded-xl glass-card flex items-center justify-center text-white/30 hover:text-blue-400 hover:border-blue-500 transition-all">
+                  <Mail className="w-5 h-5" />
                 </a>
             </div>
           </div>
 
-          {/* Columna 2: Navegación */}
+          {/* Links Col */}
           <div>
-            <h3 className="text-slate-900 font-black mb-8 text-[11px] uppercase tracking-[0.25em]">
-              Sistemas MG
+            <h3 className="text-blue-500 font-black mb-10 text-[11px] uppercase tracking-[0.3em]">
+              PLATAFORMA
             </h3>
-            <ul className="space-y-4">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="text-slate-500 hover:text-blue-600 text-[13px] font-medium transition-colors"
-                  >
-                    {link.label}
+            <ul className="space-y-5">
+              {['INICIO', 'SERVICIOS', 'SOLUCIONES', 'NOSOTROS', 'CONTACTO'].map((link) => (
+                <li key={link}>
+                  <a href={`#${link.toLowerCase()}`} className="text-white/40 hover:text-white text-[12px] font-black tracking-widest transition-colors flex items-center gap-2 group">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    {link}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Columna 3: Contacto */}
+          {/* Contact Col */}
           <div>
-            <h3 className="text-slate-900 font-black mb-8 text-[11px] uppercase tracking-[0.25em]">
-              Soporte Directo
+            <h3 className="text-blue-500 font-black mb-10 text-[11px] uppercase tracking-[0.3em]">
+              CONEXIÓN TÉCNICA
             </h3>
-            <ul className="space-y-4">
-              <li>
-                <a
-                  href="mailto:mpeg.logistica@gmail.com"
-                  className="flex items-center gap-4 text-slate-500 hover:text-blue-600 transition-colors text-[13px] font-medium"
-                >
-                  <Mail className="w-4 h-4 text-blue-400" />
-                  mpeg.logistica@gmail.com
-                </a>
-              </li>
-              <li>
-                <a
-                  href="tel:+56929645522"
-                  className="flex items-center gap-4 text-slate-500 hover:text-blue-600 transition-colors text-[13px] font-medium"
-                >
-                  <Phone className="w-4 h-4 text-blue-400" />
-                  +56 9 2964 5522
-                </a>
-              </li>
-            </ul>
+            <div className="space-y-6">
+               <a href="mailto:mpeg.logistica@gmail.com" className="block p-6 glass-card rounded-2xl group">
+                  <div className="text-[9px] font-mono text-blue-400 mb-2 uppercase tracking-widest">Soporte 24/7</div>
+                  <div className="text-xs font-black text-white group-hover:text-blue-400 transition-colors">mpeg.logistica@gmail.com</div>
+               </a>
+               <a href="tel:+56929645522" className="block p-6 glass-card rounded-2xl group">
+                  <div className="text-[9px] font-mono text-blue-400 mb-2 uppercase tracking-widest">Línea Directa</div>
+                  <div className="text-xs font-black text-white group-hover:text-blue-400 transition-colors">+56 9 2964 5522</div>
+               </a>
+            </div>
 
-            <div className="mt-12">
-              <div className="flex flex-wrap gap-2">
+            <div className="mt-12 flex gap-4">
                 {LOCALES.map((loc) => (
                   <button
                     key={loc.code}
                     onClick={() => handleLocaleChange(loc.code)}
-                    className={`px-3 py-1.5 rounded-lg text-[10px] font-bold transition-all ${
+                    className={`px-4 py-2 rounded-lg text-[10px] font-black tracking-widest transition-all ${
                       loc.code === currentLocale
-                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20'
-                        : 'bg-slate-50 text-slate-400 hover:bg-slate-100 hover:text-slate-600'
+                        ? 'bg-blue-600 text-white shadow-[0_0_20px_rgba(0,163,255,0.3)]'
+                        : 'bg-white/5 text-white/30 hover:bg-white/10'
                     }`}
                   >
                     {loc.flag} {loc.name}
                   </button>
                 ))}
-              </div>
             </div>
           </div>
         </div>
 
-        {/* Línea divisoria */}
-        <div className="border-t border-slate-50 pt-10 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <p className="text-slate-400 text-[11px] font-medium">
-            © {currentYear} MG.DIGUITAL. {t('rights')}
+        <div className="mt-32 pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8">
+          <p className="text-white/20 text-[11px] font-bold tracking-widest">
+            © {currentYear} MG.DIGUITAL. TODOS LOS DERECHOS RESERVADOS.
           </p>
-          <p className="text-slate-300 text-[10px] font-mono uppercase tracking-widest">{t('built_with')}</p>
+          <div className="flex items-center gap-3">
+             <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+             <p className="text-white/20 text-[10px] font-mono uppercase tracking-widest">SISTEMAS OPERATIVOS / ESTABLE</p>
+          </div>
         </div>
       </div>
     </footer>

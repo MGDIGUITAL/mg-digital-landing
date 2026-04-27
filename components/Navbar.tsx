@@ -5,31 +5,19 @@ import { useLocale } from 'next-intl'
 import { useRouter, usePathname } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 
-const LOCALES = [
-  { code: 'es', flag: '🇨🇱', name: 'ES' },
-  { code: 'en', flag: '🇺🇸', name: 'EN' },
-  { code: 'ru', flag: '🇷🇺', name: 'RU' },
-  { code: 'pt', flag: '🇧🇷', name: 'PT' },
-  { code: 'fr', flag: '🇫🇷', name: 'FR' },
-  { code: 'it', flag: '🇮🇹', name: 'IT' },
-  { code: 'zh', flag: '🇨🇳', name: 'ZH' },
-] as const
-
 const NAV_LINKS = [
-  { href: '#servicios',  label: 'Servicios' },
-  { href: '#soluciones', label: 'Soluciones' },
-  { href: '#nosotros',   label: 'Nosotros' },
-  { href: '#contacto',   label: 'Proyectos' },
+  { href: '#inicio',     label: 'INICIO' },
+  { href: '#servicios',  label: 'SERVICIOS' },
+  { href: '#soluciones', label: 'SOLUCIONES' },
+  { href: '#nosotros',   label: 'NOSOTROS' },
+  { href: '#proyectos',  label: 'PROYECTOS' },
+  { href: '#contacto',   label: 'CONTACTO' },
 ]
 
 export default function Navbar() {
   const locale   = useLocale()
-  const router   = useRouter()
-  const pathname = usePathname()
-
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isLangOpen, setIsLangOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20)
@@ -37,131 +25,80 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const currentLocale = LOCALES.find((l) => l.code === locale) ?? LOCALES[0]
-
-  function handleLocaleChange(newLocale: string) {
-    const segments = pathname.split('/')
-    segments[1] = newLocale
-    router.push(segments.join('/'))
-    setIsLangOpen(false)
-    setIsMenuOpen(false)
-  }
-
   return (
     <nav
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
       style={{
-        background: isScrolled ? 'rgba(255,255,255,0.95)' : 'transparent',
-        backdropFilter: isScrolled ? 'blur(10px)' : 'none',
-        boxShadow: isScrolled ? '0 10px 40px -10px rgba(0,0,0,0.05)' : 'none',
-        borderBottom: isScrolled ? '1px solid #f1f5f9' : '1px solid transparent',
+        background: isScrolled ? 'rgba(2,6,23,0.95)' : 'transparent',
+        backdropFilter: isScrolled ? 'blur(15px)' : 'none',
+        borderBottom: isScrolled ? '1px solid rgba(255,255,255,0.05)' : 'none',
       }}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="flex items-center justify-between h-20 lg:h-24">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
+        <div className="flex items-center justify-between h-20 lg:h-28">
 
-          {/* Logo */}
-          <a href="#inicio" className="flex items-center gap-2 group">
-            <span className="text-2xl font-black uppercase tracking-tighter transition-transform duration-300 group-hover:scale-105">
-              <span style={{ color: 'var(--blue-deep)' }}>MG</span>
-              <span style={{ color: 'var(--blue-primary)' }}>.DIGUITAL</span>
-            </span>
+          {/* Logo & Subtitle */}
+          <a href="#inicio" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 lg:w-12 lg:h-12 flex items-center justify-center border-2 border-blue-500/50 group-hover:border-blue-400 transition-all shadow-[0_0_15px_rgba(0,163,255,0.3)]">
+                <span className="text-xl lg:text-2xl font-black text-white italic">MG</span>
+            </div>
+            <div className="flex flex-col -gap-1">
+              <span className="text-lg lg:text-xl font-black tracking-tight leading-none">
+                <span className="text-white">MG</span>
+                <span style={{ color: 'var(--blue-neon)' }}>.DIGUITAL</span>
+              </span>
+              <span className="text-[8px] lg:text-[9px] font-mono tracking-[0.2em] text-white/40 uppercase">
+                SOFTWARE | ERP | CRM | WEB
+              </span>
+            </div>
           </a>
 
-          {/* Desktop nav */}
-          <div className="hidden lg:flex items-center gap-12">
+          {/* Desktop Nav Links */}
+          <div className="hidden lg:flex items-center gap-10">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-[11px] font-bold uppercase tracking-[0.2em] transition-all duration-300"
-                style={{ color: isScrolled ? 'var(--text-muted)' : 'rgba(0,0,0,0.6)' }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--blue-primary)' }}
-                onMouseLeave={(e) => { e.currentTarget.style.color = isScrolled ? 'var(--text-muted)' : 'rgba(0,0,0,0.6)' }}
+                className="relative text-[11px] font-bold tracking-[0.15em] text-white/70 hover:text-white transition-all group py-2"
               >
                 {link.label}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all group-hover:w-full" />
               </a>
             ))}
           </div>
 
-          {/* Right side */}
+          {/* Right Side: Lang + CTA */}
           <div className="hidden lg:flex items-center gap-8">
-            <div className="relative">
-              <button
-                onClick={() => setIsLangOpen(!isLangOpen)}
-                className="flex items-center gap-3 px-4 py-2 text-[10px] font-mono uppercase tracking-widest border border-slate-200 transition-colors"
-                style={{ color: 'var(--text-muted)' }}
-              >
-                <span>{currentLocale.flag}</span>
-                <span>{currentLocale.name}</span>
-              </button>
-
-              {isLangOpen && (
-                <>
-                  <div className="fixed inset-0 z-40" onClick={() => setIsLangOpen(false)} />
-                  <div className="absolute right-0 mt-2 w-32 bg-white border border-slate-100 shadow-xl z-50 rounded-lg overflow-hidden">
-                    {LOCALES.map((loc) => (
-                      <button
-                        key={loc.code}
-                        onClick={() => handleLocaleChange(loc.code)}
-                        className="w-full flex items-center gap-3 px-4 py-3 text-[10px] font-mono transition-colors hover:bg-slate-50"
-                        style={{ color: loc.code === locale ? 'var(--blue-primary)' : 'var(--text-muted)' }}
-                      >
-                        <span>{loc.flag}</span>
-                        <span>{loc.name}</span>
-                      </button>
-                    ))}
-                  </div>
-                </>
-              )}
+            <div className="flex items-center gap-2 text-[11px] font-bold tracking-widest text-white/50">
+              <span className="text-white hover:text-blue-400 cursor-pointer transition-colors">ES</span>
+              <span className="opacity-20">|</span>
+              <span className="hover:text-blue-400 cursor-pointer transition-colors">CL</span>
             </div>
 
             <a
               href="#contacto"
-              className="px-8 py-4 text-[10px] font-black uppercase tracking-[0.2em] bg-blue-600 text-white rounded-sm transition-all duration-300 hover:bg-blue-700 hover:shadow-lg hover:-translate-y-0.5"
+              className="px-8 py-3.5 text-[11px] font-black uppercase tracking-[0.2em] bg-blue-600 text-white shadow-[0_0_20px_rgba(0,163,255,0.4)] hover:bg-blue-500 hover:scale-105 transition-all duration-300"
             >
-              Consultar Proyecto
+              CONSULTAR
             </a>
           </div>
 
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2"
-            style={{ color: 'var(--blue-deep)' }}
-          >
-            {isMenuOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
+          {/* Mobile button */}
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="lg:hidden text-white">
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile menu */}
-      <div
-        className={`lg:hidden transition-all duration-500 overflow-hidden bg-white ${
-          isMenuOpen ? 'max-h-screen' : 'max-h-0'
-        }`}
-      >
-        <div className="px-6 py-8 space-y-2 border-t border-slate-100">
+      {/* Mobile Menu */}
+      <div className={`lg:hidden transition-all duration-500 overflow-hidden ${isMenuOpen ? 'max-h-screen border-t border-white/5 bg-slate-950' : 'max-h-0'}`}>
+        <div className="p-8 flex flex-col gap-6">
           {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={() => setIsMenuOpen(false)}
-              className="flex items-center gap-4 py-4 text-xs font-bold uppercase tracking-widest border-b border-slate-50 text-slate-600"
-            >
-              <span className="text-blue-500">→</span>
+            <a key={link.href} href={link.href} onClick={() => setIsMenuOpen(false)} className="text-sm font-bold tracking-widest text-white/70 hover:text-blue-400">
               {link.label}
             </a>
           ))}
-          <div className="pt-8">
-            <a
-              href="#contacto"
-              onClick={() => setIsMenuOpen(false)}
-              className="flex items-center justify-center w-full py-5 text-xs font-black uppercase tracking-widest bg-blue-600 text-white"
-            >
-              Consultar Proyecto
-            </a>
-          </div>
+          <a href="#contacto" className="w-full py-4 bg-blue-600 text-center font-black tracking-widest text-xs">CONSULTAR</a>
         </div>
       </div>
     </nav>
