@@ -33,7 +33,7 @@ export default async function HomePage({
       <section
         id="soluciones"
         className="py-32 scroll-mt-24"
-        style={{ background: 'var(--bg-deep)', borderTop: '1px solid rgba(0,242,255,0.06)' }}
+        style={{ background: 'var(--bg-deep)', borderTop: '1px solid rgba(0, 85, 204,0.06)' }}
       >
         <div className="container">
           <SectionLabel number="02" name="SOLUCIONES" />
@@ -59,7 +59,7 @@ export default async function HomePage({
                     className="glass group flex items-center gap-5 p-5 cursor-default"
                   >
                     <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 transition-all group-hover:scale-110"
-                         style={{ background: 'rgba(0,242,255,0.08)' }}>
+                         style={{ background: 'rgba(0, 85, 204,0.08)' }}>
                       <item.icon className="w-4 h-4" style={{ color: 'var(--cyan)' }} />
                     </div>
                     <span className="text-sm font-semibold text-white group-hover:text-[var(--cyan)] transition-colors">
@@ -71,7 +71,7 @@ export default async function HomePage({
                 ))}
               </div>
               <div>
-                <a href="#contacto" className="btn-primary inline-flex">
+                <a href="https://wa.me/56929645522" target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex">
                   Solicitar Demo <ChevronRight className="w-4 h-4" />
                 </a>
               </div>
@@ -101,7 +101,7 @@ export default async function HomePage({
       <section
         id="nosotros"
         className="py-32 scroll-mt-24"
-        style={{ background: 'var(--bg-surface)', borderTop: '1px solid rgba(0,242,255,0.06)' }}
+        style={{ background: 'var(--bg-surface)', borderTop: '1px solid rgba(0, 85, 204,0.06)' }}
       >
         <div className="container">
           <SectionLabel number="03" name="NOSOTROS" />
@@ -165,11 +165,11 @@ export default async function HomePage({
       <section
         id="proyectos"
         className="py-40 scroll-mt-24 relative overflow-hidden"
-        style={{ background: 'var(--bg-deep)', borderTop: '1px solid rgba(0,242,255,0.06)' }}
+        style={{ background: 'var(--bg-deep)', borderTop: '1px solid rgba(0, 85, 204,0.06)' }}
       >
         {/* Radial glow */}
         <div className="absolute inset-0 pointer-events-none"
-             style={{ background: 'radial-gradient(ellipse at center, rgba(0,242,255,0.07) 0%, transparent 65%)' }} />
+             style={{ background: 'radial-gradient(ellipse at center, rgba(0, 85, 204,0.07) 0%, transparent 65%)' }} />
 
         <div className="container relative z-10 text-center">
           <SectionLabel number="04" name="PROYECTOS" />
@@ -185,7 +185,9 @@ export default async function HomePage({
             <div className="flex flex-wrap gap-4 justify-center">
               <a
                 id="contacto"
-                href="mailto:mpeg.logistica@gmail.com"
+                href="https://wa.me/56929645522"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-primary text-sm"
               >
                 <MessageSquare className="w-5 h-5" />

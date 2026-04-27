@@ -74,9 +74,9 @@ export default function Navbar() {
     <header
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
       style={{
-        background: scrolled ? 'rgba(0,5,13,0.85)' : 'transparent',
+        background: scrolled ? 'rgba(15, 23, 42,0.85)' : 'transparent',
         backdropFilter: scrolled ? 'blur(20px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(0,242,255,0.08)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(0, 85, 204,0.08)' : 'none',
       }}
     >
       <div className="container">
@@ -93,10 +93,10 @@ export default function Navbar() {
                     style={{ animation: 'drawStroke 1.2s ease forwards' }} />
               <text x="50%" y="55%" dominantBaseline="middle" textAnchor="middle"
                     fontFamily="Inter" fontWeight="900" fontSize="13"
-                    fill="white" letterSpacing="0.5">MG</text>
+                    fill="var(--white)" letterSpacing="0.5">MG</text>
               <defs>
                 <linearGradient id="logoGrad" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stopColor="#00f2ff" />
+                  <stop offset="0%" stopColor="#0055cc" />
                   <stop offset="100%" stopColor="#0066cc" />
                 </linearGradient>
               </defs>
@@ -127,7 +127,7 @@ export default function Navbar() {
                 onClick={e => { e.preventDefault(); handleNav(link.href) }}
                 className="px-4 py-2 text-sm font-medium transition-colors duration-200 relative"
                 style={{
-                  color: activeId === link.href.slice(1) ? 'var(--cyan)' : 'rgba(255,255,255,0.6)',
+                  color: activeId === link.href.slice(1) ? 'var(--cyan)' : 'rgba(15, 23, 42,0.6)',
                 }}
               >
                 {link.label}
@@ -138,8 +138,9 @@ export default function Navbar() {
           {/* ── CTA + Mobile toggle ── */}
           <div className="flex items-center gap-4">
             <a
-              href="#contacto"
-              onClick={e => { e.preventDefault(); handleNav('#contacto') }}
+              href="https://wa.me/56929645522"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hidden md:inline-flex btn-primary text-xs py-2.5 px-5"
             >
               Consultar
@@ -160,8 +161,8 @@ export default function Navbar() {
         className="lg:hidden overflow-hidden transition-all duration-400"
         style={{
           maxHeight: menuOpen ? '400px' : '0',
-          background: 'rgba(0,5,13,0.97)',
-          borderTop: menuOpen ? '1px solid rgba(0,242,255,0.08)' : 'none',
+          background: 'rgba(15, 23, 42,0.97)',
+          borderTop: menuOpen ? '1px solid rgba(0, 85, 204,0.08)' : 'none',
         }}
       >
         <nav className="container py-6 flex flex-col gap-1">
@@ -172,14 +173,14 @@ export default function Navbar() {
               onClick={e => { e.preventDefault(); handleNav(link.href) }}
               className="py-3 px-4 text-sm font-medium rounded-lg transition-colors"
               style={{
-                color: activeId === link.href.slice(1) ? 'var(--cyan)' : 'rgba(255,255,255,0.6)',
-                background: activeId === link.href.slice(1) ? 'rgba(0,242,255,0.05)' : 'transparent',
+                color: activeId === link.href.slice(1) ? 'var(--cyan)' : 'rgba(15, 23, 42,0.6)',
+                background: activeId === link.href.slice(1) ? 'rgba(0, 85, 204,0.05)' : 'transparent',
               }}
             >
               {link.label}
             </a>
           ))}
-          <a href="#contacto" onClick={e => { e.preventDefault(); handleNav('#contacto') }}
+          <a href="https://wa.me/56929645522" target="_blank" rel="noopener noreferrer"
              className="mt-4 btn-primary justify-center text-xs">
             Consultar Proyecto
           </a>

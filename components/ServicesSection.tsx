@@ -30,7 +30,7 @@ const SERVICES = [
     metric: '60%',
     metricLabel: 'Menos errores',
     bullets: ['Gestión Integral', 'Reportes en Vivo', 'Multi-sucursal'],
-    color: '#00f2ff',
+    color: '#0055cc',
   },
   {
     key: 'crm',
@@ -121,10 +121,10 @@ function ServiceCard({ svc, index }: { svc: typeof SERVICES[0]; index: number })
           ? hovered ? 'translateY(-6px) scale(1.01)' : 'translateY(0) scale(1)'
           : 'translateY(28px) scale(0.97)',
         transition: `opacity 0.5s ${index * 0.07}s ease, transform 0.4s ease, box-shadow 0.4s ease`,
-        background: 'rgba(5, 15, 35, 0.7)',
+        background: 'rgba(241, 245, 249, 0.7)',
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
-        border: `1px solid ${hovered ? svc.color + '70' : 'rgba(0,242,255,0.12)'}`,
+        border: `1px solid ${hovered ? svc.color + '70' : 'rgba(0, 85, 204,0.12)'}`,
         boxShadow: hovered
           ? `0 0 0 1px ${svc.color}30, 0 20px 60px ${svc.color}20, inset 0 0 30px ${svc.color}06`
           : '0 4px 24px rgba(0,0,0,0.4)',
@@ -174,7 +174,7 @@ function ServiceCard({ svc, index }: { svc: typeof SERVICES[0]; index: number })
         </div>
 
         {/* Divider */}
-        <div className="h-px w-full" style={{ background: 'rgba(255,255,255,0.05)' }} />
+        <div className="h-px w-full" style={{ background: 'rgba(15, 23, 42,0.05)' }} />
 
         {/* Bullet features */}
         <ul className="flex flex-col gap-2">
@@ -220,14 +220,14 @@ export default function ServicesSection() {
         <div
           className="absolute inset-0"
           style={{
-            background: 'linear-gradient(180deg, rgba(0,5,13,0.85) 0%, rgba(5,15,35,0.78) 50%, rgba(0,5,13,0.92) 100%)',
+            background: 'linear-gradient(180deg, rgba(15, 23, 42,0.85) 0%, rgba(241, 245, 249,0.78) 50%, rgba(15, 23, 42,0.92) 100%)',
           }}
         />
         {/* Scanlines */}
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,242,255,0.012) 0px, rgba(0,242,255,0.012) 1px, transparent 1px, transparent 3px)',
+            backgroundImage: 'repeating-linear-gradient(0deg, rgba(0, 85, 204,0.012) 0px, rgba(0, 85, 204,0.012) 1px, transparent 1px, transparent 3px)',
           }}
         />
       </div>
@@ -259,10 +259,10 @@ export default function ServicesSection() {
                   onClick={() => setActiveCategory(cat)}
                   className="relative px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300"
                   style={{
-                    background: isActive ? 'var(--cyan)' : 'rgba(0,242,255,0.07)',
+                    background: isActive ? 'var(--cyan)' : 'rgba(0, 85, 204,0.07)',
                     color: isActive ? 'var(--bg-deep)' : 'var(--slate)',
-                    border: `1px solid ${isActive ? 'var(--cyan)' : 'rgba(0,242,255,0.12)'}`,
-                    boxShadow: isActive ? '0 0 22px rgba(0,242,255,0.4)' : 'none',
+                    border: `1px solid ${isActive ? 'var(--cyan)' : 'rgba(0, 85, 204,0.12)'}`,
+                    boxShadow: isActive ? '0 0 22px rgba(0, 85, 204,0.4)' : 'none',
                     transform: isActive ? 'scale(1.06)' : 'scale(1)',
                   }}
                 >
@@ -296,23 +296,25 @@ export default function ServicesSection() {
         {/* CTA button — centered, neon border */}
         <div className="flex flex-col items-center gap-4">
           <a
-            href="#contacto"
+            href="https://wa.me/56929645522"
+            target="_blank"
+            rel="noopener noreferrer"
             className="group relative inline-flex items-center gap-3 px-10 py-4 font-bold uppercase tracking-[0.2em] text-sm text-white rounded-full transition-all duration-400"
             style={{
-              background: 'rgba(0,242,255,0.06)',
+              background: 'rgba(0, 85, 204,0.06)',
               border: '1.5px solid var(--cyan)',
-              boxShadow: '0 0 24px rgba(0,242,255,0.25)',
+              boxShadow: '0 0 24px rgba(0, 85, 204,0.25)',
             }}
             onMouseEnter={e => {
               const el = e.currentTarget
-              el.style.background = 'rgba(0,242,255,0.12)'
-              el.style.boxShadow = '0 0 50px rgba(0,242,255,0.45)'
+              el.style.background = 'rgba(0, 85, 204,0.12)'
+              el.style.boxShadow = '0 0 50px rgba(0, 85, 204,0.45)'
               el.style.transform = 'scale(1.04)'
             }}
             onMouseLeave={e => {
               const el = e.currentTarget
-              el.style.background = 'rgba(0,242,255,0.06)'
-              el.style.boxShadow = '0 0 24px rgba(0,242,255,0.25)'
+              el.style.background = 'rgba(0, 85, 204,0.06)'
+              el.style.boxShadow = '0 0 24px rgba(0, 85, 204,0.25)'
               el.style.transform = 'scale(1)'
             }}
           >

@@ -1,21 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 @import "tailwindcss";
 
+@theme {
+  --color-white: var(--white);
+}
+
 /* ================================================================
    MG.DIGUITAL — Industrial Futurist Design System v3.1
-   Palette: #00050d (deep), #00f2ff (cyan), #94a3b8 (slate)
+   Palette: #ffffff (deep), #0055cc (cyan), #475569 (slate)
    ================================================================ */
 
 :root {
   /* Core Colors */
-  --bg-deep:       #00050d;
-  --bg-surface:    #050e1a;
-  --bg-card:       rgba(5, 20, 40, 0.6);
-  --cyan:          #00f2ff;
-  --cyan-dim:      rgba(0, 242, 255, 0.15);
-  --cyan-glow:     rgba(0, 242, 255, 0.25);
-  --slate:         #94a3b8;
-  --white:         #ffffff;
+  --bg-deep:       #ffffff;
+  --bg-surface:    #f8fafc;
+  --bg-card:       rgba(226, 232, 240, 0.6);
+  --cyan:          #0055cc;
+  --cyan-dim:      rgba(0, 85, 204, 0.15);
+  --cyan-glow:     rgba(0, 85, 204, 0.25);
+  --slate:         #475569;
+  --white:         #0f172a;
 
   /* Typography */
   --font-sans: 'Inter', system-ui, sans-serif;
@@ -61,14 +65,14 @@ body {
   background: var(--bg-card);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(0, 242, 255, 0.08);
+  border: 1px solid rgba(0, 85, 204, 0.08);
   border-radius: 1rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .glass:hover {
-  border-color: rgba(0, 242, 255, 0.3);
-  box-shadow: 0 0 40px rgba(0, 242, 255, 0.08), inset 0 0 40px rgba(0, 242, 255, 0.02);
+  border-color: rgba(0, 85, 204, 0.3);
+  box-shadow: 0 0 40px rgba(0, 85, 204, 0.08), inset 0 0 40px rgba(0, 85, 204, 0.02);
 }
 
 /* ── Cyan accent text ── */
@@ -76,7 +80,7 @@ body {
 
 .text-glow {
   color: var(--cyan);
-  text-shadow: 0 0 20px rgba(0, 242, 255, 0.5), 0 0 60px rgba(0, 242, 255, 0.2);
+  text-shadow: 0 0 20px rgba(0, 85, 204, 0.5), 0 0 60px rgba(0, 85, 204, 0.2);
 }
 
 /* ── Buttons ── */
@@ -98,7 +102,7 @@ body {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 50px rgba(0, 242, 255, 0.45);
+  box-shadow: 0 0 50px rgba(0, 85, 204, 0.45);
 }
 
 .btn-ghost {
@@ -112,7 +116,7 @@ body {
   text-transform: uppercase;
   background: transparent;
   color: var(--white);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(15, 23, 42, 0.2);
   border-radius: 0.5rem;
   transition: all 0.25s ease;
 }
@@ -120,7 +124,7 @@ body {
 .btn-ghost:hover {
   border-color: var(--cyan);
   color: var(--cyan);
-  background: rgba(0, 242, 255, 0.05);
+  background: rgba(0, 85, 204, 0.05);
 }
 
 /* ── Section label ── */
@@ -145,7 +149,7 @@ body {
   display: block;
   flex: 1;
   height: 1px;
-  background: rgba(255,255,255,0.04);
+  background: rgba(15, 23, 42,0.04);
 }
 
 .section-label span {
@@ -170,7 +174,7 @@ body {
   inset: 0;
   padding: 1px;
   border-radius: inherit;
-  background: linear-gradient(135deg, rgba(0,242,255,0.3), transparent 50%, rgba(0,242,255,0.1));
+  background: linear-gradient(135deg, rgba(0, 85, 204,0.3), transparent 50%, rgba(0, 85, 204,0.1));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -199,15 +203,15 @@ body {
 .cube-face {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(0,242,255,0.06) 0%, rgba(0,5,13,0.8) 100%);
-  border: 1px solid rgba(0,242,255,0.25);
+  background: linear-gradient(135deg, rgba(0, 85, 204,0.06) 0%, rgba(15, 23, 42,0.8) 100%);
+  border: 1px solid rgba(0, 85, 204,0.25);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-mono);
   font-size: 1.5rem;
   font-weight: 700;
-  color: rgba(0,242,255,0.5);
+  color: rgba(0, 85, 204,0.5);
   letter-spacing: 0.1em;
 }
 
@@ -240,7 +244,7 @@ body {
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  border: 1px solid rgba(0,242,255,0.08);
+  border: 1px solid rgba(0, 85, 204,0.08);
 }
 
 .orbit-ring-1 { width: 380px; height: 380px; animation: orbit1 12s linear infinite; }
@@ -315,10 +319,10 @@ body {
   background-color: var(--bg-deep);
   background-image:
     /* Fine dot grid */
-    radial-gradient(rgba(0,242,255,0.18) 1px, transparent 1px),
+    radial-gradient(rgba(0, 85, 204,0.18) 1px, transparent 1px),
     /* Larger grid lines */
-    linear-gradient(rgba(0,242,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,242,255,0.03) 1px, transparent 1px);
+    linear-gradient(rgba(0, 85, 204,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 85, 204,0.03) 1px, transparent 1px);
   background-size:
     30px 30px,
     90px 90px,
@@ -329,8 +333,8 @@ body {
 .stripe-bg {
   background-image: repeating-linear-gradient(
     -45deg,
-    rgba(0,242,255,0.015) 0px,
-    rgba(0,242,255,0.015) 1px,
+    rgba(0, 85, 204,0.015) 0px,
+    rgba(0, 85, 204,0.015) 1px,
     transparent 1px,
     transparent 12px
   );
@@ -339,7 +343,7 @@ body {
 /* ── Scrollbar ── */
 ::-webkit-scrollbar            { width: 5px; }
 ::-webkit-scrollbar-track      { background: var(--bg-deep); }
-::-webkit-scrollbar-thumb      { background: rgba(0,242,255,0.4); border-radius: 999px; }
+::-webkit-scrollbar-thumb      { background: rgba(0, 85, 204,0.4); border-radius: 999px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
 
 ::selection { background: var(--cyan); color: var(--bg-deep); }

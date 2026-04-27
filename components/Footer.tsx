@@ -23,7 +23,7 @@ export default function Footer({ currentLocale }: FooterProps) {
   }
 
   return (
-    <footer style={{ background: 'var(--bg-surface)', borderTop: '1px solid rgba(0,242,255,0.07)' }}>
+    <footer style={{ background: 'var(--bg-surface)', borderTop: '1px solid rgba(0, 85, 204,0.07)' }}>
       <div className="container py-20">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
 
@@ -31,7 +31,7 @@ export default function Footer({ currentLocale }: FooterProps) {
           <div className="md:col-span-2 flex flex-col gap-6">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 flex items-center justify-center font-black text-sm italic text-white"
-                   style={{ border: '1.5px solid rgba(0,242,255,0.4)', borderRadius: '6px' }}>
+                   style={{ border: '1.5px solid rgba(0, 85, 204,0.4)', borderRadius: '6px' }}>
                 MG
               </div>
               <div className="flex flex-col leading-none">
@@ -87,9 +87,10 @@ export default function Footer({ currentLocale }: FooterProps) {
                 mpeg.logistica@gmail.com
               </span>
             </a>
-            <a href="tel:+56929645522"
+            <a href="https://wa.me/56929645522"
+               target="_blank" rel="noopener noreferrer"
                className="glass flex flex-col gap-1 p-4 group" style={{ borderRadius: '10px' }}>
-              <span className="text-[10px] font-mono" style={{ color: 'var(--cyan)' }}>Línea Directa</span>
+              <span className="text-[10px] font-mono" style={{ color: 'var(--cyan)' }}>Línea Directa / WhatsApp</span>
               <span className="text-xs font-semibold text-white group-hover:text-[var(--cyan)] transition-colors">
                 +56 9 2964 5522
               </span>
@@ -104,7 +105,7 @@ export default function Footer({ currentLocale }: FooterProps) {
                   className="px-3 py-1.5 rounded-lg text-[10px] font-bold tracking-widest transition-all"
                   style={loc.code === currentLocale
                     ? { background: 'var(--cyan)', color: 'var(--bg-deep)' }
-                    : { background: 'rgba(255,255,255,0.05)', color: 'var(--slate)' }}
+                    : { background: 'rgba(15, 23, 42,0.05)', color: 'var(--slate)' }}
                 >
                   {loc.flag} {loc.name}
                 </button>
@@ -115,13 +116,13 @@ export default function Footer({ currentLocale }: FooterProps) {
 
         {/* Bottom bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8"
-             style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-          <p className="text-xs" style={{ color: 'rgba(255,255,255,0.25)' }}>
+             style={{ borderTop: '1px solid rgba(15, 23, 42,0.05)' }}>
+          <p className="text-xs" style={{ color: 'rgba(15, 23, 42,0.25)' }}>
             © {year} MG.DIGUITAL. Todos los derechos reservados.
           </p>
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-[10px] font-mono uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.2)' }}>
+            <span className="text-[10px] font-mono uppercase tracking-widest" style={{ color: 'rgba(15, 23, 42,0.2)' }}>
               Sistemas operativos · Estable
             </span>
           </div>

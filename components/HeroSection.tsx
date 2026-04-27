@@ -122,7 +122,7 @@ export default function HeroSection() {
       <div
         className="pointer-events-none absolute inset-0 z-0"
         style={{
-          backgroundImage: 'repeating-linear-gradient(0deg, rgba(0,242,255,0.015) 0px, rgba(0,242,255,0.015) 1px, transparent 1px, transparent 3px)',
+          backgroundImage: 'repeating-linear-gradient(0deg, rgba(0, 85, 204,0.015) 0px, rgba(0, 85, 204,0.015) 1px, transparent 1px, transparent 3px)',
           backgroundSize: '100% 3px',
         }}
       />
@@ -134,13 +134,13 @@ export default function HeroSection() {
         <div className="absolute bottom-1/4 left-1/6 w-96 h-96 rounded-full opacity-[0.08] blur-[120px]"
              style={{ background: '#0055cc' }} />
         <div className="absolute top-1/4 left-1/3 w-72 h-72 rounded-full opacity-[0.05] blur-[100px]"
-             style={{ background: '#00f2ff' }} />
+             style={{ background: '#0055cc' }} />
       </div>
 
       {/* ── Vignette edges ── */}
       <div
         className="pointer-events-none absolute inset-0 z-0"
-        style={{ background: 'radial-gradient(ellipse at center, transparent 55%, rgba(0,5,13,0.7) 100%)' }}
+        style={{ background: 'radial-gradient(ellipse at center, transparent 55%, rgba(15, 23, 42,0.7) 100%)' }}
       />
 
       {/* ══ MAIN HERO GRID ══ */}
@@ -177,7 +177,7 @@ export default function HeroSection() {
 
             {/* CTAs */}
             <div className="fade-up-4 flex flex-wrap gap-4">
-              <a href="#contacto" className="btn-primary">
+              <a href="https://wa.me/56929645522" target="_blank" rel="noopener noreferrer" className="btn-primary">
                 Consultar Proyecto <ArrowRight className="w-4 h-4" />
               </a>
               <a href="#servicios" className="btn-ghost">
@@ -187,7 +187,7 @@ export default function HeroSection() {
 
             {/* Trust badges */}
             <div className="fade-up-5 flex flex-wrap items-center gap-6 pt-4"
-                 style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                 style={{ borderTop: '1px solid rgba(15, 23, 42,0.06)' }}>
               {[
                 { value: '+50', label: 'Proyectos entregados' },
                 { value: '24/7', label: 'Soporte continuo' },
@@ -242,7 +242,7 @@ export default function HeroSection() {
       </div>
 
       {/* ══ FEATURE CARDS ══ */}
-      <div className="relative z-10" style={{ background: 'rgba(5,20,40,0.5)', borderTop: '1px solid rgba(0,242,255,0.07)' }}>
+      <div className="relative z-10" style={{ background: 'rgba(226, 232, 240,0.5)', borderTop: '1px solid rgba(0, 85, 204,0.07)' }}>
         <div className="container">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {FEATURES.map((f, i) => (
@@ -250,7 +250,7 @@ export default function HeroSection() {
                 key={f.title}
                 className="group flex flex-col gap-4 p-8 cursor-default transition-all duration-300"
                 style={{
-                  borderRight: i < 3 ? '1px solid rgba(0,242,255,0.05)' : 'none',
+                  borderRight: i < 3 ? '1px solid rgba(0, 85, 204,0.05)' : 'none',
                   animationDelay: `${i * 0.1}s`,
                 }}
               >
