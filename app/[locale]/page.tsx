@@ -4,6 +4,7 @@ import ServicesSection from '@/components/ServicesSection'
 import ERPModulesSection from '@/components/ERPModulesSection'
 import PortfolioSection from '@/components/PortfolioSection'
 import Footer from '@/components/Footer'
+import Chatbot from '@/components/Chatbot'
 
 export default function Home({ params: { locale } }: { params: { locale: string } }) {
   return (
@@ -26,6 +27,8 @@ export default function Home({ params: { locale } }: { params: { locale: string 
       <div className="mt-40">
         <Footer />
       </div>
+
+      <Chatbot />
     </main>
   )
 }

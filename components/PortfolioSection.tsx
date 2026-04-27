@@ -1,54 +1,114 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { ArrowRight, ArrowLeft } from "lucide-react";
+
 export default function PortfolioSection() {
   return (
-    <section className="trabajos" id="trabajos">
-      <div className="section-head">
-        <div className="sec-eyebrow">Nuestros Trabajos</div>
-        <h2 className="sec-title">Proyectos que generan resultados reales</h2>
-      </div>
-      <div className="trab-grid">
-        <div className="trab-arrow left">
-          <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-        </div>
-        <div className="trab-card">
-          <div className="trab-img web">
-            <svg width="64" height="48" viewBox="0 0 64 48" fill="none"><rect x="4" y="4" width="56" height="40" rx="4" fill="#dbeafe" stroke="#93c5fd" strokeWidth="1.5"/><rect x="4" y="4" width="56" height="10" rx="4" fill="#bfdbfe"/><circle cx="11" cy="9" r="2" fill="#ef4444"/><circle cx="18" cy="9" r="2" fill="#f59e0b"/><circle cx="25" cy="9" r="2" fill="#22c55e"/><rect x="10" y="20" width="20" height="3" rx="1.5" fill="#93c5fd"/><rect x="10" y="26" width="30" height="2" rx="1" fill="#bfdbfe"/><rect x="10" y="31" width="24" height="2" rx="1" fill="#bfdbfe"/><rect x="36" y="20" width="18" height="16" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="1"/></svg>
+    <section className="py-32 bg-white" id="trabajos">
+      <div className="max-w-7xl mx-auto px-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="flex flex-col md:flex-row justify-between items-end mb-20 gap-6"
+        >
+          <div>
+            <div className="inline-block px-4 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold tracking-[0.2em] uppercase mb-4">
+              Casos de Éxito
+            </div>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+              Proyectos que generan <br className="hidden md:block"/>resultados reales
+            </h2>
           </div>
-          <div className="trab-info">
-            <h4>Sitio Web Corporativo</h4>
-            <p>Diseño moderno y responsivo</p>
+          
+          <div className="flex gap-3">
+            <button className="w-12 h-12 rounded-full border-2 border-slate-200 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600 transition-colors">
+              <ArrowLeft className="w-5 h-5" />
+            </button>
+            <button className="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white hover:bg-blue-700 hover:shadow-lg transition-all hover:scale-105">
+              <ArrowRight className="w-5 h-5" />
+            </button>
           </div>
-        </div>
-        <div className="trab-card">
-          <div className="trab-img erp">
-            <svg width="64" height="48" viewBox="0 0 64 48" fill="none"><rect x="4" y="4" width="56" height="40" rx="4" fill="#0f2340"/><rect x="4" y="4" width="14" height="40" rx="4" fill="#0a1a2e"/><rect x="6" y="8" width="10" height="6" rx="2" fill="#1a56db"/><rect x="6" y="17" width="10" height="4" rx="1" fill="#1a3a6b"/><rect x="6" y="24" width="10" height="4" rx="1" fill="#1a3a6b"/><rect x="6" y="31" width="10" height="4" rx="1" fill="#1a3a6b"/><rect x="22" y="8" width="34" height="8" rx="2" fill="#1a3a6b"/><rect x="22" y="20" width="15" height="10" rx="2" fill="#1a3a6b"/><rect x="40" y="20" width="16" height="10" rx="2" fill="#1a3a6b"/><rect x="22" y="33" width="34" height="6" rx="2" fill="#1a3a6b"/><rect x="24" y="22" width="6" height="6" rx="1" fill="#3b82f6"/><rect x="32" y="23" width="4" height="5" rx="1" fill="#60a5fa"/></svg>
-          </div>
-          <div className="trab-info">
-            <h4>Sistema ERP</h4>
-            <p>Gestión integral de tu empresa</p>
-          </div>
-        </div>
-        <div className="trab-card">
-          <div className="trab-img crm">
-            <svg width="64" height="48" viewBox="0 0 64 48" fill="none"><rect x="4" y="4" width="56" height="40" rx="4" fill="#1a3a5f"/><rect x="8" y="8" width="20" height="32" rx="3" fill="#0f2340"/><rect x="10" y="10" width="16" height="10" rx="2" fill="#1a56db" opacity=".5"/><rect x="10" y="23" width="16" height="4" rx="1" fill="#1a56db" opacity=".4"/><rect x="10" y="29" width="12" height="3" rx="1" fill="#1a56db" opacity=".3"/><rect x="31" y="8" width="26" height="14" rx="3" fill="#0f2340"/><rect x="33" y="10" width="10" height="10" rx="2" fill="#1a56db" opacity=".4"/><rect x="45" y="10" width="10" height="10" rx="2" fill="#1a56db" opacity=".4"/><rect x="31" y="25" width="26" height="15" rx="3" fill="#0f2340"/><rect x="33" y="27" width="22" height="3" rx="1" fill="#3b82f6" opacity=".5"/><rect x="33" y="32" width="16" height="2" rx="1" fill="#3b82f6" opacity=".3"/></svg>
-          </div>
-          <div className="trab-info">
-            <h4>Plataforma CRM</h4>
-            <p>Tus clientes, siempre conectados</p>
-          </div>
-        </div>
-        <div className="trab-card">
-          <div className="trab-img folio">
-            <svg width="64" height="48" viewBox="0 0 64 48" fill="none"><rect x="4" y="4" width="56" height="40" rx="4" fill="#111827"/><rect x="8" y="8" width="22" height="32" rx="3" fill="#1f2937"/><rect x="10" y="12" width="18" height="2" rx="1" fill="#374151"/><rect x="10" y="16" width="14" height="2" rx="1" fill="#374151"/><rect x="10" y="20" width="16" height="2" rx="1" fill="#374151"/><rect x="10" y="24" width="12" height="2" rx="1" fill="#374151"/><rect x="10" y="28" width="15" height="2" rx="1" fill="#374151"/><rect x="32" y="8" width="26" height="32" rx="3" fill="#1f2937"/><rect x="34" y="12" width="10" height="3" rx="1" fill="#3b82f6" opacity=".6"/><rect x="34" y="18" width="20" height="2" rx="1" fill="#4b5563"/><rect x="34" y="22" width="16" height="2" rx="1" fill="#4b5563"/><rect x="34" y="26" width="18" height="2" rx="1" fill="#4b5563"/><rect x="34" y="32" width="14" height="5" rx="2" fill="#1a56db" opacity=".7"/></svg>
-          </div>
-          <div className="trab-info">
-            <h4>Sistema de Folios</h4>
-            <p>Digitalización y control total</p>
-          </div>
-        </div>
-        <div className="trab-arrow right">
-          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          
+          {/* Card 1: Web */}
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            viewport={{ once: true }}
+            whileHover={{ y: -8 }}
+            className="group cursor-pointer"
+          >
+            <div className="bg-slate-50 rounded-[2rem] p-8 lg:p-12 mb-6 relative overflow-hidden h-[300px] sm:h-[400px] flex items-center justify-center">
+              {/* Laptop Mockup */}
+              <div className="relative w-[80%] max-w-[400px] z-10 transition-transform duration-500 group-hover:scale-105">
+                <div className="bg-slate-800 rounded-t-2xl p-2 pb-0 shadow-2xl">
+                  <div className="bg-slate-900 rounded-t-xl overflow-hidden aspect-[16/10] relative">
+                     {/* Screen Content Fake */}
+                     <div className="absolute inset-0 bg-blue-50 p-4">
+                        <div className="w-full h-8 bg-white rounded-md mb-4 flex items-center px-4 gap-2 shadow-sm">
+                          <div className="w-2 h-2 rounded-full bg-red-400" />
+                          <div className="w-2 h-2 rounded-full bg-amber-400" />
+                          <div className="w-2 h-2 rounded-full bg-green-400" />
+                        </div>
+                        <div className="w-1/2 h-12 bg-blue-100 rounded-lg mb-4" />
+                        <div className="flex gap-2 mb-4">
+                          <div className="w-1/3 h-24 bg-white rounded-lg shadow-sm" />
+                          <div className="w-1/3 h-24 bg-white rounded-lg shadow-sm" />
+                          <div className="w-1/3 h-24 bg-white rounded-lg shadow-sm" />
+                        </div>
+                     </div>
+                  </div>
+                </div>
+                <div className="bg-slate-300 h-4 rounded-b-xl w-[110%] -ml-[5%] relative shadow-xl">
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/4 h-1 bg-slate-400 rounded-b-md" />
+                </div>
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-100/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            </div>
+            <h3 className="text-2xl font-bold text-slate-900 mb-2">Corporate Landing Pages</h3>
+            <p className="text-slate-500">Diseño UI/UX • Desarrollo Frontend • Optimización SEO</p>
+          </motion.div>
+
+          {/* Card 2: Mobile / App */}
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -8 }}
+            className="group cursor-pointer"
+          >
+            <div className="bg-slate-50 rounded-[2rem] p-8 lg:p-12 mb-6 relative overflow-hidden h-[300px] sm:h-[400px] flex items-center justify-center">
+              {/* Phone Mockup */}
+              <div className="relative w-[180px] h-[360px] bg-slate-800 rounded-[3rem] p-3 shadow-2xl z-10 transition-transform duration-500 group-hover:scale-105">
+                <div className="w-full h-full bg-slate-900 rounded-[2.25rem] overflow-hidden relative">
+                  {/* Notch */}
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-slate-800 rounded-b-2xl z-20" />
+                  {/* Screen Content Fake */}
+                  <div className="absolute inset-0 bg-slate-50 pt-10 px-4">
+                     <div className="w-12 h-12 bg-blue-600 rounded-2xl mb-6 shadow-lg shadow-blue-500/30" />
+                     <div className="w-3/4 h-6 bg-slate-200 rounded-full mb-3" />
+                     <div className="w-1/2 h-4 bg-slate-200 rounded-full mb-8" />
+                     
+                     <div className="w-full h-24 bg-white rounded-2xl shadow-sm mb-4" />
+                     <div className="w-full h-24 bg-white rounded-2xl shadow-sm" />
+                  </div>
+                </div>
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-tr from-indigo-100/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            </div>
+            <h3 className="text-2xl font-bold text-slate-900 mb-2">Plataforma CRM Mobile</h3>
+            <p className="text-slate-500">App Nativa • Integración de Datos • Dashboard</p>
+          </motion.div>
+
         </div>
       </div>
     </section>
-  )
+  );
 }

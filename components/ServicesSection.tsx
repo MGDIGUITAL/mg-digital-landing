@@ -1,55 +1,86 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { Monitor, Box, Users, FileText, Cloud, Smartphone } from "lucide-react";
+
+const SERVICES = [
+  { icon: Monitor, title: "Páginas Web", desc: "Diseñamos sitios web modernos, responsivos y enfocados en convertir visitas en clientes con UX/UI de primer nivel." },
+  { icon: Box, title: "Sistemas ERP", desc: "Desarrollamos ERP personalizados para optimizar y automatizar los procesos operativos y financieros de tu empresa." },
+  { icon: Users, title: "Plataformas CRM", desc: "Creamos soluciones CRM a medida para gestionar tus clientes, automatizar seguimientos y aumentar tus ventas." },
+  { icon: FileText, title: "Sistemas de Folios", desc: "Digitaliza y organiza tus documentos con sistemas de folios electrónicos seguros y de alta eficiencia." },
+  { icon: Cloud, title: "Transformación Digital", desc: "Soluciones 100% cloud para llevar toda la infraestructura de tu negocio al siguiente nivel de eficiencia." },
+  { icon: Smartphone, title: "Aplicaciones Móviles", desc: "Desarrollamos aplicaciones móviles nativas y multiplataforma de alta calidad para iOS y Android." },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" }
+  }
+};
+
 export default function ServicesSection() {
   return (
-    <section className="servicios" id="servicios">
-      <div className="section-head">
-        <div className="sec-eyebrow">Nuestros Servicios</div>
-        <h2 className="sec-title">Soluciones digitales completas</h2>
-        <p className="sec-sub">para cada necesidad de tu negocio</p>
-      </div>
-      <div className="serv-grid">
-        <div className="serv-item">
-          <div className="si-icon-wrap">
-            <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+    <section className="py-32 bg-slate-50" id="servicios">
+      <div className="max-w-7xl mx-auto px-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="text-center mb-20"
+        >
+          <div className="inline-block px-4 py-1.5 rounded-full bg-blue-100/50 border border-blue-200 text-blue-700 text-xs font-bold tracking-[0.2em] uppercase mb-4">
+            Ecosistema de Soluciones
           </div>
-          <h3>Páginas Web</h3>
-          <p>Diseñamos sitios web modernos, responsivos y enfocados en convertir visitas en clientes.</p>
-        </div>
-        <div className="serv-item">
-          <div className="si-icon-wrap">
-            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-          </div>
-          <h3>Sistemas ERP</h3>
-          <p>Desarrollamos ERP personalizados para optimizar y automatizar los procesos de tu empresa.</p>
-        </div>
-        <div className="serv-item">
-          <div className="si-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-          <h3>CRM</h3>
-          <p>Creamos soluciones CRM a medida para gestionar tus clientes y aumentar tus ventas.</p>
-        </div>
-        <div className="serv-item">
-          <div className="si-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          </div>
-          <h3>Más Folios</h3>
-          <p>Digitaliza y organiza tus documentos con sistemas de folios electrónicos seguros.</p>
-        </div>
-        <div className="serv-item">
-          <div className="si-icon-wrap">
-            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-          <h3>Todo Digital</h3>
-          <p>Soluciones 100% digitales para llevar tu negocio al siguiente nivel de eficiencia.</p>
-        </div>
-        <div className="serv-item">
-          <div className="si-icon-wrap">
-            <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-          </div>
-          <h3>Aplicaciones</h3>
-          <p>Desarrollamos aplicaciones móviles a medida para iOS y Android de alta calidad.</p>
-        </div>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-6">
+            Ingeniería digital para <br className="hidden md:block"/>cada necesidad de tu negocio
+          </h2>
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            Combinamos diseño de alto nivel con arquitectura de software robusta para crear productos que dominan el mercado.
+          </p>
+        </motion.div>
+
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+        >
+          {SERVICES.map((s, i) => (
+            <motion.div 
+              key={i}
+              variants={itemVariants}
+              whileHover={{ y: -8, transition: { duration: 0.2 } }}
+              className="bg-white p-8 lg:p-10 rounded-[2rem] shadow-sm hover:shadow-2xl hover:shadow-blue-900/5 border border-slate-100 transition-all group relative overflow-hidden"
+            >
+              {/* Decorative background shape */}
+              <div className="absolute -right-10 -top-10 w-40 h-40 bg-blue-50 rounded-full blur-3xl group-hover:bg-blue-100 transition-colors z-0" />
+              
+              <div className="relative z-10">
+                <div className="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center mb-8 group-hover:scale-110 group-hover:bg-blue-600 transition-all duration-300">
+                  <s.icon className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors" strokeWidth={1.5} />
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-4">{s.title}</h3>
+                <p className="text-slate-600 leading-relaxed">
+                  {s.desc}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
-  )
+  );
 }
