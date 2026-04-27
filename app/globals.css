@@ -1,13 +1,23 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 
 /* ============================================================
-   MG DIGITAL — Global Styles
+   MG DIGITAL — High-Tech Design System
+   Inspired by: bold tech aesthetic with neon lime accent
    ============================================================ */
 
 :root {
-  --font-inter: 'Inter', system-ui, sans-serif;
-  --color-brand-blue: #3b82f6;
-  --color-brand-cyan: #06b6d4;
+  --lime:   #C5FF00;
+  --lime-dim: rgba(197,255,0,0.12);
+  --lime-glow: rgba(197,255,0,0.25);
+  --black:  #0a0a0a;
+  --surface: #111111;
+  --surface-2: #1a1a1a;
+  --border: rgba(255,255,255,0.08);
+  --text-primary: #ffffff;
+  --text-muted: rgba(255,255,255,0.45);
+  --font-sans: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'Space Mono', monospace;
 }
 
 * {
@@ -23,46 +33,48 @@ html {
 }
 
 body {
-  font-family: var(--font-inter);
-  background-color: #020617;
-  color: #f8fafc;
+  font-family: var(--font-sans);
+  background-color: var(--black);
+  color: var(--text-primary);
   overflow-x: hidden;
 }
 
-/* Scrollbar personalizada */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #0f172a;
-}
-::-webkit-scrollbar-thumb {
-  background: #1e3a5f;
-  border-radius: 9999px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #3b82f6;
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--lime); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #d4ff33; }
+
+/* Text selection */
+::selection { background: var(--lime); color: #000; }
+
+/* Select options */
+select option { background-color: var(--surface-2); color: #fff; }
+
+/* Focus */
+:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
+
+/* Section divider line */
+.section-line {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
 }
 
-/* Selección de texto */
-::selection {
-  background: rgba(59, 130, 246, 0.3);
-  color: #ffffff;
+/* Neon glow utility */
+.lime-glow {
+  box-shadow: 0 0 30px var(--lime-glow), 0 0 60px rgba(197,255,0,0.10);
 }
 
-/* Transiciones suaves para cambios de idioma */
-main {
-  transition: opacity 0.15s ease;
+/* Animate fade up */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
+.fade-up { animation: fadeUp 0.6s ease forwards; }
 
-/* Select nativo estilizado */
-select option {
-  background-color: #1e293b;
-  color: #f8fafc;
-}
-
-/* Focus visible accesible */
-:focus-visible {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
+/* Scan line effect for tech feel */
+@keyframes scanline {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
 }

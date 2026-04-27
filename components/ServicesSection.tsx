@@ -1,17 +1,8 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import {
-  Ship,
-  FileCheck,
-  Globe,
-  Laptop,
-  FolderOpen,
-  Headphones,
-  ArrowRight,
-} from 'lucide-react'
+import { Ship, FileCheck, Globe, Laptop, FolderOpen, Headphones, ArrowUpRight } from 'lucide-react'
 
-// Mapeo de claves de servicio a íconos de Lucide
 const SERVICE_ICONS = {
   import_export: Ship,
   customs:       FileCheck,
@@ -24,96 +15,125 @@ const SERVICE_ICONS = {
 type ServiceKey = keyof typeof SERVICE_ICONS
 
 const SERVICE_KEYS: ServiceKey[] = [
-  'import_export',
-  'customs',
-  'logistics',
-  'digital',
-  'documents',
-  'support',
-]
-
-// Colores de acento por servicio para variedad visual
-const ACCENT_COLORS = [
-  'from-blue-500 to-cyan-500',
-  'from-violet-500 to-purple-500',
-  'from-emerald-500 to-teal-500',
-  'from-orange-500 to-amber-500',
-  'from-rose-500 to-pink-500',
-  'from-sky-500 to-indigo-500',
+  'import_export', 'customs', 'logistics', 'digital', 'documents', 'support',
 ]
 
 export default function ServicesSection() {
   const t = useTranslations('services')
 
   return (
-    <section id="servicios" className="py-24 lg:py-32 relative overflow-hidden">
-      {/* Fondo */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/50 to-slate-950" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(59,130,246,0.05),_transparent_70%)]" />
+    <section id="servicios" className="relative overflow-hidden" style={{ background: 'var(--black)' }}>
+      {/* Top border */}
+      <div className="w-full h-px" style={{ background: 'var(--border)' }} />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Encabezado */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium">
-            {t('badge')}
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        {/* Section header */}
+        <div className="py-16 flex flex-col lg:flex-row lg:items-end gap-6 justify-between">
+          <div>
+            <span
+              className="text-xs font-mono tracking-[0.3em] uppercase mb-4 block"
+              style={{ color: 'var(--lime)' }}
+            >
+              01 / SERVICIOS
+            </span>
+            <h2
+              className="font-black uppercase leading-none tracking-tight"
+              style={{ fontSize: 'clamp(2.5rem, 6vw, 5rem)', color: '#fff' }}
+            >
+              {t('title')}
+            </h2>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-4">
-            {t('title')}
-          </h2>
-          <p className="max-w-2xl mx-auto text-slate-400 text-lg leading-relaxed">
+          <p
+            className="max-w-sm text-sm leading-relaxed"
+            style={{ color: 'var(--text-muted)' }}
+          >
             {t('subtitle')}
           </p>
         </div>
 
-        {/* Grid de servicios */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {SERVICE_KEYS.map((key, index) => {
-            const Icon = SERVICE_ICONS[key]
-            const accent = ACCENT_COLORS[index]
+        {/* Divider */}
+        <div className="w-full h-px" style={{ background: 'var(--border)' }} />
 
-            return (
-              <div
-                key={key}
-                className="group relative p-6 lg:p-8 rounded-2xl bg-slate-900/60 border border-slate-800/50 hover:border-blue-500/30 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-900/20 cursor-default"
+        {/* Services list — horizontal rows */}
+        {SERVICE_KEYS.map((key, index) => {
+          const Icon = SERVICE_ICONS[key]
+          const num  = String(index + 1).padStart(2, '0')
+
+          return (
+            <div
+              key={key}
+              className="group flex items-center gap-6 py-7 cursor-default transition-all duration-300"
+              style={{
+                borderBottom: '1px solid var(--border)',
+              }}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget
+                el.style.paddingLeft = '24px'
+                el.style.background = 'var(--surface)'
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget
+                el.style.paddingLeft = '0px'
+                el.style.background = 'transparent'
+              }}
+            >
+              {/* Number */}
+              <span
+                className="text-xs font-mono w-8 flex-shrink-0"
+                style={{ color: 'var(--text-muted)' }}
               >
-                {/* Gradiente de fondo al hover */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-600/0 to-cyan-600/0 group-hover:from-blue-600/5 group-hover:to-cyan-600/5 transition-all duration-300" />
+                {num}
+              </span>
 
-                {/* Ícono */}
-                <div className={`relative w-14 h-14 rounded-2xl bg-gradient-to-br ${accent} p-0.5 mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                  <div className="w-full h-full rounded-2xl bg-slate-900 flex items-center justify-center">
-                    <Icon className="w-6 h-6 text-white" />
-                  </div>
-                </div>
-
-                {/* Contenido */}
-                <h3 className="relative text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">
-                  {t(`items.${key}.name`)}
-                </h3>
-                <p className="relative text-slate-400 leading-relaxed text-sm">
-                  {t(`items.${key}.description`)}
-                </p>
-
-                {/* Arrow indicator */}
-                <div className="relative mt-4 flex items-center gap-1 text-blue-400/0 group-hover:text-blue-400 transition-all duration-300 text-sm font-medium">
-                  <ArrowRight className="w-4 h-4" />
-                </div>
+              {/* Icon */}
+              <div
+                className="w-10 h-10 flex-shrink-0 flex items-center justify-center transition-all duration-300"
+                style={{ border: '1px solid var(--border)' }}
+              >
+                <Icon className="w-4 h-4 text-white group-hover:hidden" />
+                <Icon className="w-4 h-4 hidden group-hover:block" style={{ color: 'var(--lime)' }} />
               </div>
-            )
-          })}
-        </div>
 
-        {/* CTA hacia formulario */}
-        <div className="text-center mt-14">
+              {/* Name */}
+              <span
+                className="flex-1 font-bold uppercase tracking-wider text-sm lg:text-base transition-colors duration-200"
+                style={{ color: '#fff' }}
+              >
+                {t(`items.${key}.name`)}
+              </span>
+
+              {/* Description — visible on hover */}
+              <span
+                className="hidden lg:block flex-1 text-xs leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ color: 'var(--text-muted)' }}
+              >
+                {t(`items.${key}.description`)}
+              </span>
+
+              {/* Arrow */}
+              <ArrowUpRight
+                className="w-5 h-5 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-200 -translate-x-2 group-hover:translate-x-0"
+                style={{ color: 'var(--lime)' }}
+              />
+            </div>
+          )
+        })}
+
+        {/* CTA */}
+        <div className="py-14 flex justify-center">
           <a
             href="#cotizaciones"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold rounded-2xl hover:from-blue-500 hover:to-cyan-500 transition-all duration-300 shadow-xl hover:shadow-blue-500/30 hover:scale-105"
+            className="flex items-center gap-3 px-10 py-4 font-bold uppercase tracking-wider text-sm transition-all duration-200 hover:scale-105 hover:shadow-lg"
+            style={{ background: 'var(--lime)', color: '#000' }}
           >
             Solicitar Cotización
-            <ArrowRight className="w-5 h-5" />
+            <ArrowUpRight className="w-4 h-4" />
           </a>
         </div>
       </div>
+
+      {/* Bottom border */}
+      <div className="w-full h-px" style={{ background: 'var(--border)' }} />
     </section>
   )
 }
