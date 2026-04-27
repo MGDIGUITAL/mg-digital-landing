@@ -17,10 +17,9 @@ const LOCALES = [
 
 const NAV_LINKS = [
   { href: '#servicios',  label: 'Servicios' },
+  { href: '#soluciones', label: 'Soluciones' },
   { href: '#nosotros',   label: 'Nosotros' },
-  { href: '#cobertura',  label: 'Cobertura' },
-  { href: '#contacto',   label: 'Contacto' },
-  { href: '#seguimiento',label: 'Seguimiento' },
+  { href: '#contacto',   label: 'Proyectos' },
 ]
 
 interface NavbarProps { compact?: boolean }
@@ -68,7 +67,7 @@ export default function Navbar({ compact = false }: NavbarProps) {
           <a href="#inicio" className="flex items-center gap-2 group">
             <span className="text-xl font-black uppercase tracking-tight">
               <span className="text-white">MG</span>
-              <span style={{ color: 'var(--lime)' }}> DIGITAL</span>
+              <span style={{ color: 'var(--lime)' }}>.DIGUITAL</span>
             </span>
           </a>
 
@@ -140,11 +139,11 @@ export default function Navbar({ compact = false }: NavbarProps) {
 
             {/* CTA */}
             <a
-              href="#cotizaciones"
+              href="#contacto"
               className="px-6 py-3 text-xs font-black uppercase tracking-widest transition-all duration-200 hover:scale-105"
               style={{ background: 'var(--lime)', color: 'var(--black)' }}
             >
-              Cotizar Ahora
+              Consultar
             </a>
           </div>
 
@@ -182,30 +181,13 @@ export default function Navbar({ compact = false }: NavbarProps) {
 
           <div className="pt-4">
             <a
-              href="#cotizaciones"
+              href="#contacto"
               onClick={() => setIsMenuOpen(false)}
               className="flex items-center justify-center w-full py-4 text-xs font-black uppercase tracking-widest"
-              style={{ background: 'var(--lime)', color: '#000' }}
+              style={{ background: 'var(--lime)', color: 'var(--black)' }}
             >
-              Cotizar Ahora
+              Consultar Proyecto
             </a>
-          </div>
-
-          <div className="pt-3 flex flex-wrap gap-2">
-            {LOCALES.map((loc) => (
-              <button
-                key={loc.code}
-                onClick={() => handleLocaleChange(loc.code)}
-                className="flex items-center gap-1 px-3 py-2 text-xs font-mono"
-                style={{
-                  border: `1px solid ${loc.code === locale ? 'var(--lime)' : 'var(--border)'}`,
-                  color: loc.code === locale ? 'var(--lime)' : 'var(--text-muted)',
-                  background: 'transparent',
-                }}
-              >
-                {loc.flag} {loc.name}
-              </button>
-            ))}
           </div>
         </div>
       </div>
