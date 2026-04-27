@@ -34,16 +34,20 @@ export default function QuoteForm() {
   const [serverError, setServerError] = useState('')
   const [isSuccess, setIsSuccess]     = useState(false)
 
-  // Schema Zod con mensajes de validación internacionalizados
+  // Schema Zod con mensajes de validación internacionalizados (compatible con Zod v4)
   const schema = z.object({
-    nombre:       z.string().min(2,  t('validation.name_min')).nonempty(t('validation.name_required')),
-    email:        z.string().email(t('validation.email_invalid')).nonempty(t('validation.email_required')),
-    telefono:     z.string().min(7,  t('validation.phone_min')).nonempty(t('validation.phone_required')),
-    tipo_servicio: z.enum(
-      ['importacion_exportacion','asesoria_aduanera','logistica_internacional','consultoria_digital','gestion_documentos','soporte_24_7'],
-      { errorMap: () => ({ message: t('validation.service_required') }) }
-    ),
-    descripcion:  z.string().min(20, t('validation.description_min')).nonempty(t('validation.description_required')),
+    nombre:        z.string().min(2,  t('validation.name_min')),
+    email:         z.string().email(t('validation.email_invalid')),
+    telefono:      z.string().min(7,  t('validation.phone_min')),
+    tipo_servicio: z.enum([
+      'importacion_exportacion',
+      'asesoria_aduanera',
+      'logistica_internacional',
+      'consultoria_digital',
+      'gestion_documentos',
+      'soporte_24_7',
+    ] as const, t('validation.service_required')),
+    descripcion:   z.string().min(20, t('validation.description_min')),
   })
 
   type FormValues = z.infer<typeof schema>
