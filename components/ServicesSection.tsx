@@ -1,69 +1,58 @@
 'use client'
 
-import { Globe, Database, Users, Monitor, BarChart, Smartphone, ChevronRight } from 'lucide-react'
+import { Code2, Cubes, Handshake, FileText, CloudCog, Smartphone } from 'lucide-react'
 
 const SERVICES = [
   {
-    icon: Globe,
-    title: 'Páginas Web',
-    desc: 'Sitios corporativos y e-commerce de alto impacto visual y rendimiento.',
-    color: 'bg-blue-500',
+    icon: Code2,
+    title: 'PÁGINAS WEB',
+    desc: 'Diseñamos sitios web modernos, responsivos y enfocados en convertir visitas en clientes.',
   },
   {
-    icon: Database,
-    title: 'Sistemas ERP',
-    desc: 'Planificación de recursos empresariales para el control total de procesos.',
-    color: 'bg-indigo-600',
+    icon: Cubes,
+    title: 'SISTEMAS ERP',
+    desc: 'Desarrollamos sistemas ERP personalizados para optimizar y automatizar los procesos de tu negocio.',
   },
   {
-    icon: Users,
-    title: 'Sistemas CRM',
-    desc: 'Gestión inteligente de relaciones con clientes para potenciar tus ventas.',
-    color: 'bg-cyan-500',
+    icon: Handshake,
+    title: 'CRM',
+    desc: 'Creamos soluciones CRM a medida para gestionar tus clientes y aumentar tus ventas.',
   },
   {
-    icon: Monitor,
-    title: 'Más Folios',
-    desc: 'Soluciones de facturación electrónica y gestión tributaria automatizada.',
-    color: 'bg-blue-700',
+    icon: FileText,
+    title: 'MÁS FOLIOS',
+    desc: 'Digitaliza y organiza tus documentos con sistemas de folios electrónicos seguros y eficientes.',
   },
   {
-    icon: BarChart,
-    title: 'Todo Digital',
-    desc: 'Digitalización completa de archivos y flujos de trabajo tradicionales.',
-    color: 'bg-violet-600',
+    icon: CloudCog,
+    title: 'TODO DIGITAL',
+    desc: 'Soluciones 100% digitales para llevar tu negocio al siguiente nivel.',
   },
   {
     icon: Smartphone,
-    title: 'Aplicaciones',
-    desc: 'Apps móviles nativas e híbridas diseñadas para escalar tu negocio.',
-    color: 'bg-sky-500',
+    title: 'APLICACIONES',
+    desc: 'Desarrollamos aplicaciones móviles a medida para iOS y Android.',
   },
 ]
 
 export default function ServicesSection() {
   return (
-    <section id="servicios" className="py-24 bg-slate-50">
+    <section id="servicios" className="py-20 bg-white">
       <div className="container">
         <div className="text-center mb-16">
-          <h2 className="text-sm font-black uppercase tracking-[0.3em] text-blue-600 mb-4">Soluciones Digitales</h2>
-          <p className="text-4xl lg:text-5xl font-black text-slate-900">Especialización Técnica</p>
+          <h2 className="text-[22px] font-bold text-slate-700 tracking-wide mb-2 uppercase">Nuestros Servicios</h2>
+          <p className="text-[15px] text-slate-500">Soluciones digitales completas para cada necesidad de tu negocio.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
           {SERVICES.map((s, i) => (
             <div 
               key={s.title} 
-              className="group bg-white p-10 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-blue-900/5 transition-all duration-300 hover:-translate-y-1"
+              className="flex flex-col items-center text-center p-6 rounded-2xl border border-blue-100 hover:shadow-lg hover:-translate-y-1 transition-all bg-white"
             >
-              <div className={`w-14 h-14 ${s.color} rounded-2xl flex items-center justify-center text-white mb-8 shadow-lg shadow-blue-500/20 group-hover:scale-110 transition-transform`}>
-                <s.icon className="w-7 h-7" />
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-4">{s.title}</h3>
-              <p className="text-slate-500 leading-relaxed mb-8">{s.desc}</p>
-              <div className="flex items-center gap-2 text-blue-600 font-bold text-sm uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all">
-                Saber más <ChevronRight className="w-4 h-4" />
-              </div>
+              <s.icon className="w-12 h-12 text-[#0055cc] mb-6" strokeWidth={1.2} />
+              <h3 className="text-[14px] font-bold text-slate-800 mb-3 uppercase">{s.title}</h3>
+              <p className="text-[13px] text-slate-500 leading-relaxed">{s.desc}</p>
             </div>
           ))}
         </div>
