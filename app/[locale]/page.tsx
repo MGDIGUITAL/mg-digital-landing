@@ -7,19 +7,8 @@ import QuoteForm from '@/components/QuoteForm'
 import Footer from '@/components/Footer'
 import { MessageSquare } from 'lucide-react'
 
-export async function generateMetadata({ 
-  params 
-}: { 
-  params: Promise<{ locale: string }> 
-}): Promise<Metadata> {
-  const { locale } = await params
-  const t = await getTranslations({ locale, namespace: 'hero' })
-  return {
-    title: `MG DIGITAL — ${t('headline')}`,
-    description: t('subheadline'),
-    keywords: 'logística internacional, importación exportación, aduana, Chile, MG Digital',
-  }
-}
+// Metadatos estáticos definidos en el layout.
+
 
 /* ------------------------------------------------------------------ */
 /* Utility: section wrapper with consistent styling                    */

@@ -142,7 +142,7 @@ export default function Navbar({ compact = false }: NavbarProps) {
             <a
               href="#cotizaciones"
               className="px-6 py-3 text-xs font-black uppercase tracking-widest transition-all duration-200 hover:scale-105"
-              style={{ background: 'var(--lime)', color: '#000' }}
+              style={{ background: 'var(--lime)', color: 'var(--black)' }}
             >
               Cotizar Ahora
             </a>

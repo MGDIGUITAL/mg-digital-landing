@@ -1,18 +1,26 @@
-import { getRequestConfig } from 'next-intl/server'
-import { routing } from './routing'
+import { getRequestConfig } from 'next-intl/server';
+import { routing } from './routing';
 
-// Configuración del servidor next-intl: carga los mensajes JSON según el locale activo
 export default getRequestConfig(async ({ requestLocale }) => {
-  // Obtiene el locale de la request; usa el default si no es válido
-  let locale = await requestLocale
+  // Aseguramos que el locale se resuelva correctamente
+  let locale = await requestLocale;
 
-  if (!locale || !routing.locales.includes(locale as 'es' | 'en' | 'ru' | 'pt' | 'fr' | 'it' | 'zh')) {
-    locale = routing.defaultLocale
+  // Validación de seguridad para el locale
+  if (!locale || !routing.locales.includes(locale as any)) {
+    locale = routing.defaultLocale;
   }
 
-  return {
-    locale,
-    // Importa dinámicamente el archivo de mensajes según el locale
-    messages: (await import(`../messages/${locale}.json`)).default,
+  try {
+    return {
+      locale,
+      messages: (await import(`../messages/${locale}.json`)).default
+    };
+  } catch (error) {
+    console.error(`Failed to load messages for locale: ${locale}`, error);
+    // Fallback al idioma por defecto si falla la carga
+    return {
+      locale: routing.defaultLocale,
+      messages: (await import(`../messages/${routing.defaultLocale}.json`)).default
+    };
   }
-})
+});

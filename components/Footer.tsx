@@ -41,20 +41,20 @@ export default function Footer({ currentLocale }: FooterProps) {
 
   return (
     <footer id="contacto" className="relative bg-slate-950 border-t border-slate-800/50">
-      {/* Gradiente superior */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
+      {/* Línea superior neón */}
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, var(--lime), transparent)' }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           {/* Columna 1: Logo y tagline */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center shadow-lg">
-                <Package className="w-5 h-5 text-white" />
+              <div className="w-10 h-10 bg-slate-900 flex items-center justify-center shadow-lg" style={{ border: '1px solid var(--lime)' }}>
+                <Package className="w-5 h-5" style={{ color: 'var(--lime)' }} />
               </div>
               <span className="text-xl font-bold">
                 <span className="text-white">MG</span>
-                <span className="text-blue-400"> DIGITAL</span>
+                <span style={{ color: 'var(--lime)' }}> DIGITAL</span>
               </span>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed mb-4">
@@ -137,8 +137,8 @@ export default function Footer({ currentLocale }: FooterProps) {
                     onClick={() => handleLocaleChange(loc.code)}
                     className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all duration-200 ${
                       loc.code === currentLocale
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white'
+                    ? 'bg-lime-500 text-black'
+                    : 'bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800'
                     }`}
                     title={loc.flag}
                   >
