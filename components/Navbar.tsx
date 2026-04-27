@@ -1,198 +1,188 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { useRouter, usePathname } from 'next/navigation'
-import { Menu, X } from 'lucide-react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { Menu, X, ChevronDown, Monitor, Database, Users, BarChart, Globe, Zap } from 'lucide-react'
 
 const NAV_LINKS = [
-  { href: '#inicio',     label: 'Inicio' },
-  { href: '#servicios',  label: 'Servicios' },
-  { href: '#soluciones', label: 'Soluciones' },
-  { href: '#nosotros',   label: 'Nosotros' },
-  { href: '#proyectos',  label: 'Proyectos' },
-  { href: '#contacto',   label: 'Contacto' },
+  { 
+    label: 'Inicio', 
+    href: '/' 
+  },
+  { 
+    label: 'Servicios', 
+    href: '/servicios',
+    dropdown: [
+      { label: 'Páginas Web', href: '/servicios/web', icon: Globe },
+      { label: 'Sistemas ERP', href: '/servicios/erp', icon: Database },
+      { label: 'Sistemas CRM', href: '/servicios/crm', icon: Users },
+      { label: 'Automatización', href: '/servicios/automatizacion', icon: Zap },
+    ]
+  },
+  { 
+    label: 'Soluciones', 
+    href: '/soluciones',
+    dropdown: [
+      { label: 'Más Folios', href: '/soluciones/folios', icon: Monitor },
+      { label: 'Todo Digital', href: '/soluciones/digital', icon: BarChart },
+      { label: 'Aplicaciones', href: '/soluciones/apps', icon: Globe },
+    ]
+  },
+  { label: 'Nosotros', href: '/nosotros' },
+  { label: 'Proyectos', href: '/proyectos' },
 ]
 
-const SECTION_IDS = NAV_LINKS.map(l => l.href.slice(1))
-
 export default function Navbar() {
-  const [scrolled,    setScrolled]    = useState(false)
-  const [menuOpen,    setMenuOpen]    = useState(false)
-  const [activeId,    setActiveId]    = useState('inicio')
-  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 })
-  const navRef  = useRef<HTMLDivElement>(null)
-  const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({})
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const pathname = usePathname()
 
-  /* ── Scroll detection ── */
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    const onScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  /* ── Active section via Intersection Observer ── */
-  useEffect(() => {
-    const observers: IntersectionObserver[] = []
-    const ratios: Record<string, number> = {}
-
-    SECTION_IDS.forEach(id => {
-      const el = document.getElementById(id)
-      if (!el) return
-      const obs = new IntersectionObserver(
-        entries => {
-          entries.forEach(e => { ratios[id] = e.intersectionRatio })
-          const best = Object.entries(ratios).sort((a, b) => b[1] - a[1])[0]
-          if (best && best[1] > 0) setActiveId(best[0])
-        },
-        { threshold: [0, 0.25, 0.5, 0.75, 1] }
-      )
-      obs.observe(el)
-      observers.push(obs)
-    })
-
-    return () => observers.forEach(o => o.disconnect())
-  }, [])
-
-  /* ── Smooth indicator movement ── */
-  useEffect(() => {
-    const el = linkRefs.current[activeId]
-    const nav = navRef.current
-    if (!el || !nav) return
-    const elRect  = el.getBoundingClientRect()
-    const navRect = nav.getBoundingClientRect()
-    setIndicatorStyle({ left: elRect.left - navRect.left, width: elRect.width })
-  }, [activeId])
-
-  const handleNav = (href: string) => {
-    setMenuOpen(false)
-    setTimeout(() => {
-      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }, 60)
-  }
-
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
-        background: scrolled ? 'rgba(15, 23, 42,0.85)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(20px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(0, 85, 204,0.08)' : 'none',
+        background: scrolled ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(10px)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(0, 85, 204, 0.1)' : 'none',
+        height: '80px',
       }}
     >
-      <div className="container">
-        <div className="flex items-center justify-between h-20">
+      <div className="container h-full">
+        <div className="flex items-center justify-between h-full">
 
           {/* ── Logo ── */}
-          <a href="#inicio" onClick={(e) => { e.preventDefault(); handleNav('#inicio') }}
-             className="flex items-center gap-3 group">
-            {/* Animated SVG Logo */}
-            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="1" y="1" width="34" height="34" rx="4"
-                    stroke="url(#logoGrad)" strokeWidth="1.5"
-                    strokeDasharray="136" strokeDashoffset="136"
-                    style={{ animation: 'drawStroke 1.2s ease forwards' }} />
-              <text x="50%" y="55%" dominantBaseline="middle" textAnchor="middle"
-                    fontFamily="Inter" fontWeight="900" fontSize="13"
-                    fill="var(--white)" letterSpacing="0.5">MG</text>
-              <defs>
-                <linearGradient id="logoGrad" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stopColor="#0055cc" />
-                  <stop offset="100%" stopColor="#0066cc" />
-                </linearGradient>
-              </defs>
-            </svg>
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="relative w-10 h-10 flex items-center justify-center font-black text-sm italic text-white rounded-lg transition-transform duration-300 group-hover:scale-110"
+                 style={{ background: 'linear-gradient(135deg, #0055cc, #00aaff)' }}>
+              MG
+              <div className="absolute -inset-1 rounded-lg opacity-20 group-hover:opacity-40 transition-opacity" style={{ background: '#0055cc', filter: 'blur(8px)' }} />
+            </div>
             <div className="flex flex-col leading-none">
-              <span className="text-lg font-black tracking-tight">
-                <span className="text-white">MG</span>
-                <span style={{ color: 'var(--cyan)' }}>.DIGUITAL</span>
+              <span className="text-xl font-black tracking-tight" style={{ color: 'var(--white)' }}>
+                MG<span style={{ color: '#0055cc' }}>.DIGUITAL</span>
               </span>
-              <span className="text-[8px] font-mono tracking-[0.22em] opacity-40 uppercase mt-0.5">
-                SOFTWARE · ERP · CRM · WEB
+              <span className="text-[9px] font-mono tracking-[0.25em] uppercase mt-1" style={{ color: 'var(--slate)' }}>
+                Ingeniería · Software · Futuro
               </span>
             </div>
-          </a>
+          </Link>
 
-          {/* ── Desktop nav ── */}
-          <nav ref={navRef} className="hidden lg:flex items-center gap-1 relative">
-            {/* Active indicator bar */}
-            <span
-              className="absolute bottom-0 h-0.5 transition-all duration-300 ease-out rounded-full"
-              style={{ ...indicatorStyle, background: 'var(--cyan)' }}
-            />
+          {/* ── Desktop Nav ── */}
+          <nav className="hidden lg:flex items-center gap-2 h-full">
             {NAV_LINKS.map(link => (
-              <a
-                key={link.href}
-                ref={el => { linkRefs.current[link.href.slice(1)] = el }}
-                href={link.href}
-                onClick={e => { e.preventDefault(); handleNav(link.href) }}
-                className="px-4 py-2 text-sm font-medium transition-colors duration-200 relative"
-                style={{
-                  color: activeId === link.href.slice(1) ? 'var(--cyan)' : 'rgba(15, 23, 42,0.6)',
-                }}
+              <div 
+                key={link.label}
+                className="relative h-full flex items-center"
+                onMouseEnter={() => setActiveDropdown(link.label)}
+                onMouseLeave={() => setActiveDropdown(null)}
               >
-                {link.label}
-              </a>
+                <Link
+                  href={link.href}
+                  className="px-4 py-2 text-sm font-semibold flex items-center gap-1.5 transition-colors duration-200"
+                  style={{
+                    color: pathname === link.href ? '#0055cc' : 'var(--white)',
+                  }}
+                >
+                  {link.label}
+                  {link.dropdown && (
+                    <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${activeDropdown === link.label ? 'rotate-180' : ''}`} />
+                  )}
+                </Link>
+
+                {/* Dropdown Menu */}
+                {link.dropdown && (
+                  <div 
+                    className={`absolute top-full left-0 w-64 pt-2 transition-all duration-300 ${activeDropdown === link.label ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2'}`}
+                  >
+                    <div className="bg-white rounded-xl shadow-2xl border border-slate-100 p-2 overflow-hidden">
+                      {link.dropdown.map(item => (
+                        <Link
+                          key={item.label}
+                          href={item.href}
+                          className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-50 transition-colors group/item"
+                        >
+                          <div className="w-8 h-8 rounded-md bg-blue-50 flex items-center justify-center text-blue-600 group-hover/item:bg-blue-600 group-hover/item:text-white transition-colors">
+                            <item.icon className="w-4 h-4" />
+                          </div>
+                          <span className="text-sm font-bold text-slate-700 group-hover/item:text-blue-600">
+                            {item.label}
+                          </span>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             ))}
           </nav>
 
-          {/* ── CTA + Mobile toggle ── */}
+          {/* ── CTA ── */}
           <div className="flex items-center gap-4">
-            <a
+            <Link
               href="https://wa.me/56929645522"
               target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:inline-flex btn-primary text-xs py-2.5 px-5"
+              className="hidden md:inline-flex px-6 py-3 bg-[#0055cc] text-white text-xs font-black uppercase tracking-widest rounded-full shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 hover:-translate-y-0.5 transition-all active:scale-95"
             >
-              Consultar
-            </a>
+              Cotizar Proyecto
+            </Link>
             <button
-              onClick={() => setMenuOpen(v => !v)}
-              className="lg:hidden text-white p-2"
-              aria-label="Menú"
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="lg:hidden p-2 text-slate-900"
             >
-              {menuOpen ? <X size={24} /> : <Menu size={24} />}
+              {menuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* ── Mobile menu ── */}
-      <div
-        className="lg:hidden overflow-hidden transition-all duration-400"
-        style={{
-          maxHeight: menuOpen ? '400px' : '0',
-          background: 'rgba(15, 23, 42,0.97)',
-          borderTop: menuOpen ? '1px solid rgba(0, 85, 204,0.08)' : 'none',
-        }}
+      {/* ── Mobile Menu ── */}
+      <div 
+        className={`lg:hidden absolute top-full left-0 right-0 bg-white border-t border-slate-100 shadow-2xl transition-all duration-300 overflow-hidden ${menuOpen ? 'max-h-[80vh] opacity-100 visible' : 'max-h-0 opacity-0 invisible'}`}
       >
-        <nav className="container py-6 flex flex-col gap-1">
+        <div className="container py-8 flex flex-col gap-4">
           {NAV_LINKS.map(link => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={e => { e.preventDefault(); handleNav(link.href) }}
-              className="py-3 px-4 text-sm font-medium rounded-lg transition-colors"
-              style={{
-                color: activeId === link.href.slice(1) ? 'var(--cyan)' : 'rgba(15, 23, 42,0.6)',
-                background: activeId === link.href.slice(1) ? 'rgba(0, 85, 204,0.05)' : 'transparent',
-              }}
-            >
-              {link.label}
-            </a>
+            <div key={link.label}>
+              <Link
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className="text-lg font-bold text-slate-900 flex items-center justify-between"
+              >
+                {link.label}
+              </Link>
+              {link.dropdown && (
+                <div className="mt-2 ml-4 flex flex-col gap-2 border-l-2 border-blue-50 pl-4">
+                  {link.dropdown.map(item => (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setMenuOpen(false)}
+                      className="text-sm font-medium text-slate-500 py-1"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
-          <a href="https://wa.me/56929645522" target="_blank" rel="noopener noreferrer"
-             className="mt-4 btn-primary justify-center text-xs">
-            Consultar Proyecto
-          </a>
-        </nav>
+          <Link
+            href="https://wa.me/56929645522"
+            target="_blank"
+            className="mt-6 w-full py-4 bg-[#0055cc] text-white text-center font-black uppercase tracking-widest rounded-xl"
+          >
+            Cotizar Proyecto
+          </Link>
+        </div>
       </div>
-
-      {/* Inline keyframe for stroke animation */}
-      <style>{`
-        @keyframes drawStroke {
-          to { stroke-dashoffset: 0; }
-        }
-      `}</style>
     </header>
   )
 }
+
