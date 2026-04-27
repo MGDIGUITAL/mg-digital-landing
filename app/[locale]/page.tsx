@@ -1,18 +1,22 @@
-import { getTranslations } from 'next-intl/server';
+import { getTranslations } from 'next-intl/server'
+import Navbar from '@/components/Navbar'
+import HeroSection from '@/components/HeroSection'
 
-export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'hero' });
-
+export default async function HomePage({ 
+  params 
+}: { 
+  params: Promise<{ locale: string }> 
+}) {
+  const { locale } = await params
+  
   return (
-    <div style={{ background: '#000', color: '#fff', height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'sans-serif' }}>
-      <div>
-        <h1 style={{ color: '#C5FF00' }}>MG DIGITAL - TEST MODE</h1>
-        <p>Locale: {locale}</p>
-        <p>Translation Test: {t('headline')}</p>
-        <hr style={{ borderColor: '#333', margin: '20px 0' }} />
-        <p style={{ color: '#666' }}>Si ves esto, la infraestructura está bien. El error está en los componentes.</p>
+    <main style={{ background: 'var(--black)', color: '#fff' }}>
+      <Navbar />
+      <HeroSection />
+      
+      <div className="py-20 text-center">
+        <p className="text-lime-500 font-mono text-xs">DIAGNOSTIC: Navbar & Hero loaded. If you see this, the error is in the next components.</p>
       </div>
-    </div>
-  );
+    </main>
+  )
 }
