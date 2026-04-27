@@ -1,7 +1,7 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { routing } from '@/i18n/routing';
+import { routing } from '../../i18n/routing';
 import { Inter } from 'next/font/google';
 import '../globals.css';
 
@@ -19,12 +19,10 @@ interface LocaleLayoutProps {
 export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
   const { locale } = await params;
 
-  // Verificamos que el locale sea válido según nuestra configuración
   if (!routing.locales.includes(locale as any)) {
     notFound();
   }
 
-  // Obtenemos los mensajes de forma segura
   const messages = await getMessages();
 
   return (
