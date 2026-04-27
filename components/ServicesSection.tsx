@@ -1,92 +1,139 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
+import { useRef, useEffect, useState } from 'react'
 import { Cpu, Database, Layout, Zap, Search, LifeBuoy, ArrowUpRight } from 'lucide-react'
 
-const SERVICE_ICONS = {
-  industrial_opt: Cpu,
-  erp_crm:        Database,
-  web_dev:        Layout,
-  automation:     Zap,
-  consulting:     Search,
-  support:        LifeBuoy,
-} as const
-
-type ServiceKey = keyof typeof SERVICE_ICONS
-
-const SERVICE_KEYS: ServiceKey[] = [
-  'industrial_opt', 'erp_crm', 'web_dev', 'automation', 'consulting', 'support',
+const SERVICES = [
+  {
+    key: 'industrial',
+    icon: Cpu,
+    title: 'Optimización Industrial',
+    desc: 'Automatizamos líneas de producción y detectamos cuellos de botella con análisis de datos en tiempo real.',
+    badge: 'INDUSTRIA 4.0',
+  },
+  {
+    key: 'erp',
+    icon: Database,
+    title: 'Sistemas ERP',
+    desc: 'Soluciones integrales para gestionar inventario, finanzas, RRHH y producción en una sola plataforma.',
+    badge: 'CORE SYSTEM',
+  },
+  {
+    key: 'web',
+    icon: Layout,
+    title: 'Desarrollo Web',
+    desc: 'Plataformas web de alto rendimiento, SEO optimizado y experiencias de usuario que convierten.',
+    badge: 'FULL STACK',
+  },
+  {
+    key: 'automation',
+    icon: Zap,
+    title: 'Automatización',
+    desc: 'Robots de procesos (RPA), integraciones API y flujos de trabajo sin fricción entre sistemas.',
+    badge: 'RPA · API',
+  },
+  {
+    key: 'crm',
+    icon: Search,
+    title: 'Sistemas CRM',
+    desc: 'Centraliza la gestión comercial, pipeline de ventas y atención al cliente en un ecosistema propio.',
+    badge: 'VENTAS',
+  },
+  {
+    key: 'support',
+    icon: LifeBuoy,
+    title: 'Soporte 24/7',
+    desc: 'Monitoreo continuo, SLAs garantizados y equipo técnico disponible cuando tu operación lo exige.',
+    badge: 'SLA GARANTIZADO',
+  },
 ]
 
-export default function ServicesSection() {
-  const t = useTranslations('services')
+function ServiceCard({ svc, index }: { svc: typeof SERVICES[0]; index: number }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) setVisible(true) },
+      { threshold: 0.15 }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
 
   return (
-    <section id="servicios" className="relative overflow-hidden bg-[#020617]">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-        <div className="py-24 lg:py-32 flex flex-col lg:flex-row lg:items-end gap-12 justify-between">
-          <div className="max-w-3xl">
-            <span
-              className="text-[10px] font-mono tracking-[0.4em] uppercase mb-6 block font-bold text-blue-400"
-            >
-              01 // SERVICIOS TÉCNICOS
-            </span>
-            <h2
-              className="text-[3rem] lg:text-[5.5rem] font-black uppercase leading-[0.9] tracking-tighter text-white"
-            >
-              SOLUCIONES <span style={{ color: 'var(--blue-neon)' }}>DIGITALES</span>
-            </h2>
-          </div>
-          <p className="max-w-xs text-sm leading-relaxed text-white/30 font-medium">
-            Implementamos infraestructura crítica y software de gestión para la industria 4.0.
+    <div
+      ref={ref}
+      className="glass border-animated group flex flex-col gap-6 p-8 cursor-default"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0)' : 'translateY(28px)',
+        transition: `opacity 0.5s ${index * 0.08}s ease, transform 0.5s ${index * 0.08}s ease`,
+      }}
+    >
+      {/* Header */}
+      <div className="flex items-start justify-between">
+        <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
+             style={{ background: 'rgba(0,242,255,0.08)', border: '1px solid rgba(0,242,255,0.15)' }}>
+          <svc.icon className="w-5 h-5 transition-colors duration-300"
+                    style={{ color: 'var(--cyan)' }} />
+        </div>
+        <span className="text-[9px] font-mono font-bold tracking-[0.25em] px-2 py-1 rounded"
+              style={{ color: 'var(--cyan)', background: 'rgba(0,242,255,0.07)' }}>
+          {svc.badge}
+        </span>
+      </div>
+
+      {/* Content */}
+      <div className="flex flex-col gap-3 flex-1">
+        <h3 className="text-base font-bold text-white group-hover:text-[var(--cyan)] transition-colors duration-300">
+          {svc.title}
+        </h3>
+        <p className="text-sm leading-relaxed flex-1" style={{ color: 'var(--slate)' }}>
+          {svc.desc}
+        </p>
+      </div>
+
+      {/* Footer */}
+      <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest transition-all duration-300 opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0"
+           style={{ color: 'var(--cyan)' }}>
+        Ver módulo <ArrowUpRight className="w-3.5 h-3.5" />
+      </div>
+    </div>
+  )
+}
+
+export default function ServicesSection() {
+  return (
+    <section id="servicios" className="py-32" style={{ background: 'var(--bg-surface)' }}>
+      <div className="container">
+        {/* Header */}
+        <div className="section-label"><span>01 // Servicios Técnicos</span></div>
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
+          <h2 className="font-black leading-tight tracking-tighter" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}>
+            Soluciones <span className="text-cyan">Digitales</span><br />
+            para la Industria
+          </h2>
+          <p className="max-w-sm text-sm leading-relaxed lg:text-right" style={{ color: 'var(--slate)' }}>
+            Implementamos infraestructura crítica y software de gestión para empresas que necesitan operar al máximo nivel.
           </p>
         </div>
 
+        {/* Cards grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {SERVICE_KEYS.map((key, index) => {
-            const Icon = SERVICE_ICONS[key]
-            const num  = String(index + 1).padStart(2, '0')
-
-            return (
-              <div
-                key={key}
-                className="group p-10 lg:p-14 glass-card rounded-2xl relative overflow-hidden"
-              >
-                <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-blue-500/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                
-                <div className="flex justify-between items-start mb-10">
-                    <span className="text-[10px] font-mono font-black text-white/10 group-hover:text-blue-500 transition-colors">
-                      {num}
-                    </span>
-                    <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center group-hover:bg-blue-600/20 group-hover:border-blue-500 transition-all duration-500">
-                        <Icon className="w-7 h-7 text-white/20 group-hover:text-blue-400 transition-colors" />
-                    </div>
-                </div>
-
-                <h3 className="font-black uppercase tracking-[0.15em] text-[16px] mb-6 text-white group-hover:text-blue-400 transition-colors">
-                  {t(`items.${key}.name`)}
-                </h3>
-
-                <p className="text-[12px] leading-relaxed text-white/30 font-medium mb-10 group-hover:text-white/60 transition-colors">
-                  {t(`items.${key}.description`)}
-                </p>
-
-                <div className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-blue-400 opacity-40 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
-                  <span>EXPANDIR MÓDULO</span>
-                  <ArrowUpRight className="w-4 h-4" />
-                </div>
-              </div>
-            )
-          })}
+          {SERVICES.map((svc, i) => (
+            <ServiceCard key={svc.key} svc={svc} index={i} />
+          ))}
         </div>
 
-        <div className="py-24 lg:py-40 flex justify-center">
-          <a
-            href="#contacto"
-            className="flex items-center gap-6 px-16 py-7 font-black uppercase tracking-[0.3em] text-[11px] bg-blue-600 text-white shadow-[0_0_50px_rgba(0,163,255,0.3)] transition-all duration-500 hover:scale-105 hover:bg-blue-500"
-          >
-            INICIAR TRANSFORMACIÓN
-            <ArrowUpRight className="w-5 h-5" />
+        {/* CTA */}
+        <div className="mt-16 flex justify-center">
+          <a href="#contacto"
+             className="btn-primary text-sm">
+            Iniciar Transformación Digital
+            <ArrowUpRight className="w-4 h-4" />
           </a>
         </div>
       </div>

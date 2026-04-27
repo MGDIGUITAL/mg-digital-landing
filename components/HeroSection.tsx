@@ -1,142 +1,239 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
-import { ArrowRight, Cpu, Monitor, Database, Users, Settings, Zap, BarChart3, Globe, ShieldCheck, ChevronRight } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { ArrowRight, ChevronRight } from 'lucide-react'
 
-export default function HeroSection() {
-  const t = useTranslations('hero')
+/* ── Animated counter hook ── */
+function useCountUp(target: number, duration = 1800, suffix = '') {
+  const [value, setValue] = useState(0)
+  const ref = useRef<HTMLDivElement>(null)
+  const started = useRef(false)
 
-  const features = [
-    { icon: Monitor, title: 'DESARROLLO WEB', desc: 'Sitios y aplicaciones web modernas, rápidas y adaptadas a tu negocio.' },
-    { icon: Database, title: 'SISTEMAS ERP', desc: 'Soluciones integrales para gestionar y automatizar todos los procesos de tu empresa.' },
-    { icon: Users, title: 'SISTEMAS CRM', desc: 'Gestiona tus clientes, mejora relaciones y aumenta tus ventas de forma eficiente.' },
-    { icon: Settings, title: 'PROYECTOS A MEDIDA', desc: 'Desarrollamos soluciones personalizadas que se adaptan a tus necesidades específicas.' },
-  ]
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !started.current) {
+        started.current = true
+        const start = performance.now()
+        const tick = (now: number) => {
+          const progress = Math.min((now - start) / duration, 1)
+          // Elastic easing
+          const eased = progress < 1
+            ? 1 - Math.pow(2, -10 * progress) * Math.cos((progress * 10 - 0.75) * (2 * Math.PI) / 3)
+            : 1
+          setValue(Math.round(eased * target))
+          if (progress < 1) requestAnimationFrame(tick)
+        }
+        requestAnimationFrame(tick)
+      }
+    }, { threshold: 0.4 })
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [target, duration])
 
-  const stats = [
-    { icon: BarChart3, value: '98%', label: 'EFICIENCIA', sub: 'En procesos optimizados' },
-    { icon: Zap, value: '24/7', label: 'MONITOREO', sub: 'Soporte y monitoreo continuo' },
-    { icon: Globe, value: '50+', label: 'PROYECTOS', sub: 'Exitosos y entregados' },
-    { icon: ShieldCheck, value: '100%', label: 'SATISFACCIÓN', sub: 'Clientes satisfechos' },
-  ]
+  return { ref, display: value + suffix }
+}
+
+/* ── Individual stat counter ── */
+function StatCounter({ value, suffix, label, sub }: {
+  value: number; suffix: string; label: string; sub: string
+}) {
+  const { ref, display } = useCountUp(value, 1600, suffix)
+  return (
+    <div ref={ref} className="flex flex-col gap-1">
+      <span className="text-4xl lg:text-5xl font-black stat-number" style={{ color: 'var(--cyan)' }}>
+        {display}
+      </span>
+      <span className="text-sm font-bold text-white uppercase tracking-widest">{label}</span>
+      <span className="text-xs" style={{ color: 'var(--slate)' }}>{sub}</span>
+    </div>
+  )
+}
+
+/* ── Mini live chart ── */
+function MiniChart() {
+  const [points, setPoints] = useState([40, 55, 35, 60, 45, 70, 50, 65, 42, 75])
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPoints(prev => {
+        const next = [...prev.slice(1), Math.round(30 + Math.random() * 50)]
+        return next
+      })
+    }, 1200)
+    return () => clearInterval(interval)
+  }, [])
+
+  const pts = points.map((y, i) => `${i * 11},${80 - y}`).join(' ')
 
   return (
-    <section id="inicio" className="relative min-h-screen flex flex-col pt-28 lg:pt-36 bg-[#020617] overflow-hidden">
-      
-      {/* Background Circuitry/Energy Patterns */}
-      <div className="absolute inset-0 z-0">
-         <div className="absolute top-1/4 right-0 w-[800px] h-[800px] bg-blue-600/10 rounded-full blur-[150px] animate-pulse-slow" />
-         <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-blue-900/10 to-transparent" />
-         <div 
-           className="absolute inset-0 opacity-[0.05] pointer-events-none"
-           style={{
-             backgroundImage: `radial-gradient(var(--blue-neon) 1px, transparent 1px)`,
-             backgroundSize: '50px 50px',
-           }}
-         />
+    <svg viewBox="0 0 99 80" className="w-full h-16" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="var(--cyan)" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="var(--cyan)" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <polyline
+        points={pts}
+        fill="none"
+        stroke="var(--cyan)"
+        strokeWidth="2"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+        style={{ transition: 'all 0.8s ease' }}
+      />
+      <polygon
+        points={`0,80 ${pts} 99,80`}
+        fill="url(#chartGrad)"
+        style={{ transition: 'all 0.8s ease' }}
+      />
+    </svg>
+  )
+}
+
+/* ── Feature cards below hero ── */
+const FEATURES = [
+  { icon: '⌗', title: 'Desarrollo Web', desc: 'Sitios y apps modernas, rápidas y adaptadas a tu negocio.' },
+  { icon: '◈', title: 'Sistemas ERP', desc: 'Gestiona y automatiza todos los procesos de tu empresa.' },
+  { icon: '⬡', title: 'Sistemas CRM', desc: 'Mejora relaciones con clientes y aumenta ventas.' },
+  { icon: '⊕', title: 'Proyectos a Medida', desc: 'Soluciones personalizadas para tus necesidades específicas.' },
+]
+
+export default function HeroSection() {
+  return (
+    <section
+      id="inicio"
+      className="relative min-h-screen flex flex-col justify-center pt-20 pb-0 overflow-hidden grid-bg"
+    >
+      {/* Ambient glow */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute top-1/3 right-1/4 w-96 h-96 rounded-full opacity-20 blur-[120px]"
+             style={{ background: 'var(--cyan)' }} />
+        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 rounded-full opacity-10 blur-[100px]"
+             style={{ background: '#0066cc' }} />
       </div>
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
-          
-          {/* Left Side: Text Content */}
-          <div className="fade-in-up">
-            <div className="flex items-center gap-3 mb-8">
-               <div className="w-8 h-8 rounded-full border border-blue-500/30 flex items-center justify-center bg-blue-500/5">
-                  <Zap className="w-4 h-4 text-blue-400" />
-               </div>
-               <span className="text-[10px] lg:text-[12px] font-mono font-bold tracking-[0.3em] text-blue-400 uppercase">
-                 OPTIMIZACIÓN INDUSTRIAL & SOFTWARE
-               </span>
+      {/* ══ MAIN HERO GRID ══ */}
+      <div className="container relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-24 items-center min-h-[calc(100vh-5rem)] py-16">
+
+          {/* LEFT — Content */}
+          <div className="flex flex-col gap-8">
+            {/* Label */}
+            <div className="fade-up-1 flex items-center gap-3">
+              <div className="flex gap-1.5">
+                <span className="led" />
+                <span className="led" style={{ animationDelay: '0.8s' }} />
+                <span className="led" style={{ animationDelay: '1.6s' }} />
+              </div>
+              <span className="text-xs font-mono tracking-[0.3em] uppercase" style={{ color: 'var(--cyan)' }}>
+                Optimización Industrial · Software
+              </span>
             </div>
 
-            <h1 className="text-[4rem] lg:text-[7.5rem] font-black leading-[0.85] tracking-tighter mb-10">
-              <span className="block text-white">DIGITALIZAMOS</span>
-              <span className="block text-white">TU</span>
-              <span className="block italic text-glow" style={{ color: 'var(--blue-neon)' }}>
-                OPERACIÓN
-              </span>
-              <span className="block italic text-glow" style={{ color: 'var(--blue-neon)' }}>
-                INDUSTRIAL
-              </span>
-            </h1>
+            {/* Headline */}
+            <div className="fade-up-2">
+              <h1 className="font-black leading-[1.0] tracking-tight" style={{ fontSize: 'clamp(2.8rem, 6vw, 5rem)' }}>
+                Desarrollamos<br />
+                <span className="text-glow">software que hace</span><br />
+                crecer tu negocio
+              </h1>
+            </div>
 
-            <p className="text-sm lg:text-lg leading-relaxed text-white/50 max-w-xl mb-12 font-medium">
-              Expertos en creación de sistemas ERP, CRM y plataformas web de alto rendimiento diseñadas para optimizar la administración y productividad de tu empresa.
+            {/* Subheadline */}
+            <p className="fade-up-3 text-lg leading-relaxed max-w-lg" style={{ color: 'var(--slate)' }}>
+              Creamos sistemas ERP, CRM y plataformas web a medida para digitalizar y optimizar la operación industrial de tu empresa.
             </p>
 
-            <div className="flex flex-wrap gap-5">
-              <a
-                href="#contacto"
-                className="group flex items-center gap-4 px-10 py-5 font-black uppercase tracking-[0.2em] text-[11px] bg-blue-600 text-white shadow-[0_0_30px_rgba(0,163,255,0.4)] transition-all hover:scale-105"
-              >
-                CONSULTAR PROYECTO
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            {/* CTAs */}
+            <div className="fade-up-4 flex flex-wrap gap-4">
+              <a href="#contacto" className="btn-primary">
+                Consultar Proyecto <ArrowRight className="w-4 h-4" />
               </a>
-              <a
-                href="#servicios"
-                className="flex items-center gap-4 px-10 py-5 font-black uppercase tracking-[0.2em] text-[11px] border border-white/20 text-white hover:bg-white/5 transition-all"
-              >
-                CONOCE NUESTROS SERVICIOS
+              <a href="#servicios" className="btn-ghost">
+                Nuestros Servicios <ChevronRight className="w-4 h-4" />
               </a>
+            </div>
+
+            {/* Trust badges */}
+            <div className="fade-up-5 flex flex-wrap items-center gap-6 pt-4"
+                 style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+              {[
+                { value: '+50', label: 'Proyectos entregados' },
+                { value: '24/7', label: 'Soporte continuo' },
+                { value: '98%', label: 'Satisfacción' },
+              ].map(b => (
+                <div key={b.label} className="flex items-baseline gap-2">
+                  <span className="text-xl font-black" style={{ color: 'var(--cyan)' }}>{b.value}</span>
+                  <span className="text-xs" style={{ color: 'var(--slate)' }}>{b.label}</span>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Right Side: 3D Cube */}
-          <div className="relative flex justify-center items-center">
-             <div className="absolute inset-0 bg-blue-500/5 blur-[120px] rounded-full animate-pulse" />
-             <div className="relative animate-float">
-                <img 
-                  src="/mg_3d_isometric_cube_glow_1777268323155.png" 
-                  alt="MG 3D Cube" 
-                  className="w-[500px] lg:w-[700px] h-auto drop-shadow-[0_0_50px_rgba(0,163,255,0.2)]"
-                />
-             </div>
-             {/* Floating UI elements placeholders as seen in image */}
-             <div className="absolute top-10 right-0 p-4 glass-card rounded-xl hidden lg:block animate-pulse-slow">
-                <div className="text-[8px] font-mono text-blue-400 mb-1">CRM DASHBOARD</div>
-                <div className="text-xl font-black text-white">1,248</div>
-                <div className="text-[7px] text-green-400">+12.5%</div>
-             </div>
-             <div className="absolute bottom-20 left-0 p-4 glass-card rounded-xl hidden lg:block">
-                <div className="text-[8px] font-mono text-blue-400 mb-1">ERP SYSTEM</div>
-                <div className="w-24 h-1 bg-white/10 rounded-full overflow-hidden">
-                   <div className="w-2/3 h-full bg-blue-500" />
-                </div>
-             </div>
-          </div>
-        </div>
+          {/* RIGHT — 3D Cube + floating panels */}
+          <div className="relative flex items-center justify-end">
+            {/* Orbit rings */}
+            <div className="orbit-ring orbit-ring-1"><span className="orbit-dot" /></div>
+            <div className="orbit-ring orbit-ring-2"><span className="orbit-dot" /></div>
+            <div className="orbit-ring orbit-ring-3"><span className="orbit-dot" /></div>
 
-        {/* Feature Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
-          {features.map((item, i) => (
-            <div 
-              key={i} 
-              className="glass-card p-10 group hover:-translate-y-2"
-            >
-              <div className="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center mb-8 border border-blue-500/20 group-hover:bg-blue-600 group-hover:border-blue-400 transition-all">
-                 <item.icon className="w-6 h-6 text-blue-400 group-hover:text-white transition-colors" />
+            {/* Cube */}
+            <div className="cube-wrapper">
+              <div className="cube">
+                <div className="cube-face front">MG</div>
+                <div className="cube-face back">DIG</div>
+                <div className="cube-face left">ERP</div>
+                <div className="cube-face right">CRM</div>
+                <div className="cube-face top">WEB</div>
+                <div className="cube-face bottom">4.0</div>
               </div>
-              <h3 className="text-xs font-black uppercase tracking-[0.2em] mb-4 text-white">{item.title}</h3>
-              <p className="text-[11px] leading-relaxed text-white/40 group-hover:text-white/60 transition-colors">
-                {item.desc}
-              </p>
             </div>
-          ))}
-        </div>
 
-        {/* Stats Footer Row */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 py-16 border-t border-white/5">
-           {stats.map((stat, i) => (
-             <div key={i} className="flex items-center gap-6 group">
-                <stat.icon className="w-10 h-10 text-blue-500/30 group-hover:text-blue-500 transition-all duration-500" />
-                <div>
-                   <div className="text-2xl lg:text-3xl font-black text-white">{stat.value}</div>
-                   <div className="text-[9px] font-black uppercase tracking-[0.2em] text-blue-400">{stat.label}</div>
-                   <div className="text-[8px] text-white/30 uppercase mt-0.5">{stat.sub}</div>
-                </div>
-             </div>
-           ))}
+            {/* Floating card — live chart */}
+            <div className="glass absolute top-4 right-0 p-4 w-48 hidden lg:block"
+                 style={{ animation: 'fadeUp 0.6s 0.8s ease both' }}>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-mono" style={{ color: 'var(--cyan)' }}>UPTIME</span>
+                <span className="text-[10px] font-bold text-green-400">● 99.9%</span>
+              </div>
+              <MiniChart />
+            </div>
+
+            {/* Floating card — CRM metric */}
+            <div className="glass absolute bottom-8 left-0 p-4 w-44 hidden lg:block"
+                 style={{ animation: 'fadeUp 0.6s 1.1s ease both' }}>
+              <div className="text-[10px] font-mono mb-1" style={{ color: 'var(--cyan)' }}>CRM ACTIVO</div>
+              <div className="text-2xl font-black text-white">1,248</div>
+              <div className="text-[10px] text-green-400 mt-0.5">↑ 12.5% este mes</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ══ FEATURE CARDS ══ */}
+      <div className="relative z-10" style={{ background: 'rgba(5,20,40,0.5)', borderTop: '1px solid rgba(0,242,255,0.07)' }}>
+        <div className="container">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            {FEATURES.map((f, i) => (
+              <div
+                key={f.title}
+                className="group flex flex-col gap-4 p-8 cursor-default transition-all duration-300"
+                style={{
+                  borderRight: i < 3 ? '1px solid rgba(0,242,255,0.05)' : 'none',
+                  animationDelay: `${i * 0.1}s`,
+                }}
+              >
+                <span className="text-2xl" style={{ color: 'var(--cyan)', opacity: 0.7 }}>{f.icon}</span>
+                <h3 className="font-bold text-sm tracking-wide text-white group-hover:text-[var(--cyan)] transition-colors">
+                  {f.title}
+                </h3>
+                <p className="text-xs leading-relaxed" style={{ color: 'var(--slate)' }}>{f.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
