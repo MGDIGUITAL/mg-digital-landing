@@ -1,70 +1,52 @@
-'use client'
-
-import { useState } from 'react'
-import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react'
-
-const PROJECTS = [
-  {
-    title: 'Optimización Logística ABC',
-    category: 'Sistemas ERP',
-    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800',
-  },
-  {
-    title: 'E-commerce Premium Fashion',
-    category: 'Desarrollo Web',
-    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=800',
-  },
-  {
-    title: 'Portal de Clientes Industrial',
-    category: 'Sistemas CRM',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800',
-  },
-  {
-    title: 'Automatización Bodega 4.0',
-    category: 'Innovación',
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800',
-  },
-]
-
 export default function PortfolioSection() {
-  const [active, setActive] = useState(0)
-
   return (
-    <section id="proyectos" className="py-24 bg-slate-50 overflow-hidden">
-      <div className="container">
-        <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
-          <div className="max-w-2xl">
-            <h2 className="text-sm font-black uppercase tracking-[0.3em] text-blue-600 mb-4">Portafolio</h2>
-            <p className="text-4xl lg:text-5xl font-black text-slate-900 leading-tight">Nuestros Trabajos de Ingeniería Digital</p>
+    <section className="trabajos" id="trabajos">
+      <div className="section-head">
+        <div className="sec-eyebrow">Nuestros Trabajos</div>
+        <h2 className="sec-title">Proyectos que generan resultados reales</h2>
+      </div>
+      <div className="trab-grid">
+        <div className="trab-arrow left">
+          <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+        </div>
+        <div className="trab-card">
+          <div className="trab-img web">
+            <svg width="64" height="48" viewBox="0 0 64 48" fill="none"><rect x="4" y="4" width="56" height="40" rx="4" fill="#dbeafe" stroke="#93c5fd" strokeWidth="1.5"/><rect x="4" y="4" width="56" height="10" rx="4" fill="#bfdbfe"/><circle cx="11" cy="9" r="2" fill="#ef4444"/><circle cx="18" cy="9" r="2" fill="#f59e0b"/><circle cx="25" cy="9" r="2" fill="#22c55e"/><rect x="10" y="20" width="20" height="3" rx="1.5" fill="#93c5fd"/><rect x="10" y="26" width="30" height="2" rx="1" fill="#bfdbfe"/><rect x="10" y="31" width="24" height="2" rx="1" fill="#bfdbfe"/><rect x="36" y="20" width="18" height="16" rx="2" fill="#dbeafe" stroke="#93c5fd" strokeWidth="1"/></svg>
           </div>
-          <div className="flex gap-4">
-            <button className="w-14 h-14 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-white hover:text-blue-600 hover:border-blue-600 transition-all">
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            <button className="w-14 h-14 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-white hover:text-blue-600 hover:border-blue-600 transition-all">
-              <ChevronRight className="w-6 h-6" />
-            </button>
+          <div className="trab-info">
+            <h4>Sitio Web Corporativo</h4>
+            <p>Diseño moderno y responsivo</p>
           </div>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {PROJECTS.map((p, i) => (
-            <div key={p.title} className="group relative aspect-[4/5] rounded-3xl overflow-hidden cursor-pointer">
-              <img 
-                src={p.image} 
-                alt={p.title} 
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
-              <div className="absolute bottom-0 left-0 right-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-blue-400 mb-2 block">{p.category}</span>
-                <h3 className="text-xl font-bold text-white mb-4 leading-tight">{p.title}</h3>
-                <div className="flex items-center gap-2 text-white text-xs font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-500">
-                  Ver detalle <ExternalLink className="w-3.5 h-3.5" />
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="trab-card">
+          <div className="trab-img erp">
+            <svg width="64" height="48" viewBox="0 0 64 48" fill="none"><rect x="4" y="4" width="56" height="40" rx="4" fill="#0f2340"/><rect x="4" y="4" width="14" height="40" rx="4" fill="#0a1a2e"/><rect x="6" y="8" width="10" height="6" rx="2" fill="#1a56db"/><rect x="6" y="17" width="10" height="4" rx="1" fill="#1a3a6b"/><rect x="6" y="24" width="10" height="4" rx="1" fill="#1a3a6b"/><rect x="6" y="31" width="10" height="4" rx="1" fill="#1a3a6b"/><rect x="22" y="8" width="34" height="8" rx="2" fill="#1a3a6b"/><rect x="22" y="20" width="15" height="10" rx="2" fill="#1a3a6b"/><rect x="40" y="20" width="16" height="10" rx="2" fill="#1a3a6b"/><rect x="22" y="33" width="34" height="6" rx="2" fill="#1a3a6b"/><rect x="24" y="22" width="6" height="6" rx="1" fill="#3b82f6"/><rect x="32" y="23" width="4" height="5" rx="1" fill="#60a5fa"/></svg>
+          </div>
+          <div className="trab-info">
+            <h4>Sistema ERP</h4>
+            <p>Gestión integral de tu empresa</p>
+          </div>
+        </div>
+        <div className="trab-card">
+          <div className="trab-img crm">
+            <svg width="64" height="48" viewBox="0 0 64 48" fill="none"><rect x="4" y="4" width="56" height="40" rx="4" fill="#1a3a5f"/><rect x="8" y="8" width="20" height="32" rx="3" fill="#0f2340"/><rect x="10" y="10" width="16" height="10" rx="2" fill="#1a56db" opacity=".5"/><rect x="10" y="23" width="16" height="4" rx="1" fill="#1a56db" opacity=".4"/><rect x="10" y="29" width="12" height="3" rx="1" fill="#1a56db" opacity=".3"/><rect x="31" y="8" width="26" height="14" rx="3" fill="#0f2340"/><rect x="33" y="10" width="10" height="10" rx="2" fill="#1a56db" opacity=".4"/><rect x="45" y="10" width="10" height="10" rx="2" fill="#1a56db" opacity=".4"/><rect x="31" y="25" width="26" height="15" rx="3" fill="#0f2340"/><rect x="33" y="27" width="22" height="3" rx="1" fill="#3b82f6" opacity=".5"/><rect x="33" y="32" width="16" height="2" rx="1" fill="#3b82f6" opacity=".3"/></svg>
+          </div>
+          <div className="trab-info">
+            <h4>Plataforma CRM</h4>
+            <p>Tus clientes, siempre conectados</p>
+          </div>
+        </div>
+        <div className="trab-card">
+          <div className="trab-img folio">
+            <svg width="64" height="48" viewBox="0 0 64 48" fill="none"><rect x="4" y="4" width="56" height="40" rx="4" fill="#111827"/><rect x="8" y="8" width="22" height="32" rx="3" fill="#1f2937"/><rect x="10" y="12" width="18" height="2" rx="1" fill="#374151"/><rect x="10" y="16" width="14" height="2" rx="1" fill="#374151"/><rect x="10" y="20" width="16" height="2" rx="1" fill="#374151"/><rect x="10" y="24" width="12" height="2" rx="1" fill="#374151"/><rect x="10" y="28" width="15" height="2" rx="1" fill="#374151"/><rect x="32" y="8" width="26" height="32" rx="3" fill="#1f2937"/><rect x="34" y="12" width="10" height="3" rx="1" fill="#3b82f6" opacity=".6"/><rect x="34" y="18" width="20" height="2" rx="1" fill="#4b5563"/><rect x="34" y="22" width="16" height="2" rx="1" fill="#4b5563"/><rect x="34" y="26" width="18" height="2" rx="1" fill="#4b5563"/><rect x="34" y="32" width="14" height="5" rx="2" fill="#1a56db" opacity=".7"/></svg>
+          </div>
+          <div className="trab-info">
+            <h4>Sistema de Folios</h4>
+            <p>Digitalización y control total</p>
+          </div>
+        </div>
+        <div className="trab-arrow right">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
         </div>
       </div>
     </section>
