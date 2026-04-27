@@ -16,71 +16,63 @@ export default function HeroSection() {
     <section
       id="inicio"
       className="relative min-h-[90vh] lg:min-h-screen flex flex-col justify-center overflow-hidden pt-24"
-      style={{ background: 'var(--black)' }}
+      style={{ background: 'var(--white)' }}
     >
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/90 to-black z-10" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(197,255,0,0.03)_0%,transparent_70%)] z-10" />
-        <div className="w-full h-full opacity-20 grayscale contrast-125 scale-105">
-            <img 
-              src="/hero_industrial_tech_1777267554018.png" 
-              alt="Industrial Technology" 
-              className="w-full h-full object-cover"
-            />
-        </div>
+      {/* Background with subtle tech pattern */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent z-10" />
+        <img 
+          src="/hero_corporate_tech_light_1777268082509.png" 
+          alt="Corporate Technology" 
+          className="absolute right-0 top-0 h-full w-2/3 object-cover grayscale opacity-20 transition-all duration-1000"
+        />
+        <div 
+          className="absolute inset-0 opacity-[0.03] z-10 pointer-events-none"
+          style={{
+            backgroundImage: `radial-gradient(var(--blue-primary) 0.5px, transparent 0.5px)`,
+            backgroundSize: '30px 30px',
+          }}
+        />
       </div>
-
-      {/* Grid tech background */}
-      <div
-        className="absolute inset-0 opacity-[0.02] z-10 pointer-events-none"
-        style={{
-          backgroundImage: `linear-gradient(rgba(197,255,0,0.8) 1px, transparent 1px),
-                            linear-gradient(90deg, rgba(197,255,0,0.8) 1px, transparent 1px)`,
-          backgroundSize: '120px 120px',
-        }}
-      />
 
       {/* Main content */}
       <div className="relative z-20 max-w-7xl mx-auto px-6 lg:px-12 py-20">
 
         {/* Badge */}
         <div
-          className="inline-flex items-center gap-3 px-4 py-2 mb-12 text-[10px] font-mono uppercase tracking-[0.3em]"
+          className="inline-flex items-center gap-3 px-4 py-2 mb-10 text-[10px] font-mono uppercase tracking-[0.3em] font-bold"
           style={{
-            border: '1px solid rgba(197,255,0,0.2)',
-            color: 'var(--lime)',
-            background: 'rgba(197,255,0,0.03)',
+            borderLeft: '4px solid var(--blue-primary)',
+            color: 'var(--blue-primary)',
+            background: 'var(--blue-soft)',
           }}
         >
-          <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--lime)' }} />
           {t('badge')}
         </div>
 
         {/* Headline */}
-        <div className="max-w-5xl mb-12">
+        <div className="max-w-4xl mb-12">
             <h1
-              className="font-black uppercase leading-[0.85] tracking-tighter"
-              style={{ fontSize: 'clamp(3rem, 10vw, 8.5rem)' }}
+              className="font-black uppercase leading-[0.95] tracking-tighter"
+              style={{ fontSize: 'clamp(3.5rem, 9vw, 8.5rem)', color: 'var(--blue-deep)' }}
             >
-              <span className="block text-white mb-2">{t('headline').split(' ').slice(0, 2).join(' ')}</span>
-              <span className="block italic" style={{ color: 'var(--lime)', WebkitTextStroke: '1px var(--lime)' }}>
+              <span className="block mb-2">{t('headline').split(' ').slice(0, 2).join(' ')}</span>
+              <span className="block" style={{ color: 'var(--blue-primary)' }}>
                 {t('headline').split(' ').slice(2).join(' ')}
               </span>
             </h1>
         </div>
 
         {/* Subheadline + CTAs */}
-        <div className="flex flex-col lg:flex-row items-start lg:items-center gap-12 mb-32">
-          <p className="text-sm lg:text-lg leading-relaxed max-w-xl" style={{ color: 'rgba(255,255,255,0.5)' }}>
+        <div className="flex flex-col lg:flex-row items-start lg:items-center gap-16 mb-32">
+          <p className="text-base lg:text-xl leading-relaxed max-w-xl font-medium text-slate-500">
             {t('subheadline')}
           </p>
 
           <div className="flex flex-wrap gap-6 lg:ml-auto">
             <a
               href="#contacto"
-              className="group flex items-center gap-4 px-10 py-5 font-black uppercase tracking-[0.2em] text-[11px] transition-all duration-300 hover:scale-105"
-              style={{ background: 'var(--lime)', color: '#000' }}
+              className="group flex items-center gap-4 px-12 py-5 font-black uppercase tracking-[0.2em] text-[11px] bg-blue-600 text-white shadow-xl shadow-blue-500/20 transition-all duration-300 hover:bg-blue-700 hover:-translate-y-1"
             >
               {t('cta_primary')}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -88,25 +80,27 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Technical Stats */}
+        {/* Corporate Stats */}
         <div
-          className="grid grid-cols-1 md:grid-cols-3 gap-0"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-0 bg-white shadow-2xl shadow-blue-900/5 rounded-sm overflow-hidden"
+          style={{ border: '1px solid var(--border)' }}
         >
           {stats.map((stat, i) => (
             <div
               key={stat.label}
-              className="py-12 px-8 flex items-center gap-6 group"
+              className="py-12 px-10 flex items-center gap-8 group hover:bg-slate-50 transition-colors"
               style={{
-                borderRight: i < stats.length - 1 ? '1px solid rgba(255,255,255,0.05)' : 'none',
+                borderRight: i < stats.length - 1 ? '1px solid var(--border)' : 'none',
               }}
             >
-              <stat.icon className="w-6 h-6 opacity-30 group-hover:opacity-100 transition-opacity" style={{ color: 'var(--lime)' }} />
+              <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center transition-colors group-hover:bg-blue-600">
+                <stat.icon className="w-5 h-5 text-blue-600 group-hover:text-white transition-colors" />
+              </div>
               <div>
-                  <div className="text-3xl font-black uppercase tracking-tighter text-white">
+                  <div className="text-4xl font-black uppercase tracking-tighter text-slate-900">
                     {stat.value}
                   </div>
-                  <div className="text-[10px] uppercase tracking-[0.3em] font-mono mt-1 opacity-40">
+                  <div className="text-[10px] uppercase tracking-[0.3em] font-mono mt-1 font-bold text-slate-400">
                     {stat.label}
                   </div>
               </div>

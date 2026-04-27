@@ -35,57 +35,49 @@ export default function Footer({ currentLocale }: FooterProps) {
   const navLinks = [
     { href: '#inicio',       label: tn('home') },
     { href: '#servicios',    label: tn('services') },
-    { href: '#cotizaciones', label: tn('quotes') },
-    { href: '#contacto',     label: tn('contact') },
+    { href: '#soluciones',   label: 'Soluciones' },
+    { href: '#contacto',     label: 'Proyectos' },
   ]
 
   return (
-    <footer id="contacto" className="relative bg-slate-950 border-t border-slate-800/50">
-      {/* Línea superior neón */}
-      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, var(--lime), transparent)' }} />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+    <footer id="contacto" className="relative bg-white border-t border-slate-100">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-20 lg:py-32">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-20 mb-20">
+          
           {/* Columna 1: Logo y tagline */}
           <div className="md:col-span-1">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-slate-900 flex items-center justify-center shadow-lg" style={{ border: '1px solid var(--lime)' }}>
-                <Package className="w-5 h-5" style={{ color: 'var(--lime)' }} />
-              </div>
-              <span className="text-xl font-bold">
-                <span className="text-white">MG</span>
-                <span style={{ color: 'var(--lime)' }}> DIGITAL</span>
+            <div className="flex items-center gap-3 mb-8">
+              <span className="text-2xl font-black uppercase tracking-tighter">
+                <span style={{ color: 'var(--blue-deep)' }}>MG</span>
+                <span style={{ color: 'var(--blue-primary)' }}>.DIGUITAL</span>
               </span>
             </div>
-            <p className="text-slate-400 text-sm leading-relaxed mb-4">
+            <p className="text-slate-500 text-sm leading-relaxed mb-6 font-medium">
               {t('tagline')}
             </p>
-            <p className="text-slate-500 text-xs">CEO: Matías Espinoza Guerrero</p>
-
-            {/* Instagram */}
-            <a
-              href="https://www.instagram.com/mpeg.logistica/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="inline-flex items-center gap-2 mt-4 text-slate-400 hover:text-pink-400 transition-colors text-sm"
-            >
-              <Instagram className="w-4 h-4" />
-              @mpeg.logistica
-            </a>
+            <div className="flex items-center gap-4">
+                <a
+                  href="https://www.instagram.com/mpeg.logistica/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full border border-slate-100 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-200 transition-all"
+                >
+                  <Instagram className="w-4 h-4" />
+                </a>
+            </div>
           </div>
 
           {/* Columna 2: Navegación */}
           <div>
-            <h3 className="text-white font-semibold mb-5 text-sm uppercase tracking-wider">
-              MG DIGITAL
+            <h3 className="text-slate-900 font-black mb-8 text-[11px] uppercase tracking-[0.25em]">
+              Sistemas MG
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-4">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-slate-400 hover:text-white text-sm transition-colors duration-200"
+                    className="text-slate-500 hover:text-blue-600 text-[13px] font-medium transition-colors"
                   >
                     {link.label}
                   </a>
@@ -96,51 +88,41 @@ export default function Footer({ currentLocale }: FooterProps) {
 
           {/* Columna 3: Contacto */}
           <div>
-            <h3 className="text-white font-semibold mb-5 text-sm uppercase tracking-wider">
-              {t('contact_title')}
+            <h3 className="text-slate-900 font-black mb-8 text-[11px] uppercase tracking-[0.25em]">
+              Soporte Directo
             </h3>
             <ul className="space-y-4">
               <li>
                 <a
-                  href="mailto:MPEG.LOGISTICA@GMAIL.COM"
-                  className="flex items-center gap-3 text-slate-400 hover:text-blue-400 transition-colors text-sm group"
+                  href="mailto:mpeg.logistica@gmail.com"
+                  className="flex items-center gap-4 text-slate-500 hover:text-blue-600 transition-colors text-[13px] font-medium"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center group-hover:bg-blue-500/20 transition-colors flex-shrink-0">
-                    <Mail className="w-4 h-4 text-blue-400" />
-                  </div>
-                  MPEG.LOGISTICA@GMAIL.COM
+                  <Mail className="w-4 h-4 text-blue-400" />
+                  mpeg.logistica@gmail.com
                 </a>
               </li>
               <li>
                 <a
                   href="tel:+56929645522"
-                  className="flex items-center gap-3 text-slate-400 hover:text-blue-400 transition-colors text-sm group"
+                  className="flex items-center gap-4 text-slate-500 hover:text-blue-600 transition-colors text-[13px] font-medium"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center group-hover:bg-blue-500/20 transition-colors flex-shrink-0">
-                    <Phone className="w-4 h-4 text-blue-400" />
-                  </div>
+                  <Phone className="w-4 h-4 text-blue-400" />
                   +56 9 2964 5522
                 </a>
               </li>
             </ul>
 
-            {/* Selector de idioma en el footer */}
-            <div className="mt-6">
-              <div className="flex items-center gap-2 mb-3 text-slate-500">
-                <Globe className="w-3.5 h-3.5" />
-                <span className="text-xs uppercase tracking-wider">Idioma</span>
-              </div>
+            <div className="mt-12">
               <div className="flex flex-wrap gap-2">
                 {LOCALES.map((loc) => (
                   <button
                     key={loc.code}
                     onClick={() => handleLocaleChange(loc.code)}
-                    className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all duration-200 ${
+                    className={`px-3 py-1.5 rounded-lg text-[10px] font-bold transition-all ${
                       loc.code === currentLocale
-                    ? 'bg-lime-500 text-black'
-                    : 'bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white border border-slate-800'
+                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20'
+                        : 'bg-slate-50 text-slate-400 hover:bg-slate-100 hover:text-slate-600'
                     }`}
-                    title={loc.flag}
                   >
                     {loc.flag} {loc.name}
                   </button>
@@ -151,11 +133,11 @@ export default function Footer({ currentLocale }: FooterProps) {
         </div>
 
         {/* Línea divisoria */}
-        <div className="border-t border-slate-800/50 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-slate-500 text-sm">
-            © {currentYear} MG DIGITAL. {t('rights')}
+        <div className="border-t border-slate-50 pt-10 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <p className="text-slate-400 text-[11px] font-medium">
+            © {currentYear} MG.DIGUITAL. {t('rights')}
           </p>
-          <p className="text-slate-600 text-xs">{t('built_with')}</p>
+          <p className="text-slate-300 text-[10px] font-mono uppercase tracking-widest">{t('built_with')}</p>
         </div>
       </div>
     </footer>
