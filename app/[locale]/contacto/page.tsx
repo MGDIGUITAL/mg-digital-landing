@@ -3,9 +3,50 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AIAssistant from '@/components/AIAssistant';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
+import { useState } from 'react';
 
 export default function Contacto() {
+  const [formData, setFormData] = useState({
+    nombre: "",
+    fono: "",
+    correo: "",
+    mensaje: "",
+  });
+
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    if (name === "mensaje" && value.length > 1000) return;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+
+    try {
+      const res = await fetch("/api/contacto", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        setStatus("success");
+        setFormData({ nombre: "", fono: "", correo: "", mensaje: "" });
+        setTimeout(() => setStatus("idle"), 5000);
+      } else {
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 5000);
+      }
+    } catch (error) {
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
+    }
+  };
+
   return (
     <main className="min-h-screen bg-white flex flex-col items-center overflow-x-hidden">
       <Navbar />
@@ -36,40 +77,61 @@ export default function Contacto() {
               Estamos listos para transformar tu operación. Completa el formulario y nos contactaremos contigo a la brevedad.
             </p>
 
-            {/* FormSubmit.co Integration */}
-            <form action="https://formsubmit.co/MPEG.LOGISTICA@GMAIL.COM" method="POST" className="flex flex-col gap-5 w-full max-w-xl">
-              {/* FormSubmit Configuration */}
-              <input type="hidden" name="_captcha" value="false" />
-              <input type="hidden" name="_subject" value="Nuevo Lead desde MG.DIGITAL" />
-              <input type="hidden" name="_template" value="table" />
-              
+            <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-xl">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="flex flex-col gap-2">
                   <label className="text-sm font-bold text-slate-700">Nombre</label>
-                  <input type="text" name="Nombre" required className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all text-slate-700" placeholder="Ej. Juan Pérez" />
+                  <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} required className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all text-slate-700" placeholder="Ej. Juan Pérez" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-sm font-bold text-slate-700">Fono</label>
-                  <input type="tel" name="Fono" required className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all text-slate-700" placeholder="Ej. +56 9 1234 5678" />
+                  <label className="text-sm font-bold text-slate-700">Teléfono</label>
+                  <input type="tel" name="fono" value={formData.fono} onChange={handleChange} required className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all text-slate-700" placeholder="Ej. +56 9 1234 5678" />
                 </div>
               </div>
               
               <div className="flex flex-col gap-2">
-                <label className="text-sm font-bold text-slate-700">Correo</label>
-                <input type="email" name="Correo" required className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all text-slate-700" placeholder="tu@empresa.com" />
+                <label className="text-sm font-bold text-slate-700">Correo Electrónico</label>
+                <input type="email" name="correo" value={formData.correo} onChange={handleChange} required className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all text-slate-700" placeholder="tu@empresa.com" />
               </div>
 
               <div className="flex flex-col gap-2">
                 <label className="text-sm font-bold text-slate-700">Mensaje</label>
-                <textarea name="Mensaje" required maxLength={1000} rows={4} className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all text-slate-700 resize-none" placeholder="Explícanos qué necesitas (ej. una página web simple, un sistema ERP, etc.)"></textarea>
+                <textarea name="mensaje" value={formData.mensaje} onChange={handleChange} required maxLength={1000} rows={4} className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all text-slate-700 resize-none" placeholder="Explícanos qué necesitas (ej. una página web simple, un sistema ERP, etc.)"></textarea>
                 <div className="flex justify-between items-center mt-1">
                   <p className="text-xs font-medium text-slate-400">Máximo 1000 caracteres</p>
+                  <span className="text-xs text-slate-500 font-mono">{formData.mensaje.length}/1000</span>
                 </div>
               </div>
 
-              <button type="submit" className="bg-cyan-500 text-white font-bold text-lg rounded-xl px-8 py-4 hover:bg-cyan-600 transition-colors shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 flex items-center justify-center gap-2 group w-full md:w-auto self-start mt-2">
-                Enviar Mensaje
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <button 
+                type="submit" 
+                disabled={status === "loading" || status === "success"}
+                className="bg-cyan-500 text-white font-bold text-lg rounded-xl px-8 py-4 hover:bg-cyan-600 transition-colors shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 flex items-center justify-center gap-2 group w-full md:w-auto self-start mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
+              >
+                {status === "idle" && (
+                  <>
+                    Enviar Mensaje
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
+                {status === "loading" && (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Enviando...
+                  </>
+                )}
+                {status === "success" && (
+                  <>
+                    <CheckCircle2 className="w-5 h-5" />
+                    Mensaje Enviado
+                  </>
+                )}
+                {status === "error" && (
+                  <>
+                    <AlertCircle className="w-5 h-5" />
+                    Error al enviar
+                  </>
+                )}
               </button>
             </form>
           </motion.div>
