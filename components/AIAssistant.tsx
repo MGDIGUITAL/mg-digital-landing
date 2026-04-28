@@ -7,9 +7,10 @@ import { X, Send, Bot, Loader2 } from "lucide-react";
 export default function AIAssistant() {
   const [isOpen, setIsOpen] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
   // Vercel AI SDK hook for chat streaming
-  const { messages, input, handleInputChange, handleSubmit, isLoading, append } = useChat({
+  const { messages, isLoading, append, error } = useChat({
     api: '/api/chat'
   });
 
@@ -23,6 +24,15 @@ export default function AIAssistant() {
 
   const handleQuickReply = (text: string) => {
     append({ id: Math.random().toString(), role: 'user', content: text });
+  };
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!inputValue.trim() || isLoading) return;
+    
+    // Forced ID prevents synchronous errors in some ai-sdk versions
+    append({ id: Math.random().toString(), role: 'user', content: inputValue });
+    setInputValue("");
   };
 
   return (
@@ -93,6 +103,15 @@ export default function AIAssistant() {
                 </div>
               ))}
 
+              {/* Error Message */}
+              {error && (
+                <div className="flex gap-2 justify-center">
+                  <div className="bg-red-50 border border-red-200 text-red-600 p-3 rounded-xl text-xs shadow-sm text-center">
+                    Error de conexión IA. Verifica que OPENAI_API_KEY esté configurada en Vercel.
+                  </div>
+                </div>
+              )}
+
               {/* Loading State: Animación de "escribiendo..." */}
               {isLoading && (
                 <div className="flex gap-2">
@@ -124,10 +143,10 @@ export default function AIAssistant() {
             </div>
 
             {/* Footer / Input */}
-            <form onSubmit={handleSubmit} className="p-3 bg-white border-t border-slate-100 flex gap-2">
+            <form onSubmit={onSubmit} className="p-3 bg-white border-t border-slate-100 flex gap-2">
               <input 
-                value={input}
-                onChange={handleInputChange}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
                 type="text" 
                 placeholder="Escribe tu mensaje..." 
                 className="flex-1 bg-slate-50 text-sm rounded-xl px-4 py-2 outline-none focus:ring-2 focus:ring-cyan-500/50 border border-slate-100 focus:border-cyan-500 transition-all"
@@ -135,7 +154,7 @@ export default function AIAssistant() {
               />
               <button 
                 type="submit" 
-                disabled={isLoading || !input?.trim()}
+                disabled={isLoading || !inputValue.trim()}
                 className="w-10 h-10 rounded-xl bg-cyan-500 hover:bg-cyan-600 disabled:bg-slate-300 disabled:cursor-not-allowed text-white flex items-center justify-center transition-colors flex-shrink-0 shadow-sm"
               >
                 {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4 ml-1" />}
