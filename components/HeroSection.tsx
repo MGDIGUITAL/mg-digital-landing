@@ -20,7 +20,7 @@ export default function HeroSection() {
         >
           {/* THE 3D VIDEO AS REQUESTED EXACTLY */}
           <video 
-            src="/cubo 3d.mp4" 
+            src="/cubo.mp4" 
             autoPlay 
             loop 
             muted 
