@@ -3,47 +3,119 @@ import { motion } from "framer-motion";
 
 export default function PortfolioSection() {
   return (
-    <section className="py-24 w-full relative z-10" id="portafolio">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
+    <section className="py-24 w-full" id="trabajos">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
+        
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="text-center mb-16"
         >
-          <h2 className="text-4xl font-extrabold text-white tracking-tight mb-4 uppercase">
-            Ingeniería de <span className="text-[#00f0ff] drop-shadow-[0_0_10px_rgba(0,240,255,0.8)]">Vanguardia</span>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-4 uppercase">
+            Nuestros <span className="text-cyan-500">Trabajos</span>
           </h2>
-          <div className="w-24 h-1 bg-[#00f0ff] mx-auto rounded-full shadow-[0_0_15px_rgba(0,240,255,0.6)]" />
+          <p className="text-slate-500 font-medium max-w-2xl mx-auto">
+            Proyectos que generan resultados reales y medibles.
+          </p>
         </motion.div>
 
-        <div className="w-full flex flex-col items-center">
-          <motion.div 
-            initial={{ opacity: 0, y: 40 }}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full">
+          {/* Trabajo 1 */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            whileHover={{ scale: 1.02 }}
-            className="w-full max-w-5xl rounded-[2rem] overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(0,240,255,0.1)] relative group cursor-pointer"
+            whileHover={{ y: -8 }}
+            className="flex flex-col items-center text-center group cursor-pointer"
           >
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050510] via-[#050510]/60 to-transparent z-10 transition-opacity group-hover:opacity-80" />
-            
-            {/* The Unsplash Placeholder Image as requested */}
-            <img 
-              src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1600&auto=format&fit=crop" 
-              alt="Cybernetics Tech" 
-              className="w-full h-[400px] md:h-[600px] object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700"
-            />
-            
-            <div className="absolute bottom-12 left-0 right-0 z-20 flex flex-col items-center px-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-              <div className="inline-block px-4 py-1.5 rounded-full bg-[#00f0ff]/10 border border-[#00f0ff]/30 text-[#00f0ff] text-[10px] font-bold tracking-[0.3em] uppercase mb-4 shadow-[0_0_10px_rgba(0,240,255,0.3)]">
-                Desarrollo Futuro
-              </div>
-              <h3 className="text-3xl md:text-5xl font-extrabold text-white mb-6 tracking-tight">Arquitectura de Alto Nivel</h3>
-              <p className="text-slate-300 max-w-3xl text-sm md:text-base font-medium">Integrando hardware y software de última generación para lograr niveles de eficiencia sin precedentes en tu operación.</p>
+            <div className="w-full bg-slate-100 rounded-3xl h-56 mb-6 flex items-center justify-center p-6 group-hover:bg-cyan-50 transition-colors shadow-inner overflow-hidden relative">
+               {/* Minimalist Laptop Mockup */}
+               <div className="relative w-full h-full flex flex-col items-center justify-end">
+                  <div className="w-[85%] h-[70%] bg-slate-800 rounded-t-xl border-4 border-slate-800 relative shadow-2xl">
+                    <div className="absolute inset-0 bg-white"></div>
+                  </div>
+                  <div className="w-[100%] h-3 bg-slate-300 rounded-b-xl"></div>
+               </div>
             </div>
+            <h3 className="text-lg font-bold text-slate-900 mb-1">Sitio Web Corporativo</h3>
+            <p className="text-sm text-slate-500">Diseño moderno y responsivo</p>
           </motion.div>
+
+          {/* Trabajo 2 */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -8 }}
+            className="flex flex-col items-center text-center group cursor-pointer"
+          >
+            <div className="w-full bg-slate-100 rounded-3xl h-56 mb-6 flex items-center justify-center p-6 group-hover:bg-cyan-50 transition-colors shadow-inner overflow-hidden relative">
+               {/* Monitor Mockup */}
+               <div className="relative w-full h-full flex flex-col items-center justify-end">
+                  <div className="w-[90%] h-[75%] bg-slate-800 rounded-t-xl border-4 border-slate-800 relative shadow-2xl">
+                    <div className="absolute inset-0 bg-slate-50 flex p-2 gap-2">
+                       <div className="w-1/4 bg-slate-200 rounded-sm"></div>
+                       <div className="w-3/4 bg-white rounded-sm"></div>
+                    </div>
+                  </div>
+                  <div className="w-[20%] h-4 bg-slate-300"></div>
+                  <div className="w-[40%] h-2 bg-slate-300 rounded-t-sm"></div>
+               </div>
+            </div>
+            <h3 className="text-lg font-bold text-slate-900 mb-1">Sistema ERP</h3>
+            <p className="text-sm text-slate-500">Gestión integral de tu empresa</p>
+          </motion.div>
+
+          {/* Trabajo 3 */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -8 }}
+            className="flex flex-col items-center text-center group cursor-pointer"
+          >
+            <div className="w-full bg-slate-100 rounded-3xl h-56 mb-6 flex items-center justify-center p-6 group-hover:bg-cyan-50 transition-colors shadow-inner overflow-hidden relative">
+               {/* Phone & Tablet Mockup */}
+               <div className="relative w-full h-full flex items-center justify-center gap-4">
+                  <div className="w-[45%] h-[80%] bg-slate-800 rounded-xl border-4 border-slate-800 relative shadow-2xl">
+                     <div className="absolute inset-0 bg-white rounded-lg"></div>
+                  </div>
+                  <div className="w-[25%] h-[70%] bg-slate-800 rounded-2xl border-4 border-slate-800 relative shadow-2xl mt-4">
+                     <div className="absolute inset-0 bg-white rounded-xl"></div>
+                  </div>
+               </div>
+            </div>
+            <h3 className="text-lg font-bold text-slate-900 mb-1">Plataforma CRM</h3>
+            <p className="text-sm text-slate-500">Tus clientes, siempre conectados</p>
+          </motion.div>
+
+          {/* Trabajo 4 */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -8 }}
+            className="flex flex-col items-center text-center group cursor-pointer"
+          >
+            <div className="w-full bg-slate-100 rounded-3xl h-56 mb-6 flex items-center justify-center p-6 group-hover:bg-cyan-50 transition-colors shadow-inner overflow-hidden relative">
+               {/* Dashboard Mockup */}
+               <div className="relative w-full h-full flex flex-col items-center justify-center">
+                  <div className="w-[90%] h-[80%] bg-slate-800 rounded-xl border-4 border-slate-800 relative shadow-2xl flex flex-col p-2 bg-slate-900">
+                    <div className="w-full h-2 bg-slate-700 rounded-sm mb-2"></div>
+                    <div className="flex-1 w-full bg-slate-800 rounded-sm"></div>
+                  </div>
+               </div>
+            </div>
+            <h3 className="text-lg font-bold text-slate-900 mb-1">Sistema de Folios</h3>
+            <p className="text-sm text-slate-500">Digitalización y control total</p>
+          </motion.div>
+
         </div>
       </div>
     </section>

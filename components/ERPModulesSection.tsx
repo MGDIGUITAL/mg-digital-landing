@@ -1,42 +1,60 @@
+"use client";
+import { motion } from "framer-motion";
+import { LayoutDashboard, ShoppingCart, ShoppingBag, Package, Users, Truck, Calculator, FileBarChart, Settings } from "lucide-react";
+
+const MODULES = [
+  { icon: LayoutDashboard, title: "Dashboard", desc: "Resumen general de tu empresa en tiempo real." },
+  { icon: ShoppingCart, title: "Ventas", desc: "Cotizaciones, órdenes, facturación y boletas electrónicas." },
+  { icon: ShoppingBag, title: "Compras", desc: "Gestión de compras, órdenes a proveedores y recepciones." },
+  { icon: Package, title: "Inventario", desc: "Control de stock, productos, bodegas y movimientos." },
+  { icon: Users, title: "Clientes", desc: "Gestión de clientes, contactos y segmentación avanzada." },
+  { icon: Truck, title: "Proveedores", desc: "Gestión de proveedores, evaluaciones y pagos." },
+  { icon: Calculator, title: "Contabilidad", desc: "Plan de cuentas, ingresos, egresos y conciliaciones." },
+  { icon: FileBarChart, title: "Reportes", desc: "Reportes personalizados y análisis para tomar mejores decisiones." },
+];
+
 export default function ERPModulesSection() {
   return (
-    <section className="erp-section" id="erp">
-      <div className="erp-eyebrow">Sistema ERP</div>
-      <div className="erp-title">Módulos Principales</div>
-      <div className="erp-grid">
-        <div className="erp-mod">
-          <div className="em-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
-          <h4>Dashboard</h4><p>Resumen general en tiempo real</p>
-        </div>
-        <div className="erp-mod">
-          <div className="em-icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div>
-          <h4>Ventas</h4><p>Cotizaciones y boletas electrónicas</p>
-        </div>
-        <div className="erp-mod">
-          <div className="em-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
-          <h4>Compras</h4><p>Órdenes a proveedores y recepciones</p>
-        </div>
-        <div className="erp-mod">
-          <div className="em-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
-          <h4>Inventario</h4><p>Control de stock y bodegas</p>
-        </div>
-        <div className="erp-mod">
-          <div className="em-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
-          <h4>Clientes</h4><p>Gestión y segmentación avanzada</p>
-        </div>
-        <div className="erp-mod">
-          <div className="em-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-          <h4>Proveedores</h4><p>Gestión, evaluaciones y pagos</p>
-        </div>
-        <div className="erp-mod">
-          <div className="em-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-          <h4>Contabilidad</h4><p>Ingresos, egresos y conciliaciones</p>
-        </div>
-        <div className="erp-mod">
-          <div className="em-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
-          <h4>Reportes</h4><p>Análisis para mejores decisiones</p>
+    <section className="py-24 w-full" id="erp">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
+        
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-4 uppercase">
+            Sistema ERP - <span className="text-cyan-500">Módulos Principales</span>
+          </h2>
+          <p className="text-slate-500 font-medium max-w-2xl mx-auto">
+            El cerebro de tu empresa, con todas las herramientas necesarias.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8 w-full">
+          {MODULES.map((m, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -5 }}
+              className="bg-white p-6 rounded-2xl flex flex-col items-center text-center shadow-sm border border-slate-100 hover:shadow-lg hover:border-cyan-100 transition-all cursor-pointer group"
+            >
+              <div className="w-14 h-14 rounded-xl bg-slate-50 flex items-center justify-center mb-4 group-hover:bg-cyan-50 transition-colors">
+                <m.icon className="w-7 h-7 text-slate-700 group-hover:text-cyan-500 transition-colors" strokeWidth={1.5} />
+              </div>
+              <h3 className="text-sm md:text-base font-bold text-slate-900 mb-2">{m.title}</h3>
+              <p className="text-xs text-slate-500">
+                {m.desc}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
-  )
+  );
 }

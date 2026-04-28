@@ -1,14 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background-color: #050510;
-  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  background-color: #ffffff;
+  color: #0f172a; /* slate-900 */
   overflow-x: hidden;
 }
 
 @theme {
-  --color-cyan: #00f0ff;
-  --color-dark: #050510;
+  --color-cyan: #06b6d4; /* cyan-500 */
+  --color-cyan-hover: #0891b2; /* cyan-600 */
+  --color-slate-deep: #0f172a;
 }

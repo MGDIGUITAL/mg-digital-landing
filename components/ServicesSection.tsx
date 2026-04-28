@@ -1,49 +1,53 @@
 "use client";
 import { motion } from "framer-motion";
-import { Settings, Database, Code2, HeadphonesIcon } from "lucide-react";
+import { Monitor, Box, Users, FileText, Cloud, Smartphone } from "lucide-react";
 
-const PILARES = [
-  { icon: Settings, title: "Optimización Industrial", desc: "Reducción de costos con IoT y automatización." },
-  { icon: Database, title: "Sistemas ERP & CRM", desc: "El cerebro de tu empresa bajo control total." },
-  { icon: Code2, title: "Desarrollo Web Pro", desc: "Interfaces de alto nivel que convierten." },
-  { icon: HeadphonesIcon, title: "Soporte 24/7", desc: "Ingeniería de vanguardia siempre activa." }
+const SERVICES = [
+  { icon: Monitor, title: "Páginas Web", desc: "Diseñamos sitios web modernos, responsivos y enfocados en convertir visitas en clientes." },
+  { icon: Box, title: "Sistemas ERP", desc: "Desarrollamos sistemas ERP personalizados para optimizar y automatizar los procesos de tu negocio." },
+  { icon: Users, title: "CRM", desc: "Creamos soluciones CRM a medida para gestionar tus clientes y aumentar tus ventas." },
+  { icon: FileText, title: "Más Folios", desc: "Digitaliza y organiza tus documentos con sistemas de folios electrónicos seguros y eficientes." },
+  { icon: Cloud, title: "Todo Digital", desc: "Soluciones 100% digitales para llevar tu negocio al siguiente nivel operativo." },
+  { icon: Smartphone, title: "Aplicaciones", desc: "Desarrollamos aplicaciones móviles nativas y a medida para plataformas iOS y Android." },
 ];
 
 export default function ServicesSection() {
   return (
-    <section className="py-24 w-full relative z-10" id="pilares">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
+    <section className="py-24 w-full" id="servicios">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
         
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="text-center mb-16"
         >
-          <h2 className="text-4xl font-extrabold text-white tracking-tight mb-4">
-            Pilares de la <span className="text-[#00f0ff]">Firma</span>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-4 uppercase">
+            Nuestros <span className="text-cyan-500">Servicios</span>
           </h2>
-          <div className="w-24 h-1 bg-[#00f0ff] mx-auto rounded-full shadow-[0_0_15px_rgba(0,240,255,0.6)]" />
+          <p className="text-slate-500 font-medium max-w-2xl mx-auto">
+            Soluciones digitales completas para cada necesidad de tu negocio.
+          </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
-          {PILARES.map((p, i) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+          {SERVICES.map((s, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-              className="bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-[2rem] flex flex-col items-center text-center hover:bg-white/10 hover:border-[#00f0ff]/40 shadow-xl hover:shadow-[0_0_30px_rgba(0,240,255,0.15)] transition-all cursor-pointer"
+              whileHover={{ y: -8 }}
+              className="bg-white border border-slate-100 p-10 rounded-3xl flex flex-col items-center text-center shadow-lg shadow-slate-200/50 hover:shadow-xl hover:border-cyan-100 transition-all cursor-pointer group"
             >
-              <div className="w-16 h-16 rounded-2xl bg-[#00f0ff]/10 border border-[#00f0ff]/30 flex items-center justify-center mb-6 shadow-[inset_0_0_20px_rgba(0,240,255,0.1)]">
-                <p.icon className="w-8 h-8 text-[#00f0ff]" strokeWidth={2} />
+              <div className="w-20 h-20 rounded-2xl bg-slate-50 flex items-center justify-center mb-6 group-hover:bg-cyan-50 transition-colors">
+                <s.icon className="w-10 h-10 text-slate-700 group-hover:text-cyan-500 transition-colors" strokeWidth={1.5} />
               </div>
-              <h3 className="text-lg font-extrabold text-white mb-2 tracking-wide">{p.title}</h3>
-              <p className="text-slate-400 text-sm">
-                {p.desc}
+              <h3 className="text-xl font-bold text-slate-900 mb-3">{s.title}</h3>
+              <p className="text-slate-500 text-sm leading-relaxed">
+                {s.desc}
               </p>
             </motion.div>
           ))}
