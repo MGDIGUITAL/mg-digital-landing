@@ -7,9 +7,10 @@ import { X, Send, Bot, Loader2 } from "lucide-react";
 export default function AIAssistant() {
   const [isOpen, setIsOpen] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
   // Vercel AI SDK hook for chat streaming
-  const { messages, input, handleInputChange, handleSubmit, isLoading, append } = useChat({
+  const { messages, isLoading, append } = useChat({
     api: '/api/chat'
   });
 
@@ -23,6 +24,13 @@ export default function AIAssistant() {
 
   const handleQuickReply = (text: string) => {
     append({ role: 'user', content: text });
+  };
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!inputValue.trim() || isLoading) return;
+    append({ role: 'user', content: inputValue });
+    setInputValue("");
   };
 
   return (
@@ -45,7 +53,7 @@ export default function AIAssistant() {
                   <Bot className="w-4 h-4 text-cyan-400" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm tracking-wide">Ingeniería IA - MG.DIGITAL</h4>
+                  <h4 className="font-bold text-sm tracking-wide">Viktor - Atención al cliente</h4>
                   <p className="text-[10px] text-cyan-400 flex items-center gap-1 font-bold uppercase tracking-wider mt-0.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse shadow-[0_0_5px_#22c55e]"></span>
                     En línea
@@ -70,7 +78,7 @@ export default function AIAssistant() {
                     <Bot className="w-4 h-4 text-cyan-600" />
                   </div>
                   <div className="bg-white border border-slate-100 p-3 rounded-2xl rounded-tl-sm text-sm text-slate-700 shadow-sm leading-relaxed">
-                    Hola. Analizando sistemas... ¿Qué proceso industrial o de gestión necesitas optimizar hoy en tu empresa?
+                    Hola soy Viktor fui creado para ayudarte. De parte MG.Digital en que podemos ayudarte?
                   </div>
                 </div>
               )}
@@ -124,10 +132,10 @@ export default function AIAssistant() {
             </div>
 
             {/* Footer / Input */}
-            <form onSubmit={handleSubmit} className="p-3 bg-white border-t border-slate-100 flex gap-2">
+            <form onSubmit={onSubmit} className="p-3 bg-white border-t border-slate-100 flex gap-2">
               <input 
-                value={input || ""}
-                onChange={handleInputChange}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
                 type="text" 
                 placeholder="Escribe tu mensaje..." 
                 className="flex-1 bg-slate-50 text-sm rounded-xl px-4 py-2 outline-none focus:ring-2 focus:ring-cyan-500/50 border border-slate-100 focus:border-cyan-500 transition-all"
@@ -135,7 +143,7 @@ export default function AIAssistant() {
               />
               <button 
                 type="submit" 
-                disabled={isLoading || !(input || "").trim()}
+                disabled={isLoading || !inputValue.trim()}
                 className="w-10 h-10 rounded-xl bg-cyan-500 hover:bg-cyan-600 disabled:bg-slate-300 disabled:cursor-not-allowed text-white flex items-center justify-center transition-colors flex-shrink-0 shadow-sm"
               >
                 {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4 ml-1" />}
