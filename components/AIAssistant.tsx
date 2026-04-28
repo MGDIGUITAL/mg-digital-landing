@@ -64,7 +64,7 @@ export default function AIAssistant() {
             <div className="p-4 h-[350px] overflow-y-auto bg-slate-50 flex flex-col gap-4">
               
               {/* Default Welcome Message */}
-              {messages.length === 0 && (
+              {(messages || []).length === 0 && (
                 <div className="flex gap-2">
                   <div className="w-8 h-8 rounded-full bg-cyan-100 flex items-center justify-center flex-shrink-0 mt-1 shadow-sm">
                     <Bot className="w-4 h-4 text-cyan-600" />
@@ -76,7 +76,7 @@ export default function AIAssistant() {
               )}
 
               {/* Chat Messages */}
-              {messages.map(m => (
+              {(messages || []).map(m => (
                 <div key={m.id} className={`flex gap-2 ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   {m.role !== 'user' && (
                      <div className="w-8 h-8 rounded-full bg-cyan-100 flex items-center justify-center flex-shrink-0 mt-1 shadow-sm">
@@ -108,7 +108,7 @@ export default function AIAssistant() {
               )}
               
               {/* Quick Replies */}
-              {messages.length === 0 && (
+              {(messages || []).length === 0 && (
                 <div className="flex flex-col gap-2 mt-2 ml-10">
                   <button onClick={() => handleQuickReply("Mejorar mi Logística")} className="text-left text-xs bg-white border border-slate-200 text-slate-600 px-3 py-2 rounded-xl hover:bg-cyan-50 hover:text-cyan-600 hover:border-cyan-200 transition-all shadow-sm w-fit">
                     Mejorar mi Logística
@@ -126,7 +126,7 @@ export default function AIAssistant() {
             {/* Footer / Input */}
             <form onSubmit={handleSubmit} className="p-3 bg-white border-t border-slate-100 flex gap-2">
               <input 
-                value={input}
+                value={input || ""}
                 onChange={handleInputChange}
                 type="text" 
                 placeholder="Escribe tu mensaje..." 
@@ -135,7 +135,7 @@ export default function AIAssistant() {
               />
               <button 
                 type="submit" 
-                disabled={isLoading || !input.trim()}
+                disabled={isLoading || !(input || "").trim()}
                 className="w-10 h-10 rounded-xl bg-cyan-500 hover:bg-cyan-600 disabled:bg-slate-300 disabled:cursor-not-allowed text-white flex items-center justify-center transition-colors flex-shrink-0 shadow-sm"
               >
                 {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4 ml-1" />}
