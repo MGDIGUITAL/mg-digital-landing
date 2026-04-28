@@ -1,26 +1,37 @@
+"use client";
+import { motion } from "framer-motion";
+
 export default function Navbar() {
   return (
-    <nav className="sticky top-0 z-[200] bg-white border-b border-slate-200">
-      <div className="max-w-7xl mx-auto px-6 h-[72px] flex items-center justify-between gap-8">
-        <div className="flex flex-col shrink-0">
-          <div className="text-[22px] font-extrabold text-slate-900 tracking-tight">MG.<span className="text-blue-600">DIGITAL</span></div>
-          <div className="text-[9px] tracking-[0.2em] text-slate-500 font-bold uppercase mt-0.5">Soluciones a Tu Medida</div>
+    <nav className="w-full bg-[#050510]/80 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-6 h-24 flex flex-col items-center justify-center">
+        <div className="flex flex-col md:flex-row items-center w-full justify-between gap-4">
+          
+          <div className="flex flex-col items-center md:items-start shrink-0">
+            <div className="text-2xl font-extrabold text-white tracking-widest uppercase">
+              MG.<span className="text-[#00f0ff] font-extrabold drop-shadow-[0_0_8px_rgba(0,240,255,0.8)]">DIGUITAL</span>
+            </div>
+            <div className="text-[10px] tracking-[0.4em] text-[#00f0ff] font-bold uppercase mt-1">
+              Ingeniería Digital & IoT
+            </div>
+          </div>
+          
+          <ul className="hidden md:flex items-center gap-10 flex-1 justify-center">
+            <li><a href="#" className="text-xs font-bold tracking-widest text-[#00f0ff] uppercase border-b border-[#00f0ff] pb-1">Inicio</a></li>
+            <li><a href="#pilares" className="text-xs font-bold tracking-widest text-slate-300 hover:text-[#00f0ff] uppercase transition-colors">Ingeniería</a></li>
+            <li><a href="#servicios" className="text-xs font-bold tracking-widest text-slate-300 hover:text-[#00f0ff] uppercase transition-colors">Sistemas</a></li>
+            <li><a href="#contacto" className="text-xs font-bold tracking-widest text-slate-300 hover:text-[#00f0ff] uppercase transition-colors">Contacto</a></li>
+          </ul>
+          
+          <motion.a 
+            whileHover={{ scale: 1.05 }}
+            href="https://wa.me/56929645522" 
+            className="hidden lg:flex items-center gap-2 bg-[#00f0ff]/10 border border-[#00f0ff]/40 text-[#00f0ff] px-8 py-3 rounded-full text-xs font-bold tracking-widest uppercase hover:bg-[#00f0ff]/20 hover:shadow-[0_0_20px_rgba(0,240,255,0.3)] transition-all"
+          >
+            Optimizar Operación
+          </motion.a>
+
         </div>
-        
-        <ul className="hidden md:flex items-center gap-2 flex-1 justify-center">
-          <li><a href="#" className="px-4 py-2 text-sm font-bold text-blue-600 border-b-2 border-blue-600">INICIO</a></li>
-          <li><a href="#servicios" className="px-4 py-2 text-sm font-bold text-slate-700 hover:text-blue-600 transition-colors flex items-center gap-1">SERVICIOS <span className="text-[10px] opacity-60">▾</span></a></li>
-          <li><a href="#erp" className="px-4 py-2 text-sm font-bold text-slate-700 hover:text-blue-600 transition-colors flex items-center gap-1">SISTEMAS <span className="text-[10px] opacity-60">▾</span></a></li>
-          <li><a href="#erp" className="px-4 py-2 text-sm font-bold text-slate-700 hover:text-blue-600 transition-colors flex items-center gap-1">ERP <span className="text-[10px] opacity-60">▾</span></a></li>
-          <li><a href="#" className="px-4 py-2 text-sm font-bold text-slate-700 hover:text-blue-600 transition-colors flex items-center gap-1">FOLIOS <span className="text-[10px] opacity-60">▾</span></a></li>
-          <li><a href="#" className="px-4 py-2 text-sm font-bold text-slate-700 hover:text-blue-600 transition-colors">NOSOTROS</a></li>
-          <li><a href="#" className="px-4 py-2 text-sm font-bold text-slate-700 hover:text-blue-600 transition-colors">CONTACTO</a></li>
-        </ul>
-        
-        <a href="https://wa.me/56929645522" className="hidden sm:flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition-colors shadow-sm hover:shadow-md hover:shadow-blue-600/20 whitespace-nowrap">
-          Cotizar proyecto
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-4 h-4"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
       </div>
     </nav>
   )

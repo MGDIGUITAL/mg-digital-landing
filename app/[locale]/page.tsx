@@ -1,30 +1,26 @@
 import Navbar from '@/components/Navbar'
 import HeroSection from '@/components/HeroSection'
 import ServicesSection from '@/components/ServicesSection'
-import ERPModulesSection from '@/components/ERPModulesSection'
 import PortfolioSection from '@/components/PortfolioSection'
 import Footer from '@/components/Footer'
 import Chatbot from '@/components/Chatbot'
 
 export default function Home({ params: { locale } }: { params: { locale: string } }) {
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-[#050510] text-white flex flex-col items-center">
       <Navbar />
       
-      {/* ── HERO ── */}
+      {/* ── HERO & 3D VIDEO ── */}
       <HeroSection />
 
-      {/* ── SERVICES (6 Columns) ── */}
+      {/* ── PILARES DE LA FIRMA ── */}
       <ServicesSection />
 
-      {/* ── ERP MODULES (8 Modules) ── */}
-      <ERPModulesSection />
-
-      {/* ── PORTFOLIO (4 Cards) ── */}
+      {/* ── ENGINEERING VISUAL ── */}
       <PortfolioSection />
 
-      {/* ── FOOTER (Dark) ── */}
-      <div className="mt-40">
+      {/* ── FOOTER ── */}
+      <div className="w-full mt-20 border-t border-white/10 bg-[#050510]">
         <Footer />
       </div>
 
