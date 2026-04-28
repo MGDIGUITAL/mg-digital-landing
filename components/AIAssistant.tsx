@@ -11,7 +11,7 @@ export default function AIAssistant() {
   // Custom manual state to bypass ANY Vercel AI SDK client bugs
   const [messages, setMessages] = useState<{ id: string; role: 'user' | 'assistant'; content: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -29,7 +29,7 @@ export default function AIAssistant() {
     setMessages(newMessages);
     setInputValue("");
     setIsLoading(true);
-    setError(false);
+    setErrorMsg("");
 
     try {
       const response = await fetch('/api/chat', {
@@ -39,16 +39,16 @@ export default function AIAssistant() {
       });
 
       if (!response.ok) {
-        throw new Error("API Connection Error");
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || "Error de conexión con OpenAI");
       }
 
       const data = await response.json();
       
       setMessages([...newMessages, { id: (Date.now() + 1).toString(), role: 'assistant', content: data.text }]);
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      setError(true);
-      // Remove the user message if it failed, or keep it? We keep it and show error.
+      setErrorMsg(err.message || "Error desconocido");
     } finally {
       setIsLoading(false);
     }
@@ -132,10 +132,10 @@ export default function AIAssistant() {
               ))}
 
               {/* Error Message */}
-              {error && (
+              {errorMsg && (
                 <div className="flex gap-2 justify-center">
                   <div className="bg-red-50 border border-red-200 text-red-600 p-3 rounded-xl text-xs shadow-sm text-center">
-                    Error de conexión. Revisa que OPENAI_API_KEY esté correctamente configurada en Vercel.
+                    Error IA: {errorMsg}
                   </div>
                 </div>
               )}
