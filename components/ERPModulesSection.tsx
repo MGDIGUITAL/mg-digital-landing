@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { LayoutDashboard, ShoppingCart, ShoppingBag, Package, Users, Truck, Calculator, FileBarChart, Settings } from "lucide-react";
+import { LayoutDashboard, ShoppingCart, ShoppingBag, Package, Users, Truck, Calculator, FileBarChart } from "lucide-react";
 
 const MODULES = [
   { icon: LayoutDashboard, title: "Dashboard", desc: "Resumen general de tu empresa en tiempo real." },
@@ -13,6 +13,23 @@ const MODULES = [
   { icon: FileBarChart, title: "Reportes", desc: "Reportes personalizados y análisis para tomar mejores decisiones." },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" }
+  }
+};
+
 export default function ERPModulesSection() {
   return (
     <section className="py-24 w-full" id="erp">
@@ -22,7 +39,7 @@ export default function ERPModulesSection() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-4 uppercase">
@@ -33,27 +50,29 @@ export default function ERPModulesSection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8 w-full">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full"
+        >
           {MODULES.map((m, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -5 }}
-              className="bg-white p-6 rounded-2xl flex flex-col items-center text-center shadow-sm border border-slate-100 hover:shadow-lg hover:border-cyan-100 transition-all cursor-pointer group"
+              variants={itemVariants}
+              className="bg-white p-6 rounded-2xl flex flex-col items-center text-center border border-slate-100 shadow-sm transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-900/10 hover:border-cyan-500/50 cursor-pointer group"
             >
-              <div className="w-14 h-14 rounded-xl bg-slate-50 flex items-center justify-center mb-4 group-hover:bg-cyan-50 transition-colors">
-                <m.icon className="w-7 h-7 text-slate-700 group-hover:text-cyan-500 transition-colors" strokeWidth={1.5} />
+              <div className="w-16 h-16 rounded-xl bg-slate-50 flex items-center justify-center mb-4 transition-colors duration-300 group-hover:bg-cyan-50">
+                <m.icon className="w-8 h-8 text-slate-700 transition-transform duration-300 group-hover:text-cyan-600 group-hover:scale-110" strokeWidth={1.5} />
               </div>
-              <h3 className="text-sm md:text-base font-bold text-slate-900 mb-2">{m.title}</h3>
-              <p className="text-xs text-slate-500">
+              <h3 className="text-base md:text-lg font-bold text-slate-900 mb-2">{m.title}</h3>
+              <p className="text-xs md:text-sm text-slate-500 leading-relaxed">
                 {m.desc}
               </p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
