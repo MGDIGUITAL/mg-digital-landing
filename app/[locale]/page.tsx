@@ -4,7 +4,7 @@ import ServicesSection from '@/components/ServicesSection'
 import ERPModulesSection from '@/components/ERPModulesSection'
 import PortfolioSection from '@/components/PortfolioSection'
 import Footer from '@/components/Footer'
-import Chatbot from '@/components/Chatbot'
+import AIAssistant from '@/components/AIAssistant'
 
 export default function Home({ params: { locale } }: { params: { locale: string } }) {
   return (
@@ -34,7 +34,7 @@ export default function Home({ params: { locale } }: { params: { locale: string 
         <Footer />
       </div>
 
-      <Chatbot />
+      <AIAssistant />
     </main>
   )
 }
