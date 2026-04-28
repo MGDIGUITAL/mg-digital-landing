@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useChat } from "@ai-sdk/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Send, Bot, Loader2 } from "lucide-react";
 
@@ -8,31 +7,60 @@ export default function AIAssistant() {
   const [isOpen, setIsOpen] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [inputValue, setInputValue] = useState("");
-
-  // Vercel AI SDK hook for chat streaming
-  const { messages, isLoading, append, error } = useChat({
-    api: '/api/chat'
-  });
+  
+  // Custom manual state to bypass ANY Vercel AI SDK client bugs
+  const [messages, setMessages] = useState<{ id: string; role: 'user' | 'assistant'; content: string }[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
-    // Proactive balloon appears after 3 seconds
     const timer = setTimeout(() => {
       if (!isOpen) setShowTooltip(true);
     }, 3000);
     return () => clearTimeout(timer);
   }, [isOpen]);
 
+  const sendMessage = async (text: string) => {
+    if (!text.trim() || isLoading) return;
+    
+    const userMessage = { id: Date.now().toString(), role: 'user' as const, content: text };
+    const newMessages = [...messages, userMessage];
+    
+    setMessages(newMessages);
+    setInputValue("");
+    setIsLoading(true);
+    setError(false);
+
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: newMessages })
+      });
+
+      if (!response.ok) {
+        throw new Error("API Connection Error");
+      }
+
+      const data = await response.json();
+      
+      setMessages([...newMessages, { id: (Date.now() + 1).toString(), role: 'assistant', content: data.text }]);
+    } catch (err) {
+      console.error(err);
+      setError(true);
+      // Remove the user message if it failed, or keep it? We keep it and show error.
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleQuickReply = (text: string) => {
-    append({ id: Math.random().toString(), role: 'user', content: text });
+    sendMessage(text);
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!inputValue.trim() || isLoading) return;
-    
-    // Forced ID prevents synchronous errors in some ai-sdk versions
-    append({ id: Math.random().toString(), role: 'user', content: inputValue });
-    setInputValue("");
+    sendMessage(inputValue);
   };
 
   return (
@@ -74,7 +102,7 @@ export default function AIAssistant() {
             <div className="p-4 h-[350px] overflow-y-auto bg-slate-50 flex flex-col gap-4">
               
               {/* Default Welcome Message */}
-              {(messages || []).length === 0 && (
+              {messages.length === 0 && (
                 <div className="flex gap-2">
                   <div className="w-8 h-8 rounded-full bg-cyan-100 flex items-center justify-center flex-shrink-0 mt-1 shadow-sm">
                     <Bot className="w-4 h-4 text-cyan-600" />
@@ -86,7 +114,7 @@ export default function AIAssistant() {
               )}
 
               {/* Chat Messages */}
-              {(messages || []).map(m => (
+              {messages.map(m => (
                 <div key={m.id} className={`flex gap-2 ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   {m.role !== 'user' && (
                      <div className="w-8 h-8 rounded-full bg-cyan-100 flex items-center justify-center flex-shrink-0 mt-1 shadow-sm">
@@ -107,7 +135,7 @@ export default function AIAssistant() {
               {error && (
                 <div className="flex gap-2 justify-center">
                   <div className="bg-red-50 border border-red-200 text-red-600 p-3 rounded-xl text-xs shadow-sm text-center">
-                    Error de conexión IA. Verifica que OPENAI_API_KEY esté configurada en Vercel.
+                    Error de conexión. Revisa que OPENAI_API_KEY esté correctamente configurada en Vercel.
                   </div>
                 </div>
               )}
@@ -127,7 +155,7 @@ export default function AIAssistant() {
               )}
               
               {/* Quick Replies */}
-              {(messages || []).length === 0 && (
+              {messages.length === 0 && (
                 <div className="flex flex-col gap-2 mt-2 ml-10">
                   <button onClick={() => handleQuickReply("Mejorar mi Logística")} className="text-left text-xs bg-white border border-slate-200 text-slate-600 px-3 py-2 rounded-xl hover:bg-cyan-50 hover:text-cyan-600 hover:border-cyan-200 transition-all shadow-sm w-fit">
                     Mejorar mi Logística
