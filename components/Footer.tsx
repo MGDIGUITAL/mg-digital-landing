@@ -17,7 +17,7 @@ export default function Footer() {
         <div className="flex gap-8">
           <a href="#" className="text-sm font-bold tracking-wide text-slate-400 hover:text-cyan-500 transition-colors">Nosotros</a>
           <a href="#servicios" className="text-sm font-bold tracking-wide text-slate-400 hover:text-cyan-500 transition-colors">Servicios</a>
-          <a href="#contacto" className="text-sm font-bold tracking-wide text-slate-400 hover:text-cyan-500 transition-colors">Contacto</a>
+          <a href="contacto" className="text-sm font-bold tracking-wide text-slate-400 hover:text-cyan-500 transition-colors">Contacto</a>
         </div>
 
       </div>

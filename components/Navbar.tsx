@@ -20,7 +20,7 @@ export default function Navbar() {
           <li><a href="#servicios" className="text-sm font-bold tracking-wide text-slate-600 hover:text-cyan-500 transition-colors">Servicios</a></li>
           <li><a href="#erp" className="text-sm font-bold tracking-wide text-slate-600 hover:text-cyan-500 transition-colors">ERP</a></li>
           <li><a href="#trabajos" className="text-sm font-bold tracking-wide text-slate-600 hover:text-cyan-500 transition-colors">Trabajos</a></li>
-          <li><a href="#contacto" className="text-sm font-bold tracking-wide text-slate-600 hover:text-cyan-500 transition-colors">Contacto</a></li>
+          <li><a href="contacto" className="text-sm font-bold tracking-wide text-slate-600 hover:text-cyan-500 transition-colors">Contacto</a></li>
         </ul>
         
         <motion.a 
