@@ -3,6 +3,10 @@ import { generateText } from 'ai';
 
 export async function POST(req: Request) {
   try {
+    if (!process.env.GOOGLE_GENERATIVE_AI_API_KEY) {
+      throw new Error("GOOGLE_GENERATIVE_AI_API_KEY no está configurada en las variables de entorno de Vercel.");
+    }
+
     const { messages } = await req.json();
 
     const result = await generateText({

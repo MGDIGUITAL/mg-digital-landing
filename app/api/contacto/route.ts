@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-// Inicializa Resend con la variable de entorno
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Inicializa Resend con la variable de entorno, con un fallback para que no falle el build de Next.js
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 export async function POST(request: Request) {
   try {
@@ -50,10 +50,14 @@ export async function POST(request: Request) {
     `;
 
     // Envío usando Resend
+    if (!resend) {
+      throw new Error("RESEND_API_KEY no está configurada");
+    }
+
     const data = await resend.emails.send({
       from: "MG.DIGITAL Web <onboarding@resend.dev>", // Cambiar a tu dominio verificado si lo tienes
       to: ["mpeg.logistica@gmail.com"],
-      subject: \`NUEVO LEAD MG.DIGITAL: \${nombre}\`,
+      subject: `NUEVO LEAD MG.DIGITAL: ${nombre}`,
       html: htmlContent,
       replyTo: correo,
     });

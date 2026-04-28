@@ -40,7 +40,7 @@ export default function AIAssistant() {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || "Error de conexión con OpenAI");
+        throw new Error(errorData.error || "Error de conexión con la IA");
       }
 
       const data = await response.json();
