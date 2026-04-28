@@ -7,10 +7,9 @@ import { X, Send, Bot, Loader2 } from "lucide-react";
 export default function AIAssistant() {
   const [isOpen, setIsOpen] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
-  const [inputValue, setInputValue] = useState("");
 
   // Vercel AI SDK hook for chat streaming
-  const { messages, isLoading, append } = useChat({
+  const { messages, input, handleInputChange, handleSubmit, isLoading, append } = useChat({
     api: '/api/chat'
   });
 
@@ -23,14 +22,7 @@ export default function AIAssistant() {
   }, [isOpen]);
 
   const handleQuickReply = (text: string) => {
-    append({ role: 'user', content: text });
-  };
-
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!inputValue.trim() || isLoading) return;
-    append({ role: 'user', content: inputValue });
-    setInputValue("");
+    append({ id: Math.random().toString(), role: 'user', content: text });
   };
 
   return (
@@ -132,10 +124,10 @@ export default function AIAssistant() {
             </div>
 
             {/* Footer / Input */}
-            <form onSubmit={onSubmit} className="p-3 bg-white border-t border-slate-100 flex gap-2">
+            <form onSubmit={handleSubmit} className="p-3 bg-white border-t border-slate-100 flex gap-2">
               <input 
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
+                value={input}
+                onChange={handleInputChange}
                 type="text" 
                 placeholder="Escribe tu mensaje..." 
                 className="flex-1 bg-slate-50 text-sm rounded-xl px-4 py-2 outline-none focus:ring-2 focus:ring-cyan-500/50 border border-slate-100 focus:border-cyan-500 transition-all"
@@ -143,7 +135,7 @@ export default function AIAssistant() {
               />
               <button 
                 type="submit" 
-                disabled={isLoading || !inputValue.trim()}
+                disabled={isLoading || !input?.trim()}
                 className="w-10 h-10 rounded-xl bg-cyan-500 hover:bg-cyan-600 disabled:bg-slate-300 disabled:cursor-not-allowed text-white flex items-center justify-center transition-colors flex-shrink-0 shadow-sm"
               >
                 {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4 ml-1" />}
