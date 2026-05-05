@@ -1,4 +1,5 @@
 "use client";
+import { Instagram } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -14,10 +15,21 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex gap-8">
-          <a href="#" className="text-sm font-bold tracking-wide text-slate-400 hover:text-cyan-500 transition-colors">Nosotros</a>
-          <a href="#servicios" className="text-sm font-bold tracking-wide text-slate-400 hover:text-cyan-500 transition-colors">Servicios</a>
-          <a href="contacto" className="text-sm font-bold tracking-wide text-slate-400 hover:text-cyan-500 transition-colors">Contacto</a>
+        <div className="flex items-center gap-8">
+          <div className="flex gap-8">
+            <a href="#" className="text-sm font-bold tracking-wide text-slate-400 hover:text-cyan-500 transition-colors">Nosotros</a>
+            <a href="#servicios" className="text-sm font-bold tracking-wide text-slate-400 hover:text-cyan-500 transition-colors">Servicios</a>
+            <a href="contacto" className="text-sm font-bold tracking-wide text-slate-400 hover:text-cyan-500 transition-colors">Contacto</a>
+          </div>
+          <div className="h-6 w-[1px] bg-slate-800 hidden md:block"></div>
+          <a 
+            href="https://www.instagram.com/mg.digital.cl?igsh=MWpxOWJwNzF5MHl6YQ%3D%3D&utm_source=qr" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-slate-400 hover:text-cyan-500 transition-colors"
+          >
+            <Instagram className="w-5 h-5" />
+          </a>
         </div>
 
       </div>
