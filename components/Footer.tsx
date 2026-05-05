@@ -24,7 +24,7 @@ export default function Footer() {
       
       <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500 font-medium">
         <p>© 2026 MG.DIGITAL. Todos los derechos reservados.</p>
-        <p>hola@mgdigital.cl</p>
+        <p>MPEG.LOGISTICA@GMAIL.COM — Matias Patricio Espinoza</p>
       </div>
     </footer>
   );
