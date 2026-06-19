@@ -7,18 +7,38 @@ export default function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    // Solo aplicar en dispositivos con mouse (no touch)
     if (!window.matchMedia("(pointer: fine)").matches) return;
 
+    if (videoRef.current) {
+      videoRef.current.style.transform = "translateX(-50%)";
+    }
+
+    let targetX = 0;
+    let currentX = 0;
+    let animFrame: number;
+
     const handleMouseMove = (e: MouseEvent) => {
-      if (!videoRef.current) return;
-      const xPercent = e.clientX / window.innerWidth - 0.5; // -0.5 a 0.5
-      const moveX = xPercent * 40; // intensidad
-      videoRef.current.style.transform = `translateX(${-moveX}px)`;
+      const xPercent = e.clientX / window.innerWidth - 0.5;
+      targetX = xPercent * 25;
     };
 
+    const animate = () => {
+      // Lerp: currentX se acerca a targetX un 8% cada frame
+      currentX += (targetX - currentX) * 0.08;
+      if (videoRef.current) {
+        videoRef.current.style.transform = 
+          `translateX(calc(-50% + ${-currentX}px))`;
+      }
+      animFrame = requestAnimationFrame(animate);
+    };
+
+    animate();
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      cancelAnimationFrame(animFrame);
+    };
   }, []);
 
   return (
@@ -27,12 +47,13 @@ export default function HeroSection() {
       <div className="absolute inset-0 z-0 overflow-hidden bg-black">
         <video 
           ref={videoRef}
-          src="https://res.cloudinary.com/ddqx435i5/video/upload/q_auto/f_auto/v1781863949/Voy_a_generar_el_video_con_el_sr04qq.mp4" 
+          src="https://res.cloudinary.com/ddqx435i5/video/upload/q_auto/f_auto/v1781866027/VIDEO_fiyx8s.mov" 
           autoPlay 
           loop 
           muted 
           playsInline 
-          className="absolute top-0 bottom-0 w-[110%] h-full max-w-none object-cover -left-[5%] transition-transform duration-[0.1s] ease-out" 
+          className="absolute top-0 left-1/2 w-[110%] h-full object-cover"
+          style={{ transform: "translateX(-50%)" }}
         />
         <div className="absolute inset-0 bg-black/40 z-10" />
       </div>
