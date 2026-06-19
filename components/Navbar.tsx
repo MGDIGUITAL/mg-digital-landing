@@ -10,7 +10,7 @@ export default function Navbar() {
           <img 
             src="https://res.cloudinary.com/ddqx435i5/image/upload/q_auto/f_auto/v1781868891/logo_mdrau4.png" 
             alt="VisionCode Logo" 
-            className="h-10 w-auto object-contain"
+            className="h-14 w-auto object-contain"
           />
         </div>
         
