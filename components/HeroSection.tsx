@@ -15,7 +15,7 @@ export default function HeroSection() {
           playsInline 
           className="w-full h-full object-cover" 
         />
-        <div className="absolute inset-0 bg-black/70 backdrop-blur-[2px] z-10" />
+        <div className="absolute inset-0 bg-black/40 z-10" />
       </div>
 
       <div className="max-w-5xl mx-auto w-full flex flex-col items-center relative z-20 text-center">
