@@ -23,11 +23,9 @@ export default function HeroSection() {
     };
 
     const animate = () => {
-      // Lerp: currentX se acerca a targetX un 8% cada frame
       currentX += (targetX - currentX) * 0.08;
       if (videoRef.current) {
-        videoRef.current.style.transform = 
-          `translateX(calc(-50% + ${-currentX}px))`;
+        videoRef.current.style.transform = `translateX(calc(-50% + ${-currentX}px))`;
       }
       animFrame = requestAnimationFrame(animate);
     };
@@ -43,24 +41,27 @@ export default function HeroSection() {
 
   return (
     <section className="relative w-full flex flex-col items-center justify-center min-h-[90vh] py-24 px-6 overflow-hidden">
-      {/* Video Background con Parallax */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-black">
-        <video 
+        <video
           ref={videoRef}
-          src="https://res.cloudinary.com/ddqx435i5/video/upload/q_auto/f_auto/v1781866027/VIDEO_fiyx8s.mov" 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
-          className="absolute top-0 left-1/2 w-[110%] h-full object-cover"
-          style={{ transform: "translateX(-50%)" }}
+          src="https://res.cloudinary.com/ddqx435i5/video/upload/q_auto/f_auto/v1781867673/Sin_ti%CC%81tulo_g2equl.mov"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute left-1/2 w-[110%] object-cover"
+          style={{
+            transform: "translateX(-50%)",
+            height: "130%",
+            top: "-15%",
+            objectPosition: "center 15%",
+          }}
         />
         <div className="absolute inset-0 bg-black/40 z-10" />
       </div>
 
       <div className="max-w-5xl mx-auto w-full flex flex-col items-center relative z-20 text-center">
-        
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
@@ -77,26 +78,25 @@ export default function HeroSection() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 mb-16 w-full sm:w-auto justify-center">
-            <motion.a 
+            <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href="#servicios" 
+              href="#servicios"
               className="inline-flex items-center justify-center gap-2 bg-[var(--color-primary)] text-white px-8 py-4 rounded-xl font-bold hover:bg-[var(--color-primary-hover)] shadow-[0_0_20px_rgba(230,0,0,0.3)] hover:shadow-[0_0_30px_rgba(230,0,0,0.5)] transition-all"
             >
               Conoce nuestros servicios
               <ArrowRight className="w-4 h-4" />
             </motion.a>
-            <motion.a 
+            <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href="https://wa.me/56929645522" 
+              href="https://wa.me/56929645522"
               className="inline-flex items-center justify-center gap-2 bg-black text-white border-2 border-[var(--color-primary)] px-8 py-4 rounded-xl font-bold hover:bg-[var(--color-primary)] hover:text-white transition-all shadow-[0_0_15px_rgba(230,0,0,0.2)]"
             >
               Solicitar asesoría
             </motion.a>
           </div>
 
-          {/* Iconos de Características */}
           <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-[var(--color-primary)] border border-[var(--color-primary)] shadow-[0_0_15px_rgba(230,0,0,0.4)]">
@@ -107,7 +107,6 @@ export default function HeroSection() {
                 <span className="text-xs text-white">y Confidencialidad</span>
               </div>
             </div>
-            
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-[var(--color-primary)] border border-[var(--color-primary)] shadow-[0_0_15px_rgba(230,0,0,0.4)]">
                 <Cpu className="w-6 h-6" />
@@ -117,7 +116,6 @@ export default function HeroSection() {
                 <span className="text-xs text-white">de Vanguardia</span>
               </div>
             </div>
-
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-[var(--color-primary)] border border-[var(--color-primary)] shadow-[0_0_15px_rgba(230,0,0,0.4)]">
                 <HeadphonesIcon className="w-6 h-6" />
@@ -129,8 +127,6 @@ export default function HeroSection() {
             </div>
           </div>
         </motion.div>
-
       </div>
     </section>
   );
-}
