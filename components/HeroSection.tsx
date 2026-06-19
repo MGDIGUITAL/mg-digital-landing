@@ -1,19 +1,38 @@
 "use client";
 import { motion } from "framer-motion";
 import { ArrowRight, ShieldCheck, Cpu, HeadphonesIcon } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 export default function HeroSection() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // Solo aplicar en dispositivos con mouse (no touch)
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!videoRef.current) return;
+      const xPercent = e.clientX / window.innerWidth - 0.5; // -0.5 a 0.5
+      const moveX = xPercent * 40; // intensidad
+      videoRef.current.style.transform = `translateX(${-moveX}px)`;
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   return (
     <section className="relative w-full flex flex-col items-center justify-center min-h-[90vh] py-24 px-6 overflow-hidden">
-      {/* Video Background */}
-      <div className="absolute inset-0 z-0">
+      {/* Video Background con Parallax */}
+      <div className="absolute inset-0 z-0 overflow-hidden bg-black">
         <video 
+          ref={videoRef}
           src="https://res.cloudinary.com/ddqx435i5/video/upload/q_auto/f_auto/v1781863949/Voy_a_generar_el_video_con_el_sr04qq.mp4" 
           autoPlay 
           loop 
           muted 
           playsInline 
-          className="w-full h-full object-cover" 
+          className="absolute top-0 bottom-0 w-[110%] h-full max-w-none object-cover -left-[5%] transition-transform duration-[0.1s] ease-out" 
         />
         <div className="absolute inset-0 bg-black/40 z-10" />
       </div>
@@ -32,7 +51,7 @@ export default function HeroSection() {
             <span className="text-[var(--color-primary)] drop-shadow-[0_0_20px_rgba(230,0,0,0.6)]">impulsan</span> tu negocio
           </h1>
 
-          <p className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl leading-relaxed">
+          <p className="text-lg md:text-xl text-white mb-10 max-w-2xl leading-relaxed">
             Desarrollamos sistemas web, ERP, CRM y plataformas personalizadas para ayudar a tu empresa a crecer y ser más eficiente.
           </p>
 
@@ -50,7 +69,7 @@ export default function HeroSection() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               href="https://wa.me/56929645522" 
-              className="inline-flex items-center justify-center gap-2 bg-black/40 backdrop-blur-md text-white border-2 border-[var(--color-border)] px-8 py-4 rounded-xl font-bold hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] hover:bg-black/60 transition-all"
+              className="inline-flex items-center justify-center gap-2 bg-black text-white border-2 border-[var(--color-primary)] px-8 py-4 rounded-xl font-bold hover:bg-[var(--color-primary)] hover:text-white transition-all shadow-[0_0_15px_rgba(230,0,0,0.2)]"
             >
               Solicitar asesoría
             </motion.a>
@@ -59,32 +78,32 @@ export default function HeroSection() {
           {/* Iconos de Características */}
           <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-[var(--color-primary)]/20 flex items-center justify-center text-[var(--color-primary)] border border-[var(--color-primary)]/30 backdrop-blur-sm shadow-[0_0_15px_rgba(230,0,0,0.2)]">
+              <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-[var(--color-primary)] border border-[var(--color-primary)] shadow-[0_0_15px_rgba(230,0,0,0.4)]">
                 <ShieldCheck className="w-6 h-6" />
               </div>
               <div className="flex flex-col text-left">
                 <span className="text-sm font-bold text-white">Seguridad</span>
-                <span className="text-xs text-gray-400">y Confidencialidad</span>
+                <span className="text-xs text-white">y Confidencialidad</span>
               </div>
             </div>
             
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-[var(--color-primary)]/20 flex items-center justify-center text-[var(--color-primary)] border border-[var(--color-primary)]/30 backdrop-blur-sm shadow-[0_0_15px_rgba(230,0,0,0.2)]">
+              <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-[var(--color-primary)] border border-[var(--color-primary)] shadow-[0_0_15px_rgba(230,0,0,0.4)]">
                 <Cpu className="w-6 h-6" />
               </div>
               <div className="flex flex-col text-left">
                 <span className="text-sm font-bold text-white">Tecnología</span>
-                <span className="text-xs text-gray-400">de Vanguardia</span>
+                <span className="text-xs text-white">de Vanguardia</span>
               </div>
             </div>
 
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-[var(--color-primary)]/20 flex items-center justify-center text-[var(--color-primary)] border border-[var(--color-primary)]/30 backdrop-blur-sm shadow-[0_0_15px_rgba(230,0,0,0.2)]">
+              <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-[var(--color-primary)] border border-[var(--color-primary)] shadow-[0_0_15px_rgba(230,0,0,0.4)]">
                 <HeadphonesIcon className="w-6 h-6" />
               </div>
               <div className="flex flex-col text-left">
                 <span className="text-sm font-bold text-white">Soporte</span>
-                <span className="text-xs text-gray-400">y Acompañamiento</span>
+                <span className="text-xs text-white">y Acompañamiento</span>
               </div>
             </div>
           </div>

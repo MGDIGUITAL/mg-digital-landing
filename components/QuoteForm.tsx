@@ -83,10 +83,10 @@ export default function QuoteForm() {
           <CheckCircle className="w-10 h-10 text-emerald-400" />
         </div>
         <h3 className="text-2xl font-bold text-white mb-3">{t('success_title')}</h3>
-        <p className="text-slate-400 mb-8 max-w-sm leading-relaxed">{t('success_message')}</p>
+        <p className="text-white mb-8 max-w-sm leading-relaxed">{t('success_message')}</p>
         <button
           onClick={() => setIsSuccess(false)}
-          className="px-6 py-3 bg-slate-800 text-white rounded-xl hover:bg-slate-700 transition-colors border border-slate-700"
+          className="px-6 py-3 bg-black text-white rounded-xl hover:bg-black transition-colors border border-[var(--color-primary)]"
         >
           {t('new_request')}
         </button>
@@ -95,8 +95,8 @@ export default function QuoteForm() {
   }
 
   const inputClass = (hasError: boolean) =>
-    `w-full px-4 py-3.5 rounded-xl bg-slate-800/60 border ${
-      hasError ? 'border-rose-500/50 focus:border-rose-500' : 'border-slate-700/50 focus:border-blue-500'
+    `w-full px-4 py-3.5 rounded-xl bg-black/60 border ${
+      hasError ? 'border-rose-500/50 focus:border-rose-500' : 'border-[var(--color-primary)]/50 focus:border-blue-500'
     } text-white placeholder-slate-500 focus:outline-none focus:ring-2 ${
       hasError ? 'focus:ring-rose-500/20' : 'focus:ring-blue-500/20'
     } transition-all duration-200`
@@ -105,7 +105,7 @@ export default function QuoteForm() {
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
       {/* Nombre */}
       <div>
-        <label htmlFor="nombre" className="block text-sm font-medium text-slate-300 mb-1.5">
+        <label htmlFor="nombre" className="block text-sm font-medium text-white mb-1.5">
           {t('name')} <span className="text-rose-400">*</span>
         </label>
         <input
@@ -124,7 +124,7 @@ export default function QuoteForm() {
 
       {/* Email */}
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-1.5">
+        <label htmlFor="email" className="block text-sm font-medium text-white mb-1.5">
           {t('email')} <span className="text-rose-400">*</span>
         </label>
         <input
@@ -143,7 +143,7 @@ export default function QuoteForm() {
 
       {/* Teléfono */}
       <div>
-        <label htmlFor="telefono" className="block text-sm font-medium text-slate-300 mb-1.5">
+        <label htmlFor="telefono" className="block text-sm font-medium text-white mb-1.5">
           {t('phone')} <span className="text-rose-400">*</span>
         </label>
         <input
@@ -162,7 +162,7 @@ export default function QuoteForm() {
 
       {/* Tipo de servicio */}
       <div>
-        <label htmlFor="tipo_servicio" className="block text-sm font-medium text-slate-300 mb-1.5">
+        <label htmlFor="tipo_servicio" className="block text-sm font-medium text-white mb-1.5">
           {t('service_type')} <span className="text-rose-400">*</span>
         </label>
         <select
@@ -186,7 +186,7 @@ export default function QuoteForm() {
 
       {/* Descripción */}
       <div>
-        <label htmlFor="descripcion" className="block text-sm font-medium text-slate-300 mb-1.5">
+        <label htmlFor="descripcion" className="block text-sm font-medium text-white mb-1.5">
           {t('description')} <span className="text-rose-400">*</span>
         </label>
         <textarea

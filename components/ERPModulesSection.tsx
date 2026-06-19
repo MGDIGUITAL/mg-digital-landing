@@ -45,7 +45,7 @@ export default function ERPModulesSection() {
           <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4 uppercase">
             Sistema ERP - <span className="text-[var(--color-primary)] drop-shadow-[0_0_10px_rgba(230,0,0,0.4)]">Módulos Principales</span>
           </h2>
-          <p className="text-gray-400 font-medium max-w-2xl mx-auto">
+          <p className="text-white font-medium max-w-2xl mx-auto">
             El cerebro de tu empresa, con todas las herramientas necesarias.
           </p>
         </motion.div>
@@ -64,10 +64,10 @@ export default function ERPModulesSection() {
               className="bg-[var(--color-background)] p-6 rounded-2xl flex flex-col items-center text-center border border-[var(--color-border)] shadow-sm transition-all duration-300 transform hover:-translate-y-2 hover:shadow-[0_0_25px_rgba(230,0,0,0.15)] hover:border-[var(--color-primary)] cursor-pointer group"
             >
               <div className="w-16 h-16 rounded-xl bg-[var(--color-surface)] flex items-center justify-center mb-4 transition-colors duration-300 group-hover:bg-[var(--color-primary)]/10">
-                <m.icon className="w-8 h-8 text-gray-300 transition-transform duration-300 group-hover:text-[var(--color-primary)] group-hover:scale-110" strokeWidth={1.5} />
+                <m.icon className="w-8 h-8 text-white transition-transform duration-300 group-hover:text-[var(--color-primary)] group-hover:scale-110" strokeWidth={1.5} />
               </div>
               <h3 className="text-base md:text-lg font-bold text-white mb-2">{m.title}</h3>
-              <p className="text-xs md:text-sm text-gray-400 leading-relaxed">
+              <p className="text-xs md:text-sm text-white leading-relaxed">
                 {m.desc}
               </p>
             </motion.div>

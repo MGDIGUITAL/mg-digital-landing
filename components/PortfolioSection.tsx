@@ -57,7 +57,7 @@ export default function PortfolioSection() {
             <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-3 uppercase">
               Nuestros <span className="text-[var(--color-primary)] drop-shadow-[0_0_10px_rgba(230,0,0,0.4)]">Trabajos</span>
             </h2>
-            <p className="text-gray-400 font-medium max-w-xl">
+            <p className="text-white font-medium max-w-xl">
               Proyectos que generan resultados reales y medibles.
             </p>
           </motion.div>
@@ -104,7 +104,7 @@ export default function PortfolioSection() {
               </div>
               <div className="text-left px-2">
                 <h3 className="font-bold text-white text-lg mb-1 group-hover:text-[var(--color-primary)] transition-colors">{item.title}</h3>
-                <p className="text-sm text-gray-400">{item.subtitle}</p>
+                <p className="text-sm text-white">{item.subtitle}</p>
               </div>
             </motion.div>
           ))}

@@ -10,17 +10,17 @@ export default function Navbar() {
           <div className="text-2xl font-extrabold tracking-tight">
             <span className="text-white">VISION</span><span className="text-[var(--color-primary)]">CODE</span>
           </div>
-          <div className="text-[9px] tracking-[0.2em] text-gray-500 font-bold uppercase mt-0.5">
+          <div className="text-[9px] tracking-[0.2em] text-white font-bold uppercase mt-0.5">
             Soluciones a tu medida
           </div>
         </div>
         
         <ul className="hidden md:flex items-center gap-8 flex-1 justify-center">
           <li><a href="#" className="text-sm font-bold tracking-wide text-[var(--color-primary)] border-b-2 border-[var(--color-primary)] pb-1">Inicio</a></li>
-          <li><a href="#servicios" className="text-sm font-bold tracking-wide text-gray-300 hover:text-[var(--color-primary)] transition-colors">Servicios</a></li>
-          <li><a href="#erp" className="text-sm font-bold tracking-wide text-gray-300 hover:text-[var(--color-primary)] transition-colors">ERP</a></li>
-          <li><a href="#trabajos" className="text-sm font-bold tracking-wide text-gray-300 hover:text-[var(--color-primary)] transition-colors">Trabajos</a></li>
-          <li><a href="contacto" className="text-sm font-bold tracking-wide text-gray-300 hover:text-[var(--color-primary)] transition-colors">Contacto</a></li>
+          <li><a href="#servicios" className="text-sm font-bold tracking-wide text-white hover:text-[var(--color-primary)] transition-colors">Servicios</a></li>
+          <li><a href="#erp" className="text-sm font-bold tracking-wide text-white hover:text-[var(--color-primary)] transition-colors">ERP</a></li>
+          <li><a href="#trabajos" className="text-sm font-bold tracking-wide text-white hover:text-[var(--color-primary)] transition-colors">Trabajos</a></li>
+          <li><a href="contacto" className="text-sm font-bold tracking-wide text-white hover:text-[var(--color-primary)] transition-colors">Contacto</a></li>
         </ul>
         
         <motion.a 
