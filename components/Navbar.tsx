@@ -8,7 +8,7 @@ export default function Navbar() {
         
         <div className="flex flex-col items-center md:items-start shrink-0">
           <img 
-            src="TU_LINK_DEL_LOGO" 
+            src="https://res.cloudinary.com/ddqx435i5/image/upload/q_auto/f_auto/v1781868891/logo_mdrau4.png" 
             alt="VisionCode Logo" 
             className="h-10 w-auto object-contain"
           />
