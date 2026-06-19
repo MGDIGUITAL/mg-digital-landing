@@ -13,7 +13,7 @@ const SERVICES = [
 
 export default function ServicesSection() {
   return (
-    <section className="py-24 w-full" id="servicios">
+    <section className="py-24 w-full bg-[var(--color-background)]" id="servicios">
       <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
         
         <motion.div
@@ -23,10 +23,10 @@ export default function ServicesSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-4 uppercase">
-            Nuestros <span className="text-cyan-500">Servicios</span>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4 uppercase">
+            Nuestros <span className="text-[var(--color-primary)] drop-shadow-[0_0_10px_rgba(230,0,0,0.4)]">Servicios</span>
           </h2>
-          <p className="text-slate-500 font-medium max-w-2xl mx-auto">
+          <p className="text-gray-400 font-medium max-w-2xl mx-auto">
             Soluciones digitales completas para cada necesidad de tu negocio.
           </p>
         </motion.div>
@@ -40,13 +40,13 @@ export default function ServicesSection() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ y: -8 }}
-              className="bg-white border border-slate-100 p-10 rounded-3xl flex flex-col items-center text-center shadow-lg shadow-slate-200/50 hover:shadow-xl hover:border-cyan-100 transition-all cursor-pointer group"
+              className="bg-[var(--color-surface)] border border-[var(--color-border)] p-10 rounded-3xl flex flex-col items-center text-center hover:shadow-[0_0_25px_rgba(230,0,0,0.15)] hover:border-[var(--color-primary)] transition-all cursor-pointer group"
             >
-              <div className="w-20 h-20 rounded-2xl bg-slate-50 flex items-center justify-center mb-6 group-hover:bg-cyan-50 transition-colors">
-                <s.icon className="w-10 h-10 text-slate-700 group-hover:text-cyan-500 transition-colors" strokeWidth={1.5} />
+              <div className="w-20 h-20 rounded-2xl bg-[var(--color-surface-light)] flex items-center justify-center mb-6 group-hover:bg-[var(--color-primary)]/10 group-hover:shadow-[0_0_15px_rgba(230,0,0,0.3)] transition-all">
+                <s.icon className="w-10 h-10 text-gray-300 group-hover:text-[var(--color-primary)] transition-colors" strokeWidth={1.5} />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">{s.title}</h3>
-              <p className="text-slate-500 text-sm leading-relaxed">
+              <h3 className="text-xl font-bold text-white mb-3">{s.title}</h3>
+              <p className="text-gray-400 text-sm leading-relaxed">
                 {s.desc}
               </p>
             </motion.div>
