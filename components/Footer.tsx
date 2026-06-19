@@ -10,7 +10,7 @@ export default function Footer() {
           <img 
             src="https://res.cloudinary.com/ddqx435i5/image/upload/q_auto/f_auto/v1781868891/logo_mdrau4.png" 
             alt="VisionCode Logo" 
-            className="h-12 w-auto object-contain"
+            className="h-20 w-auto object-contain"
           />
         </div>
 
