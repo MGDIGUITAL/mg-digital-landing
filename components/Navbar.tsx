@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function Navbar() {
   return (
-    <nav className="w-full bg-black/80 backdrop-blur-md border-b border-[var(--color-border)] sticky top-0 z-50">
+    <nav className="w-full bg-black border-b border-[var(--color-border)] sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 h-20 flex flex-col md:flex-row items-center justify-between gap-4">
         
         <div className="flex flex-col items-center md:items-start shrink-0">
