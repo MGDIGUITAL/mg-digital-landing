@@ -7,12 +7,11 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 h-20 flex flex-col md:flex-row items-center justify-between gap-4">
         
         <div className="flex flex-col items-center md:items-start shrink-0">
-          <div className="text-2xl font-extrabold tracking-tight">
-            <span className="text-white">VISION</span><span className="text-[var(--color-primary)]">CODE</span>
-          </div>
-          <div className="text-[9px] tracking-[0.2em] text-white font-bold uppercase mt-0.5">
-            Soluciones a tu medida
-          </div>
+          <img 
+            src="TU_LINK_DEL_LOGO" 
+            alt="VisionCode Logo" 
+            className="h-10 w-auto object-contain"
+          />
         </div>
         
         <ul className="hidden md:flex items-center gap-8 flex-1 justify-center">

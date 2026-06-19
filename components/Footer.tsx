@@ -7,12 +7,11 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
         
         <div className="flex flex-col items-center md:items-start shrink-0">
-          <div className="text-2xl font-extrabold tracking-tight">
-            <span className="text-white">VISION</span><span className="text-[var(--color-primary)]">CODE</span>
-          </div>
-          <div className="text-[10px] tracking-[0.2em] text-white font-bold uppercase mt-1">
-            Soluciones a tu medida
-          </div>
+          <img 
+            src="TU_LINK_DEL_LOGO" 
+            alt="VisionCode Logo" 
+            className="h-8 w-auto object-contain"
+          />
         </div>
 
         <div className="flex items-center gap-8">
