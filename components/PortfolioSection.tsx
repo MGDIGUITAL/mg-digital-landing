@@ -2,6 +2,8 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import RevealHeading from "./RevealHeading";
+import Eyebrow from "./Eyebrow";
 
 const PORTFOLIO_ITEMS = [
   {
@@ -48,16 +50,21 @@ export default function PortfolioSection() {
         {/* Título y Controles */}
         <div className="w-full flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
             className="text-center md:text-left"
           >
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-3 uppercase">
-              Nuestros <span className="text-[var(--color-primary)] drop-shadow-[0_0_10px_rgba(230,0,0,0.4)]">Trabajos</span>
-            </h2>
-            <p className="text-white font-medium max-w-xl">
+            <Eyebrow>portafolio</Eyebrow>
+            <RevealHeading
+              className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-3 uppercase"
+              parts={[
+                { text: "Nuestros" },
+                { text: "Trabajos", accent: true },
+              ]}
+            />
+            <p className="text-[var(--color-text-muted)] font-medium max-w-xl">
               Proyectos que generan resultados reales y medibles.
             </p>
           </motion.div>
@@ -104,7 +111,7 @@ export default function PortfolioSection() {
               </div>
               <div className="text-left px-2">
                 <h3 className="font-bold text-white text-lg mb-1 group-hover:text-[var(--color-primary)] transition-colors">{item.title}</h3>
-                <p className="text-sm text-white">{item.subtitle}</p>
+                <p className="text-sm text-[var(--color-text-muted)]">{item.subtitle}</p>
               </div>
             </motion.div>
           ))}

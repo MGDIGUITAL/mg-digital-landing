@@ -2,6 +2,8 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import AIAssistant from '@/components/AIAssistant';
+import RevealHeading from '@/components/RevealHeading';
+import Eyebrow from '@/components/Eyebrow';
 import { motion } from 'framer-motion';
 import { ArrowRight, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 import { useState } from 'react';
@@ -48,13 +50,14 @@ export default function Contacto() {
   };
 
   return (
-    <main className="min-h-screen bg-white flex flex-col items-center overflow-x-hidden">
+    <main className="min-h-screen bg-[var(--color-background)] flex flex-col items-center overflow-x-hidden">
       <Navbar />
       
-      <section className="relative w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 pt-24 pb-16 lg:pt-32 lg:pb-24 flex-grow flex items-center">
+      <section className="relative w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 pt-24 pb-16 lg:pt-32 lg:pb-24 flex-grow flex items-center overflow-hidden">
         
         {/* Decorative Grid */}
-        <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-40"></div>
+        <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#1a1a1a_1px,transparent_1px),linear-gradient(to_bottom,#1a1a1a_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-60"></div>
+        <div className="ambient-glow" />
 
         <div className="flex flex-col lg:flex-row items-center justify-between w-full relative z-10 gap-12 lg:gap-0">
           
@@ -65,48 +68,51 @@ export default function Contacto() {
             transition={{ duration: 0.6 }}
             className="w-full lg:w-1/2 flex flex-col justify-center pr-0 lg:pr-12 xl:pr-20"
           >
-            <div className="inline-block px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-100 text-cyan-600 text-xs font-bold tracking-[0.2em] uppercase mb-6 shadow-sm w-fit">
-              Soporte y Negocios
-            </div>
+            <Eyebrow>contacto</Eyebrow>
+
+            <RevealHeading
+              as="h1"
+              className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1] mb-6 uppercase"
+              parts={[
+                { text: "Hablemos de tu" },
+                { text: "Proyecto", accent: true },
+              ]}
+            />
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.1] mb-6 uppercase">
-              Hablemos de tu <span className="text-cyan-500">Proyecto</span>
-            </h1>
-            
-            <p className="text-slate-500 text-lg md:text-xl font-medium mb-10 leading-relaxed max-w-xl">
+            <p className="text-[var(--color-text-muted)] text-lg md:text-xl font-medium mb-10 leading-relaxed max-w-xl">
               Estamos listos para transformar tu operación. Completa el formulario y nos contactaremos contigo a la brevedad.
             </p>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-xl">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="flex flex-col gap-2">
-                  <label className="text-sm font-bold text-slate-700">Nombre</label>
-                  <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} required className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all text-slate-700" placeholder="Ej. Juan Pérez" />
+                  <label className="text-sm font-bold text-white">Nombre</label>
+                  <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} required className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] transition-all text-white placeholder:text-white/30" placeholder="Ej. Juan Pérez" />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="text-sm font-bold text-slate-700">Teléfono</label>
-                  <input type="tel" name="fono" value={formData.fono} onChange={handleChange} required className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all text-slate-700" placeholder="Ej. +56 9 1234 5678" />
+                  <label className="text-sm font-bold text-white">Teléfono</label>
+                  <input type="tel" name="fono" value={formData.fono} onChange={handleChange} required className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] transition-all text-white placeholder:text-white/30" placeholder="Ej. +56 9 1234 5678" />
                 </div>
               </div>
               
               <div className="flex flex-col gap-2">
-                <label className="text-sm font-bold text-slate-700">Correo Electrónico</label>
-                <input type="email" name="correo" value={formData.correo} onChange={handleChange} required className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all text-slate-700" placeholder="tu@empresa.com" />
+                <label className="text-sm font-bold text-white">Correo Electrónico</label>
+                <input type="email" name="correo" value={formData.correo} onChange={handleChange} required className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] transition-all text-white placeholder:text-white/30" placeholder="tu@empresa.com" />
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-sm font-bold text-slate-700">Mensaje</label>
-                <textarea name="mensaje" value={formData.mensaje} onChange={handleChange} required maxLength={1000} rows={4} className="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all text-slate-700 resize-none" placeholder="Explícanos qué necesitas (ej. una página web simple, un sistema ERP, etc.)"></textarea>
+                <label className="text-sm font-bold text-white">Mensaje</label>
+                <textarea name="mensaje" value={formData.mensaje} onChange={handleChange} required maxLength={1000} rows={4} className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] transition-all text-white placeholder:text-white/30 resize-none" placeholder="Explícanos qué necesitas (ej. una página web simple, un sistema ERP, etc.)"></textarea>
                 <div className="flex justify-between items-center mt-1">
-                  <p className="text-xs font-medium text-slate-400">Máximo 1000 caracteres</p>
-                  <span className="text-xs text-slate-500 font-mono">{formData.mensaje.length}/1000</span>
+                  <p className="text-xs font-medium text-[var(--color-text-muted)]">Máximo 1000 caracteres</p>
+                  <span className="text-xs text-[var(--color-text-muted)] font-mono">{formData.mensaje.length}/1000</span>
                 </div>
               </div>
 
               <button 
                 type="submit" 
                 disabled={status === "loading" || status === "success"}
-                className="bg-cyan-500 text-white font-bold text-lg rounded-xl px-8 py-4 hover:bg-cyan-600 transition-colors shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 flex items-center justify-center gap-2 group w-full md:w-auto self-start mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                className="bg-[var(--color-primary)] text-white font-bold text-lg rounded-xl px-8 py-4 hover:bg-[var(--color-primary-hover)] transition-colors shadow-[0_0_20px_rgba(230,0,0,0.3)] hover:shadow-[0_0_30px_rgba(230,0,0,0.5)] flex items-center justify-center gap-2 group w-full md:w-auto self-start mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {status === "idle" && (
                   <>
@@ -143,7 +149,7 @@ export default function Contacto() {
             transition={{ duration: 1, type: "spring", delay: 0.2 }}
             className="w-full lg:w-1/2 flex justify-center items-center relative mt-12 lg:mt-0"
           >
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-cyan-100/40 to-blue-50/40 rounded-full blur-3xl -z-10"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-[var(--color-primary)]/10 to-[var(--color-secondary)]/10 rounded-full blur-3xl -z-10"></div>
             
             <div className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px]">
               <video

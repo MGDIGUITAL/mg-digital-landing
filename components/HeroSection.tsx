@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, ShieldCheck, Cpu, HeadphonesIcon } from "lucide-react";
 import { useEffect, useRef } from "react";
+import RevealHeading from "./RevealHeading";
 
 export default function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -68,10 +69,26 @@ export default function HeroSection() {
           viewport={{ once: true }}
           className="flex flex-col items-center"
         >
-          <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.1] mb-6">
-            Soluciones digitales que <br className="hidden lg:block"/>
-            <span className="text-[var(--color-primary)] drop-shadow-[0_0_20px_rgba(230,0,0,0.6)]">impulsan</span> tu negocio
-          </h1>
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="font-mono text-xs md:text-sm tracking-[0.2em] uppercase text-white/60 mb-5 border border-[var(--color-border)] rounded-full px-4 py-1.5 bg-white/[0.03] backdrop-blur-sm"
+          >
+            <span className="text-[var(--color-primary)]">&lt;</span>vision_code<span className="text-[var(--color-primary)]">/&gt;</span>
+          </motion.span>
+
+          <RevealHeading
+            as="h1"
+            align="center"
+            stagger={0.05}
+            className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.1] mb-6"
+            parts={[
+              { text: "Soluciones digitales que" },
+              { text: "impulsan", shimmer: true, breakBefore: true },
+              { text: "tu negocio" },
+            ]}
+          />
 
           <p className="text-lg md:text-xl text-white mb-10 max-w-2xl leading-relaxed">
             Desarrollamos sistemas web, ERP, CRM y plataformas personalizadas para ayudar a tu empresa a crecer y ser más eficiente.
@@ -104,7 +121,7 @@ export default function HeroSection() {
               </div>
               <div className="flex flex-col text-left">
                 <span className="text-sm font-bold text-white">Seguridad</span>
-                <span className="text-xs text-white">y Confidencialidad</span>
+                <span className="text-xs text-[var(--color-text-muted)]">y Confidencialidad</span>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -113,7 +130,7 @@ export default function HeroSection() {
               </div>
               <div className="flex flex-col text-left">
                 <span className="text-sm font-bold text-white">Tecnología</span>
-                <span className="text-xs text-white">de Vanguardia</span>
+                <span className="text-xs text-[var(--color-text-muted)]">de Vanguardia</span>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -122,7 +139,7 @@ export default function HeroSection() {
               </div>
               <div className="flex flex-col text-left">
                 <span className="text-sm font-bold text-white">Soporte</span>
-                <span className="text-xs text-white">y Acompañamiento</span>
+                <span className="text-xs text-[var(--color-text-muted)]">y Acompañamiento</span>
               </div>
             </div>
           </div>

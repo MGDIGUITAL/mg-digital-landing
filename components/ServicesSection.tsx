@@ -1,6 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
 import { Monitor, Box, Users, FileText, Cloud, Smartphone } from "lucide-react";
+import RevealHeading from "./RevealHeading";
+import Eyebrow from "./Eyebrow";
 
 const SERVICES = [
   { icon: Monitor, title: "Páginas Web", desc: "Diseñamos sitios web modernos, responsivos y enfocados en convertir visitas en clientes." },
@@ -13,20 +15,27 @@ const SERVICES = [
 
 export default function ServicesSection() {
   return (
-    <section className="py-24 w-full bg-[var(--color-background)]" id="servicios">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
+    <section className="relative py-24 w-full bg-[var(--color-background)] overflow-hidden" id="servicios">
+      <div className="ambient-glow" />
+      <div className="max-w-7xl mx-auto px-6 flex flex-col items-center relative z-10">
         
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4 uppercase">
-            Nuestros <span className="text-[var(--color-primary)] drop-shadow-[0_0_10px_rgba(230,0,0,0.4)]">Servicios</span>
-          </h2>
-          <p className="text-white font-medium max-w-2xl mx-auto">
+          <Eyebrow className="justify-center">servicios</Eyebrow>
+          <RevealHeading
+            align="center"
+            className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4 uppercase"
+            parts={[
+              { text: "Nuestros" },
+              { text: "Servicios", accent: true },
+            ]}
+          />
+          <p className="text-[var(--color-text-muted)] font-medium max-w-2xl mx-auto">
             Soluciones digitales completas para cada necesidad de tu negocio.
           </p>
         </motion.div>
@@ -46,7 +55,7 @@ export default function ServicesSection() {
                 <s.icon className="w-10 h-10 text-white group-hover:text-[var(--color-primary)] transition-colors" strokeWidth={1.5} />
               </div>
               <h3 className="text-xl font-bold text-white mb-3">{s.title}</h3>
-              <p className="text-white text-sm leading-relaxed">
+              <p className="text-[var(--color-text-muted)] text-sm leading-relaxed">
                 {s.desc}
               </p>
             </motion.div>

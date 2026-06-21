@@ -1,6 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
 import { LayoutDashboard, ShoppingCart, ShoppingBag, Package, Users, Truck, Calculator, FileBarChart } from "lucide-react";
+import RevealHeading from "./RevealHeading";
+import Eyebrow from "./Eyebrow";
 
 const MODULES = [
   { icon: LayoutDashboard, title: "Dashboard", desc: "Resumen general de tu empresa en tiempo real." },
@@ -26,26 +28,33 @@ const itemVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: "easeOut" }
+    transition: { duration: 0.5, ease: "easeOut" as const }
   }
 };
 
 export default function ERPModulesSection() {
   return (
-    <section className="py-24 w-full bg-[var(--color-surface-light)]" id="erp">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
+    <section className="relative py-24 w-full bg-[var(--color-surface-light)] overflow-hidden" id="erp">
+      <div className="ambient-glow" />
+      <div className="max-w-7xl mx-auto px-6 flex flex-col items-center relative z-10">
         
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true, margin: "-100px" }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4 uppercase">
-            Sistema ERP - <span className="text-[var(--color-primary)] drop-shadow-[0_0_10px_rgba(230,0,0,0.4)]">Módulos Principales</span>
-          </h2>
-          <p className="text-white font-medium max-w-2xl mx-auto">
+          <Eyebrow className="justify-center">sistema_erp</Eyebrow>
+          <RevealHeading
+            align="center"
+            className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4 uppercase"
+            parts={[
+              { text: "Sistema ERP -" },
+              { text: "Módulos Principales", accent: true },
+            ]}
+          />
+          <p className="text-[var(--color-text-muted)] font-medium max-w-2xl mx-auto">
             El cerebro de tu empresa, con todas las herramientas necesarias.
           </p>
         </motion.div>
@@ -67,7 +76,7 @@ export default function ERPModulesSection() {
                 <m.icon className="w-8 h-8 text-white transition-transform duration-300 group-hover:text-[var(--color-primary)] group-hover:scale-110" strokeWidth={1.5} />
               </div>
               <h3 className="text-base md:text-lg font-bold text-white mb-2">{m.title}</h3>
-              <p className="text-xs md:text-sm text-white leading-relaxed">
+              <p className="text-xs md:text-sm text-[var(--color-text-muted)] leading-relaxed">
                 {m.desc}
               </p>
             </motion.div>

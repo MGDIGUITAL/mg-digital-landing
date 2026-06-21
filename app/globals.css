@@ -1,9 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #000000;
+  background-color: var(--color-background);
   color: #f8fafc;
   overflow-x: hidden;
 }
@@ -12,8 +16,67 @@ body {
   --color-primary: #e60000;
   --color-primary-hover: #b30000;
   --color-secondary: #6e279b;
-  --color-background: #000000;
-  --color-surface: #000000;
-  --color-surface-light: #000000;
+  --color-background: #050505;
+  --color-surface: #0c0c0f;
+  --color-surface-light: #15151a;
   --color-border: #262626;
+  --color-text-muted: #a3a3ab;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Ambient brand-colored glow used behind sections for depth */
+.ambient-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.ambient-glow::before,
+.ambient-glow::after {
+  content: "";
+  position: absolute;
+  width: 45vw;
+  height: 45vw;
+  max-width: 600px;
+  max-height: 600px;
+  border-radius: 9999px;
+  filter: blur(120px);
+  opacity: 0.16;
+}
+.ambient-glow::before {
+  background: var(--color-primary);
+  top: -10%;
+  right: -10%;
+}
+.ambient-glow::after {
+  background: var(--color-secondary);
+  bottom: -15%;
+  left: -10%;
+  opacity: 0.12;
+}
+
+/* Animated gradient text — reserved for the single hero accent word */
+.shimmer-text {
+  background: linear-gradient(90deg, var(--color-primary) 0%, #ff6a4d 25%, var(--color-secondary) 50%, var(--color-primary) 75%, #ff6a4d 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-move 6s linear infinite;
+}
+@keyframes shimmer-move {
+  to { background-position: -250% center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shimmer-text { animation: none; }
 }

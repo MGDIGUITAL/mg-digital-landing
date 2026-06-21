@@ -1,16 +1,36 @@
 "use client";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <nav className="w-full bg-black border-b border-[var(--color-border)] sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-6 h-28 flex flex-col md:flex-row items-center justify-between gap-4">
+    <nav
+      className={`w-full sticky top-0 z-50 border-b transition-all duration-300 ${
+        scrolled
+          ? "bg-black/80 backdrop-blur-md border-[var(--color-border)] shadow-[0_4px_30px_rgba(0,0,0,0.4)]"
+          : "bg-black border-transparent"
+      }`}
+    >
+      <div
+        className={`max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-300 ${
+          scrolled ? "h-20" : "h-28"
+        }`}
+      >
         
         <div className="flex flex-col items-center md:items-start shrink-0">
           <img 
             src="https://res.cloudinary.com/ddqx435i5/image/upload/q_auto/f_auto/v1781868891/logo_mdrau4.png" 
             alt="VisionCode Logo" 
-            className="h-24 w-auto object-contain"
+            className={`w-auto object-contain transition-all duration-300 ${scrolled ? "h-16" : "h-24"}`}
           />
         </div>
         
