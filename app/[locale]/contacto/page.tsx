@@ -194,7 +194,7 @@ export default function Contacto() {
             {/* Imagen Principal */}
             <div className="relative w-full rounded-[2rem] overflow-hidden border border-red-500/20 shadow-[0_0_40px_rgba(220,38,38,0.1)] bg-[#050505] group">
               <div className="absolute inset-0 bg-gradient-to-tr from-red-900/10 to-transparent mix-blend-overlay z-10 pointer-events-none transition-opacity duration-500 group-hover:opacity-30"></div>
-              <img src="/NUEVO%20FONDO.png" alt="Vision Code Contacto" className="w-full h-auto object-cover opacity-95 transition-transform duration-700 group-hover:scale-[1.02]" />
+              <img src="/ojo_vision.png" alt="Vision Code Contacto" className="w-full h-auto object-cover opacity-95 transition-transform duration-700 group-hover:scale-[1.02]" />
             </div>
 
             {/* Tarjetas de Información */}
