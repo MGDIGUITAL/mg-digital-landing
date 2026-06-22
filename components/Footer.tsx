@@ -22,7 +22,7 @@ export default function Footer() {
           </div>
           <div className="h-6 w-[1px] bg-[var(--color-primary)] hidden md:block"></div>
           <a 
-            href="https://www.instagram.com/mg.digital.cl?igsh=MWpxOWJwNzF5MHl6YQ%3D%3D&utm_source=qr" 
+            href="https://www.instagram.com/vision_code_vc/" 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-white hover:text-[var(--color-primary)] transition-colors"
