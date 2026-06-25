@@ -1,36 +1,133 @@
 "use client";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
+
+const NAV_LINKS = [
+  { label: "Inicio",    href: "#" },
+  { label: "Servicios", href: "#servicios" },
+  { label: "ERP",       href: "#erp" },
+  { label: "Trabajos",  href: "#trabajos" },
+  { label: "Contacto",  href: "contacto" },
+];
 
 export default function Navbar() {
-  return (
-    <nav className="w-full bg-black border-b border-[var(--color-border)] sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-6 h-28 flex flex-col md:flex-row items-center justify-between gap-4">
-        
-        <div className="flex flex-col items-center md:items-start shrink-0">
-          <img 
-            src="https://res.cloudinary.com/ddqx435i5/image/upload/q_auto/f_auto/v1781868891/logo_mdrau4.png" 
-            alt="VisionCode Logo" 
-            className="h-24 w-auto object-contain"
-          />
-        </div>
-        
-        <ul className="hidden md:flex items-center gap-8 flex-1 justify-center">
-          <li><a href="#" className="text-sm font-bold tracking-wide text-[var(--color-primary)] border-b-2 border-[var(--color-primary)] pb-1">Inicio</a></li>
-          <li><a href="#servicios" className="text-sm font-bold tracking-wide text-white hover:text-[var(--color-primary)] transition-colors">Servicios</a></li>
-          <li><a href="#erp" className="text-sm font-bold tracking-wide text-white hover:text-[var(--color-primary)] transition-colors">ERP</a></li>
-          <li><a href="#trabajos" className="text-sm font-bold tracking-wide text-white hover:text-[var(--color-primary)] transition-colors">Trabajos</a></li>
-          <li><a href="contacto" className="text-sm font-bold tracking-wide text-white hover:text-[var(--color-primary)] transition-colors">Contacto</a></li>
-        </ul>
-        
-        <motion.a 
-          whileHover={{ scale: 1.05 }}
-          href="https://wa.me/56929645522" 
-          className="hidden lg:flex items-center gap-2 bg-[var(--color-primary)] text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-[var(--color-primary-hover)] shadow-[0_0_15px_rgba(230,0,0,0.3)] hover:shadow-[0_0_25px_rgba(230,0,0,0.5)] transition-all"
-        >
-          Cotizar proyecto
-        </motion.a>
+  const [scrolled, setScrolled]   = useState(false);
+  const [open,     setOpen]       = useState(false);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <nav
+      className="fixed top-0 w-full z-50 transition-all duration-400"
+      style={
+        scrolled
+          ? {
+              background: "rgba(8,8,8,0.94)",
+              backdropFilter: "blur(16px)",
+              WebkitBackdropFilter: "blur(16px)",
+              borderBottom: "1px solid var(--color-border)",
+            }
+          : { background: "transparent" }
+      }
+    >
+      <div className="vc-container flex items-center justify-between" style={{ height: "4.5rem" }}>
+
+        {/* Logo */}
+        <a href="#" aria-label="VisionCode — Inicio">
+          <img
+            src="https://res.cloudinary.com/ddqx435i5/image/upload/q_auto/f_auto/v1781868891/logo_mdrau4.png"
+            alt="VisionCode Logo"
+            style={{ height: "52px", width: "auto", objectFit: "contain" }}
+          />
+        </a>
+
+        {/* Desktop links */}
+        <ul className="hidden md:flex items-center gap-8">
+          {NAV_LINKS.map((l) => (
+            <li key={l.label}>
+              <a
+                href={l.href}
+                style={{
+                  fontFamily: "'DM Mono', monospace",
+                  fontSize: "0.625rem",
+                  letterSpacing: "0.16em",
+                  textTransform: "uppercase",
+                  color: "var(--color-dim)",
+                  textDecoration: "none",
+                  transition: "color 0.18s ease",
+                }}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--color-muted)")}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--color-dim)")}
+              >
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        {/* CTA */}
+        <a
+          href="https://wa.me/56929645522"
+          className="vc-btn vc-btn-primary hidden lg:inline-flex"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ fontSize: "0.625rem", padding: "0.6rem 1.35rem" }}
+        >
+          Cotizar proyecto ↗
+        </a>
+
+        {/* Mobile toggle */}
+        <button
+          className="md:hidden p-1"
+          onClick={() => setOpen(!open)}
+          aria-label={open ? "Cerrar menú" : "Abrir menú"}
+          style={{ color: "var(--color-muted)" }}
+        >
+          {open ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </div>
+
+      {/* Mobile drawer */}
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-300 ${open ? "max-h-screen" : "max-h-0"}`}
+      >
+        <div
+          className="vc-container py-8 flex flex-col gap-6"
+          style={{ borderTop: "1px solid var(--color-border)", background: "rgba(8,8,8,0.97)" }}
+        >
+          {NAV_LINKS.map((l) => (
+            <a
+              key={l.label}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              style={{
+                fontFamily: "'DM Mono', monospace",
+                fontSize: "0.6875rem",
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
+                color: "var(--color-muted)",
+                textDecoration: "none",
+                paddingBottom: "1.25rem",
+                borderBottom: "1px solid var(--color-border)",
+              }}
+            >
+              {l.label}
+            </a>
+          ))}
+          <a
+            href="https://wa.me/56929645522"
+            className="vc-btn vc-btn-primary w-full text-center justify-center"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Cotizar proyecto ↗
+          </a>
+        </div>
       </div>
     </nav>
-  )
+  );
 }

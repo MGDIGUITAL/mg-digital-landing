@@ -1,112 +1,191 @@
 "use client";
-import { useRef } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const PORTFOLIO_ITEMS = [
   {
+    num: "01",
     title: "Sitio Web Corporativo",
     subtitle: "Diseño moderno y responsivo",
+    tag: "Web",
     imgSrc: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop",
   },
   {
+    num: "02",
     title: "Sistema ERP",
     subtitle: "Gestión integral de tu empresa",
+    tag: "Software",
     imgSrc: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
   },
   {
+    num: "03",
     title: "Plataforma CRM",
     subtitle: "Tus clientes, siempre conectados",
+    tag: "CRM",
     imgSrc: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800&auto=format&fit=crop",
   },
   {
+    num: "04",
     title: "Sistema de Folios",
     subtitle: "Digitalización y control total",
+    tag: "Docs",
     imgSrc: "https://images.unsplash.com/photo-1555421689-d68471e189f2?q=80&w=800&auto=format&fit=crop",
-  }
+  },
 ];
 
 export default function PortfolioSection() {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const sectionRef  = useRef<HTMLElement>(null);
 
-  const scrollLeft = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: -400, behavior: "smooth" });
-    }
-  };
+  useEffect(() => {
+    const els = sectionRef.current?.querySelectorAll<HTMLElement>(".vc-reveal");
+    if (!els) return;
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { (e.target as HTMLElement).classList.add("visible"); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.05 });
+    els.forEach((el, i) => { el.style.transitionDelay = `${i * 80}ms`; obs.observe(el); });
+    return () => obs.disconnect();
+  }, []);
 
-  const scrollRight = () => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollBy({ left: 400, behavior: "smooth" });
-    }
+  const scroll = (dir: "left" | "right") => {
+    carouselRef.current?.scrollBy({ left: dir === "left" ? -440 : 440, behavior: "smooth" });
   };
 
   return (
-    <section className="py-24 w-full overflow-hidden bg-[var(--color-background)]" id="trabajos">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col items-center">
-        
-        {/* Título y Controles */}
-        <div className="w-full flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center md:text-left"
-          >
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-3 uppercase">
-              Nuestros <span className="text-[var(--color-primary)] drop-shadow-[0_0_10px_rgba(230,0,0,0.4)]">Trabajos</span>
+    <section
+      id="trabajos"
+      ref={sectionRef}
+      className="vc-section overflow-hidden"
+      style={{ background: "var(--color-bg-alt)" }}
+    >
+      <div className="vc-container">
+
+        {/* Label row */}
+        <div className="vc-reveal vc-label-row">
+          <span className="vc-label">004</span>
+          <span className="vc-label-line" />
+          <span className="vc-label">Nuestros Trabajos</span>
+        </div>
+
+        {/* Heading + controls */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div>
+            <h2 className="vc-reveal vc-h2">
+              Proyectos<br />
+              <span style={{ color: "var(--color-muted)" }}>Reales</span>
             </h2>
-            <p className="text-white font-medium max-w-xl">
+            <p
+              className="vc-reveal mt-4"
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: "0.9rem",
+                color: "var(--color-muted)",
+                maxWidth: "26rem",
+              }}
+            >
               Proyectos que generan resultados reales y medibles.
             </p>
-          </motion.div>
+          </div>
 
-          <div className="flex gap-4">
-            <button 
-              onClick={scrollLeft}
-              className="w-12 h-12 rounded-full bg-[var(--color-surface)] shadow-md border border-[var(--color-border)] flex items-center justify-center text-white hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] hover:shadow-[0_0_15px_rgba(230,0,0,0.4)] hover:scale-105 transition-all"
-              aria-label="Anterior"
-            >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            <button 
-              onClick={scrollRight}
-              className="w-12 h-12 rounded-full bg-[var(--color-surface)] shadow-md border border-[var(--color-border)] flex items-center justify-center text-white hover:bg-[var(--color-primary)] hover:border-[var(--color-primary)] hover:shadow-[0_0_15px_rgba(230,0,0,0.4)] hover:scale-105 transition-all"
-              aria-label="Siguiente"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
+          <div className="vc-reveal flex gap-3">
+            {(["left", "right"] as const).map((dir) => (
+              <button
+                key={dir}
+                onClick={() => scroll(dir)}
+                style={{
+                  width: "2.75rem", height: "2.75rem",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  border: "1px solid var(--color-border)",
+                  background: "transparent",
+                  color: "var(--color-muted)",
+                  cursor: "pointer",
+                  transition: "all 0.18s ease",
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.borderColor = "var(--color-primary)";
+                  el.style.color = "var(--color-primary)";
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.borderColor = "var(--color-border)";
+                  el.style.color = "var(--color-muted)";
+                }}
+                aria-label={dir === "left" ? "Anterior" : "Siguiente"}
+              >
+                {dir === "left" ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Carrusel */}
-        <div 
+        <div style={{ height: "1px", background: "var(--color-border)", marginBottom: "2rem" }} />
+
+        {/* Carousel */}
+        <div
           ref={carouselRef}
-          className="w-full flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] px-2"
+          className="flex gap-4 overflow-x-auto pb-4"
+          style={{ scrollSnapType: "x mandatory", msOverflowStyle: "none", scrollbarWidth: "none" }}
         >
-          {PORTFOLIO_ITEMS.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="flex flex-col snap-start shrink-0 w-[85vw] md:w-[45vw] lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1.125rem)] group"
+          {PORTFOLIO_ITEMS.map((item) => (
+            <div
+              key={item.num}
+              className="group flex-shrink-0"
+              style={{
+                width: "clamp(280px, 40vw, 380px)",
+                scrollSnapAlign: "start",
+                border: "1px solid var(--color-border)",
+                transition: "border-color 0.2s ease",
+              }}
+              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(230,0,0,0.3)"; }}
+              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "var(--color-border)"; }}
             >
-              <div className="w-full aspect-[4/3] bg-[var(--color-surface)] rounded-3xl mb-5 overflow-hidden relative cursor-pointer shadow-sm border border-[var(--color-border)] group-hover:border-[var(--color-primary)] transition-colors duration-300">
-                <img 
-                  src={item.imgSrc} 
-                  alt={item.title} 
-                  className="w-full h-full object-cover object-center transform transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+              {/* Image */}
+              <div style={{ aspectRatio: "4/3", overflow: "hidden", position: "relative" }}>
+                <img
+                  src={item.imgSrc}
+                  alt={item.title}
+                  style={{
+                    width: "100%", height: "100%",
+                    objectFit: "cover",
+                    transition: "transform 0.6s ease",
+                    filter: "brightness(0.8)",
+                  }}
+                  className="group-hover:scale-105 group-hover:brightness-100"
                 />
-                <div className="absolute inset-0 bg-transparent group-hover:bg-[var(--color-primary)]/20 transition-colors duration-500 mix-blend-overlay" />
+                {/* Tag */}
+                <div
+                  style={{
+                    position: "absolute", top: "1rem", left: "1rem",
+                    fontFamily: "'DM Mono', monospace",
+                    fontSize: "0.5625rem", letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                    padding: "0.3rem 0.75rem",
+                    border: "1px solid rgba(255,255,255,0.2)",
+                    color: "rgba(255,255,255,0.7)",
+                    background: "rgba(0,0,0,0.5)",
+                    backdropFilter: "blur(4px)",
+                  }}
+                >
+                  {item.tag}
+                </div>
               </div>
-              <div className="text-left px-2">
-                <h3 className="font-bold text-white text-lg mb-1 group-hover:text-[var(--color-primary)] transition-colors">{item.title}</h3>
-                <p className="text-sm text-white">{item.subtitle}</p>
+
+              {/* Info */}
+              <div style={{ padding: "1.25rem", borderTop: "1px solid var(--color-border)" }}>
+                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5625rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--color-dim)", marginBottom: "0.4rem" }}>
+                  {item.num}
+                </p>
+                <h3 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "1rem", fontWeight: 500, color: "var(--color-white)", marginBottom: "0.25rem" }}>
+                  {item.title}
+                </h3>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.8125rem", color: "var(--color-muted)" }}>
+                  {item.subtitle}
+                </p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 

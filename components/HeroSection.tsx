@@ -1,132 +1,147 @@
 "use client";
-import { motion } from "framer-motion";
-import { ArrowRight, ShieldCheck, Cpu, HeadphonesIcon } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { ArrowRight, ShieldCheck, Cpu, HeadphonesIcon } from "lucide-react";
+
+const BADGES = [
+  { icon: ShieldCheck, title: "Seguridad", sub: "y Confidencialidad" },
+  { icon: Cpu,         title: "Tecnología", sub: "de Vanguardia" },
+  { icon: HeadphonesIcon, title: "Soporte", sub: "y Acompañamiento" },
+];
 
 export default function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const revealRef = useRef<HTMLDivElement>(null);
 
+  // Subtle parallax on mouse move
   useEffect(() => {
     if (!window.matchMedia("(pointer: fine)").matches) return;
-
-    if (videoRef.current) {
-      videoRef.current.style.transform = "translateX(-50%)";
-    }
-
-    let targetX = 0;
-    let currentX = 0;
-    let animFrame: number;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const xPercent = e.clientX / window.innerWidth - 0.5;
-      targetX = xPercent * 25;
-    };
-
-    const animate = () => {
-      currentX += (targetX - currentX) * 0.08;
+    let targetX = 0, currentX = 0, raf: number;
+    const onMove = (e: MouseEvent) => { targetX = (e.clientX / window.innerWidth - 0.5) * 20; };
+    const tick = () => {
+      currentX += (targetX - currentX) * 0.06;
       if (videoRef.current) {
         videoRef.current.style.transform = `translateX(calc(-50% + ${-currentX}px))`;
       }
-      animFrame = requestAnimationFrame(animate);
+      raf = requestAnimationFrame(tick);
     };
+    tick();
+    window.addEventListener("mousemove", onMove);
+    return () => { window.removeEventListener("mousemove", onMove); cancelAnimationFrame(raf); };
+  }, []);
 
-    animate();
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      cancelAnimationFrame(animFrame);
-    };
+  // Scroll reveal
+  useEffect(() => {
+    const els = revealRef.current?.querySelectorAll<HTMLElement>(".vc-reveal");
+    if (!els) return;
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { (e.target as HTMLElement).classList.add("visible"); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.05 });
+    els.forEach((el, i) => { el.style.transitionDelay = `${i * 100}ms`; obs.observe(el); });
+    return () => obs.disconnect();
   }, []);
 
   return (
-    <section className="relative w-full flex flex-col items-center justify-center min-h-[90vh] py-24 px-6 overflow-hidden">
-      <div className="absolute inset-0 z-0 overflow-hidden bg-black">
+    <section className="relative w-full flex flex-col justify-end min-h-screen overflow-hidden">
+
+      {/* ── Video Background ── */}
+      <div className="absolute inset-0 z-0 bg-black overflow-hidden">
         <video
           ref={videoRef}
           src="https://res.cloudinary.com/ddqx435i5/video/upload/q_auto/f_auto/v1781867673/Sin_ti%CC%81tulo_g2equl.mov"
-          autoPlay
-          loop
-          muted
-          playsInline
+          autoPlay loop muted playsInline
           className="absolute left-1/2 w-[110%] object-cover"
-          style={{
-            transform: "translateX(-50%)",
-            height: "130%",
-            top: "-15%",
-            objectPosition: "center 15%",
-          }}
+          style={{ transform: "translateX(-50%)", height: "130%", top: "-15%", objectPosition: "center 15%" }}
         />
-        <div className="absolute inset-0 bg-black/40 z-10" />
+        {/* Multi-layer overlay */}
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #080808 0%, rgba(8,8,8,0.65) 40%, rgba(8,8,8,0.25) 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(8,8,8,0.7) 0%, transparent 60%)" }} />
+        <div className="absolute inset-0 bg-black/20" />
       </div>
 
-      <div className="max-w-5xl mx-auto w-full flex flex-col items-center relative z-20 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="flex flex-col items-center"
+      {/* ── Content — bottom anchored ── */}
+      <div ref={revealRef} className="vc-container relative z-10 pb-20 pt-40">
+
+        {/* Index label */}
+        <div className="vc-reveal flex items-center gap-3 mb-10">
+          <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.625rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--color-dim)" }}>
+            001 — Software Agency
+          </span>
+          <span style={{ display: "block", height: "1px", width: "60px", background: "var(--color-border)" }} />
+          <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.625rem", letterSpacing: "0.22em", textTransform: "uppercase", color: "var(--color-dim)" }}>
+            Chile
+          </span>
+        </div>
+
+        {/* H1 */}
+        <h1
+          className="vc-reveal"
+          style={{
+            fontFamily: "'Space Grotesk', sans-serif",
+            fontWeight: 500,
+            fontSize: "clamp(2.8rem, 8vw, 7rem)",
+            lineHeight: 1,
+            letterSpacing: "-0.03em",
+            color: "var(--color-white)",
+            marginBottom: "1.5rem",
+          }}
         >
-          <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.1] mb-6">
-            Soluciones digitales que <br className="hidden lg:block"/>
-            <span className="text-[var(--color-primary)] drop-shadow-[0_0_20px_rgba(230,0,0,0.6)]">impulsan</span> tu negocio
-          </h1>
+          Soluciones digitales<br />
+          que{" "}
+          <span style={{ color: "var(--color-primary)" }}>impulsan</span>
+          <br />tu negocio
+        </h1>
 
-          <p className="text-lg md:text-xl text-white mb-10 max-w-2xl leading-relaxed">
-            Desarrollamos sistemas web, ERP, CRM y plataformas personalizadas para ayudar a tu empresa a crecer y ser más eficiente.
-          </p>
+        <p
+          className="vc-reveal"
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: "1rem",
+            lineHeight: 1.7,
+            color: "var(--color-muted)",
+            maxWidth: "32rem",
+            marginBottom: "2.5rem",
+          }}
+        >
+          Desarrollamos sistemas web, ERP, CRM y plataformas personalizadas para ayudar a tu empresa a crecer y ser más eficiente.
+        </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 mb-16 w-full sm:w-auto justify-center">
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href="#servicios"
-              className="inline-flex items-center justify-center gap-2 bg-[var(--color-primary)] text-white px-8 py-4 rounded-xl font-bold hover:bg-[var(--color-primary-hover)] shadow-[0_0_20px_rgba(230,0,0,0.3)] hover:shadow-[0_0_30px_rgba(230,0,0,0.5)] transition-all"
-            >
-              Conoce nuestros servicios
-              <ArrowRight className="w-4 h-4" />
-            </motion.a>
-            <motion.a
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href="https://wa.me/56929645522"
-              className="inline-flex items-center justify-center gap-2 bg-black text-white border-2 border-[var(--color-primary)] px-8 py-4 rounded-xl font-bold hover:bg-[var(--color-primary)] hover:text-white transition-all shadow-[0_0_15px_rgba(230,0,0,0.2)]"
-            >
-              Solicitar asesoría
-            </motion.a>
-          </div>
+        {/* CTAs */}
+        <div className="vc-reveal flex flex-col sm:flex-row gap-3 mb-16">
+          <a href="#servicios" className="vc-btn vc-btn-primary">
+            Conoce nuestros servicios <ArrowRight size={14} />
+          </a>
+          <a href="https://wa.me/56929645522" className="vc-btn vc-btn-ghost" target="_blank" rel="noopener noreferrer">
+            Solicitar asesoría
+          </a>
+        </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-[var(--color-primary)] border border-[var(--color-primary)] shadow-[0_0_15px_rgba(230,0,0,0.4)]">
-                <ShieldCheck className="w-6 h-6" />
+        {/* Stats strip */}
+        <div
+          className="vc-reveal flex flex-wrap gap-x-10 gap-y-3 pt-8"
+          style={{ borderTop: "1px solid var(--color-border)" }}
+        >
+          {BADGES.map(({ icon: Icon, title, sub }) => (
+            <div key={title} className="flex items-center gap-3">
+              <div
+                style={{
+                  width: "2rem", height: "2rem",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  border: "1px solid var(--color-border)",
+                  color: "var(--color-primary)",
+                }}
+              >
+                <Icon size={14} />
               </div>
-              <div className="flex flex-col text-left">
-                <span className="text-sm font-bold text-white">Seguridad</span>
-                <span className="text-xs text-white">y Confidencialidad</span>
+              <div>
+                <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "0.8rem", fontWeight: 500, color: "var(--color-white)", lineHeight: 1.2 }}>{title}</p>
+                <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.5625rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--color-dim)" }}>{sub}</p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-[var(--color-primary)] border border-[var(--color-primary)] shadow-[0_0_15px_rgba(230,0,0,0.4)]">
-                <Cpu className="w-6 h-6" />
-              </div>
-              <div className="flex flex-col text-left">
-                <span className="text-sm font-bold text-white">Tecnología</span>
-                <span className="text-xs text-white">de Vanguardia</span>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center text-[var(--color-primary)] border border-[var(--color-primary)] shadow-[0_0_15px_rgba(230,0,0,0.4)]">
-                <HeadphonesIcon className="w-6 h-6" />
-              </div>
-              <div className="flex flex-col text-left">
-                <span className="text-sm font-bold text-white">Soporte</span>
-                <span className="text-xs text-white">y Acompañamiento</span>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+          ))}
+        </div>
+
       </div>
     </section>
   );
