@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { InfiniteSlider } from '@/components/ui/infinite-slider'
 import { ProgressiveBlur } from '@/components/ui/progressive-blur'
 import { cn } from '@/lib/utils'
-import { Menu, X, ChevronRight } from 'lucide-react'
+import { Menu, X, ChevronRight, Cpu, Cloud, Database, Code, Shield, Network, Zap, Settings } from 'lucide-react'
 import { useScroll, motion } from 'framer-motion'
 
 export default function HeroSection() {
@@ -43,14 +43,13 @@ export default function HeroSection() {
                                 </div>
                             </div>
                         </div>
-                        <div className="aspect-[2/3] absolute inset-1 overflow-hidden rounded-3xl border border-black/10 sm:aspect-video lg:rounded-[3rem] dark:border-white/5">
-                            <video
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
-                                className="size-full object-cover opacity-50 invert dark:opacity-35 dark:invert-0 dark:lg:opacity-75"
-                                src="https://ik.imagekit.io/lrigu76hy/tailark/dna-video.mp4?updatedAt=1745736251477"></video>
+                        <div className="aspect-[2/3] absolute inset-1 overflow-hidden rounded-3xl border border-black/10 sm:aspect-video lg:rounded-[3rem] dark:border-white/5 bg-zinc-900">
+                            {/* Replaced failing video with Unsplash tech background image */}
+                            <img
+                                className="size-full object-cover opacity-50 dark:lg:opacity-75"
+                                src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop"
+                                alt="Abstract tech background"
+                            />
                         </div>
                     </div>
                 </section>
@@ -65,79 +64,31 @@ export default function HeroSection() {
                                     speedOnHover={20}
                                     speed={40}
                                     gap={112}>
-                                    <div className="flex">
-                                        <img
-                                            className="mx-auto h-5 w-fit invert dark:invert-0 brightness-200"
-                                            src="https://html.tailus.io/blocks/customers/nvidia.svg"
-                                            alt="Nvidia Logo"
-                                            height="20"
-                                            width="auto"
-                                        />
+                                    
+                                    {/* Replaced failing Tailus logos with lucide-react icons */}
+                                    <div className="flex items-center text-white/70">
+                                        <Cpu className="size-6 mr-2" /> <span className="font-semibold tracking-wider">NVIDIA</span>
                                     </div>
-
-                                    <div className="flex">
-                                        <img
-                                            className="mx-auto h-4 w-fit invert dark:invert-0 brightness-200"
-                                            src="https://html.tailus.io/blocks/customers/column.svg"
-                                            alt="Column Logo"
-                                            height="16"
-                                            width="auto"
-                                        />
+                                    <div className="flex items-center text-white/70">
+                                        <Cloud className="size-6 mr-2" /> <span className="font-semibold tracking-wider">COLUMN</span>
                                     </div>
-                                    <div className="flex">
-                                        <img
-                                            className="mx-auto h-4 w-fit invert dark:invert-0 brightness-200"
-                                            src="https://html.tailus.io/blocks/customers/github.svg"
-                                            alt="GitHub Logo"
-                                            height="16"
-                                            width="auto"
-                                        />
+                                    <div className="flex items-center text-white/70">
+                                        <Code className="size-6 mr-2" /> <span className="font-semibold tracking-wider">GITHUB</span>
                                     </div>
-                                    <div className="flex">
-                                        <img
-                                            className="mx-auto h-5 w-fit invert dark:invert-0 brightness-200"
-                                            src="https://html.tailus.io/blocks/customers/nike.svg"
-                                            alt="Nike Logo"
-                                            height="20"
-                                            width="auto"
-                                        />
+                                    <div className="flex items-center text-white/70">
+                                        <Shield className="size-6 mr-2" /> <span className="font-semibold tracking-wider">NIKE</span>
                                     </div>
-                                    <div className="flex">
-                                        <img
-                                            className="mx-auto h-5 w-fit invert dark:invert-0 brightness-200"
-                                            src="https://html.tailus.io/blocks/customers/lemonsqueezy.svg"
-                                            alt="Lemon Squeezy Logo"
-                                            height="20"
-                                            width="auto"
-                                        />
+                                    <div className="flex items-center text-white/70">
+                                        <Database className="size-6 mr-2" /> <span className="font-semibold tracking-wider">SQUEEZY</span>
                                     </div>
-                                    <div className="flex">
-                                        <img
-                                            className="mx-auto h-4 w-fit invert dark:invert-0 brightness-200"
-                                            src="https://html.tailus.io/blocks/customers/laravel.svg"
-                                            alt="Laravel Logo"
-                                            height="16"
-                                            width="auto"
-                                        />
+                                    <div className="flex items-center text-white/70">
+                                        <Settings className="size-6 mr-2" /> <span className="font-semibold tracking-wider">LARAVEL</span>
                                     </div>
-                                    <div className="flex">
-                                        <img
-                                            className="mx-auto h-7 w-fit invert dark:invert-0 brightness-200"
-                                            src="https://html.tailus.io/blocks/customers/lilly.svg"
-                                            alt="Lilly Logo"
-                                            height="28"
-                                            width="auto"
-                                        />
+                                    <div className="flex items-center text-white/70">
+                                        <Network className="size-6 mr-2" /> <span className="font-semibold tracking-wider">LILLY</span>
                                     </div>
-
-                                    <div className="flex">
-                                        <img
-                                            className="mx-auto h-6 w-fit invert dark:invert-0 brightness-200"
-                                            src="https://html.tailus.io/blocks/customers/openai.svg"
-                                            alt="OpenAI Logo"
-                                            height="24"
-                                            width="auto"
-                                        />
+                                    <div className="flex items-center text-white/70">
+                                        <Zap className="size-6 mr-2" /> <span className="font-semibold tracking-wider">OPENAI</span>
                                     </div>
                                 </InfiniteSlider>
 
