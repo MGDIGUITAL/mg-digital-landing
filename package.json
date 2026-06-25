@@ -13,6 +13,7 @@
     "@ai-sdk/openai": "^3.0.53",
     "@ai-sdk/react": "^3.0.170",
     "@hookform/resolvers": "^5.2.2",
+    "@paper-design/shaders-react": "^0.0.76",
     "@supabase/supabase-js": "^2.104.1",
     "ai": "^6.0.168",
     "framer-motion": "^12.38.0",
