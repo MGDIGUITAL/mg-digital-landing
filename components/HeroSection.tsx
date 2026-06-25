@@ -44,12 +44,14 @@ export default function HeroSection() {
                             </div>
                         </div>
                         <div className="aspect-[2/3] absolute inset-1 overflow-hidden rounded-3xl border border-black/10 sm:aspect-video lg:rounded-[3rem] dark:border-white/5 bg-zinc-900">
-                            {/* Replaced failing video with Unsplash tech background image */}
-                            <img
+                            {/* Using local video instead of broken dna-video or static unsplash image */}
+                            <video
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
                                 className="size-full object-cover opacity-50 dark:lg:opacity-75"
-                                src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop"
-                                alt="Abstract tech background"
-                            />
+                                src="/cubo.mp4"></video>
                         </div>
                     </div>
                 </section>
