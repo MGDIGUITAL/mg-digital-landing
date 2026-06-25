@@ -60,16 +60,16 @@ export function ShaderBackground({ children }: ShaderBackgroundProps) {
         </defs>
       </svg>
 
-      {/* Background Shaders */}
+      {/* Background Shaders — VisionCode palette: dark navy + subtle blue tones */}
       <MeshGradient
         className="absolute inset-0 w-full h-full"
-        colors={["#000000", "#8b5cf6", "#ffffff", "#1e1b4b", "#4c1d95"]}
+        colors={["#000000", "#0a0f1e", "#0f2040", "#1a1a2e", "#000000"]}
         speed={0.3}
         backgroundColor="#000000"
       />
       <MeshGradient
-        className="absolute inset-0 w-full h-full opacity-60"
-        colors={["#000000", "#ffffff", "#8b5cf6", "#000000"]}
+        className="absolute inset-0 w-full h-full opacity-50"
+        colors={["#000000", "#ffffff", "#0f2040", "#000000"]}
         speed={0.2}
         wireframe={true}
         backgroundColor="transparent"
